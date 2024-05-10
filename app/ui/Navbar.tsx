@@ -3,7 +3,8 @@ import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet"
 import Link from "next/link"
 import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import NavLinks from "@/app/ui/Nav-links"
-import { Bars3BottomLeftIcon, ShoppingCartIcon } from "@heroicons/react/24/outline"
+import { Bars3BottomLeftIcon, ShoppingCartIcon, XMarkIcon, FlagIcon } from "@heroicons/react/24/outline"
+import { UserRoundCogIcon } from "lucide-react"
 
 export default function Navbar() {
   return (
@@ -21,29 +22,12 @@ export default function Navbar() {
             <span className="text-lg font-semibold">Game Store</span>
           </Link>
           <div className="grid gap-2 py-6">
-            <Link
-              className="flex w-full items-center py-2 text-lg font-semibold hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-              href="#"
-            >
-              Login as Admin
-            </Link>
-            <Link
-              className="flex w-full items-center py-2 text-lg font-semibold hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-              href="#"
-            >
-              PC Games
-            </Link>
-            <Link
-              className="flex w-full items-center py-2 text-lg font-semibold hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-              href="#"
-            >
-              Table Games
-            </Link>
+            <NavLinks />
           </div>
         </SheetContent>
       </Sheet>
 
-      <Link className="mr-6 hidden lg:flex items-center gap-2" href="#">
+      <Link className="mr-6 hidden lg:flex items-center gap-2" href="/">
         <FlagIcon className="h-6 w-6" />
         <span className="text-lg font-semibold">Game Store</span>
       </Link>
@@ -85,7 +69,7 @@ export default function Navbar() {
                   </div>
                 </div>
                 <Button size="icon" variant="ghost">
-                  <XIcon className="h-4 w-4" />
+                  <XMarkIcon className="h-4 w-4" />
                 </Button>
               </div>
             </DropdownMenuItem>
@@ -109,7 +93,7 @@ export default function Navbar() {
                   </div>
                 </div>
                 <Button size="icon" variant="ghost">
-                  <XIcon className="h-4 w-4" />
+                  <XMarkIcon className="h-4 w-4" />
                 </Button>
               </div>
             </DropdownMenuItem>
@@ -126,49 +110,26 @@ export default function Navbar() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+          <Button
+              className="bg-gray-900 text-white hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              size="icon"
+            >
+              <UserRoundCogIcon className="h-6 w-6" />
+              <span className="sr-only">Cart</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-80">
+            <DropdownMenuLabel>Opciones</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Button className="w-full ">Iniciar sesión como admin</Button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
-  )
-}
-
-function FlagIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-      <line x1="4" x2="4" y1="22" y2="15" />
-    </svg>
-  )
-}
-
-
-
-function XIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
   )
 }

@@ -2,20 +2,26 @@
 
 import { cn } from "@/lib/utils"
 import { HomeIcon, PuzzlePieceIcon } from "@heroicons/react/24/outline"
+import { TbHorseToy} from "react-icons/tb";
+import { Gamepad2Icon } from "lucide-react";
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const links = [
   {
-    name: "Home",
-    href: "/",
-    icon: HomeIcon,
-
+    name: "Juegos de mesa",
+    href: "/juegos-de-mesa",
+    icon: PuzzlePieceIcon,
   },
   {
-    name: "Juegos de mesa",
-    href: "/table-games",
-    icon: PuzzlePieceIcon,
+    name: "Videojuegos",
+    href: "/videojuegos",
+    icon: Gamepad2Icon,
+  },
+  {
+    name: "Juguetes",
+    href: "/juguetes",
+    icon: TbHorseToy,
   }
 ]
 
@@ -34,7 +40,7 @@ export default function NavLinks() {
                 'bg-gray-700 text-blue-400': pathname === link.href,
               }
             )}>
-            <LinkIcon className="h-6 w-6" />
+            <LinkIcon strokeWidth={1.5} className="h-6 w-6" />
             <p className="md:block">{link.name}</p>
           </Link>
         );
