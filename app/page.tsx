@@ -28,7 +28,7 @@ export default function Home() {
   const recommended = [game, gameJuguete, gameVideojuego]
   const boardGames = [game, game, game, game, game]
   const toys = [gameJuguete, gameJuguete, gameJuguete]
-  const videogames = [gameVideojuego, gameVideojuego, gameVideojuego]
+  const videogames = [gameVideojuego, gameVideojuego, gameVideojuego, gameVideojuego]
 
   return (
     <>
