@@ -1,33 +1,19 @@
+'use client';
+
 import { ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { Game } from "@/lib/definitions"
 import CartItem from "./CartItem"
 import { ScrollArea } from "@/components/ui/scroll-area"
-export default function Cart() {
-  const game: Game = {
-    name: 'AjeChess',
-    description: 'Classic strategy game for 2 players.',
-    img: 'https://t.ly/Ia7tG',
-    category: 'Juego de mesa',
-    price: 777
-  }
-  const gameJuguete: Game = {
-    name: 'Caballito de troya',
-    description: 'Probablemente es solo una escoba.',
-    img: 'https://t.ly/QkCcx',
-    category: 'Juguete',
-    price: 99.99
-  }
-  const gameVideojuego: Game = {
-    name: 'Minecraft',
-    description: 'Juego de mundo abierto',
-    img: 'https://t.ly/XLzbu',
-    category: 'Videojuego',
-    price: 4120
-  }
-  const items = [game, gameJuguete, gameVideojuego, game, gameJuguete, gameVideojuego, game, gameJuguete, gameVideojuego, game, gameJuguete, gameVideojuego]
+import { useCart } from "@/lib/hooks/useCart";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
+export default function Cart() {
+
+  const { cart, dispatch } = useCart();
+
+  const cartTotal = cart.items.reduce((total, item) => total + item.game.price, 0);
 
   return (
     <DropdownMenu>
@@ -37,31 +23,39 @@ export default function Cart() {
           size="icon"
         >
           <ShoppingCartIcon className="h-6 w-6" />
+          <div className="relative">
+            <Badge className={cn("absolute -top-5 -right-2 rounded-full bg-red-500 px-1 py-0 text-xs text-white",
+              { 'hidden': cart.cartCount === 0 })
+            }>
+              {cart.cartCount}
+            </Badge>
+          </div>
           <span className="sr-only">Cart</span>
         </Button>
+
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-80">
-        <DropdownMenuLabel>Your Cart</DropdownMenuLabel>
+        <DropdownMenuLabel>Tu carrito ({cart.cartCount})</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         <ScrollArea className="h-[400px]">
-          {items.map((game) => (
-            <CartItem key={game.name} game={game} />
+          {cart.items.map((item) => (
+            <CartItem key={item.game.id} game={item.game} />
           ))}
         </ScrollArea>
 
 
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between w-full">
             <p className="font-medium">Total</p>
-            <p className="font-medium">$49.98</p>
+            <p className="font-medium">${cartTotal}</p>
           </div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Button className="w-full">Checkout</Button>
+          <Button className="w-full">Ir a pagar</Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
 

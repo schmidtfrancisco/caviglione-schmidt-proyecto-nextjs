@@ -5,6 +5,7 @@ import { Game } from '@/lib/definitions'
 export default function Home() {
   
   const game : Game = {
+    id: '1',
     name : 'AjeChess',
     description : 'Classic strategy game for 2 players.',
     img: 'https://t.ly/Ia7tG',
@@ -12,6 +13,7 @@ export default function Home() {
     price: 777
   }
   const gameJuguete : Game = {
+    id: '2',
     name : 'Caballito de troya',
     description : 'Probablemente es solo una escoba.',
     img: 'https://t.ly/QkCcx',
@@ -19,6 +21,7 @@ export default function Home() {
     price: 99.99
   }
   const gameVideojuego : Game = {
+    id: '3',
     name : 'Minecraft',
     description : 'Juego de mundo abierto',
     img: 'https://t.ly/XLzbu',
