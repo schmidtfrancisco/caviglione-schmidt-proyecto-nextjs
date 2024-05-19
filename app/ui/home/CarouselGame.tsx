@@ -1,3 +1,5 @@
+'use client';
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,9 +7,15 @@ import { CarouselItem } from "@/components/ui/carousel";
 import Image from "next/image"
 import { Game } from '@/lib/definitions'
 import { cn } from "@/lib/utils";
+import { useCart } from "@/lib/hooks/useCart";
 
 
 export default function CarouselGame({game}: {game: Game}) {
+  const { dispatch } = useCart();
+  const handleAddToCart = () => {
+    dispatch({ type: "ADD_TO_CART", game })
+  }
+
   return (
     <CarouselItem className="md:basis-1/2 lg:basis-1/3">
       <Card>
@@ -38,7 +46,7 @@ export default function CarouselGame({game}: {game: Game}) {
           <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
             <p className="text-sm text-gray-800 font-bold">${game.price}</p>
             <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-              <Button size="sm" variant="outline" className="text-xs block">
+              <Button onClick={handleAddToCart} size="sm" variant="outline" className="text-xs block">
                 Agregar al carrito
               </Button>
               <Button size="sm">Comprar</Button>
