@@ -1,5 +1,5 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import CarouselGame from "./ui/home/CarouselGame";
+import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import CarouselGame from "@/app/ui/home/CarouselGame";
 import { Game } from '@/lib/definitions'
 
 export default function Home() {
@@ -45,7 +45,7 @@ export default function Home() {
             }}
             orientation="horizontal"
           >
-            <CarouselContent className='-ml-1'>
+            <CarouselContent>
               {recommended.map((game) => (
                 <CarouselGame key={game.name} game={game} />
               ))}
