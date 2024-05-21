@@ -65,7 +65,7 @@ export default function Home() {
             }}
             orientation="horizontal"
           >
-            <CarouselContent className='-ml-1'>
+            <CarouselContent>
               {boardGames.map((game) => (
                 <CarouselGame key={game.name} game={game} />
               ))}
@@ -84,7 +84,7 @@ export default function Home() {
             }}
             orientation="horizontal"
           >
-            <CarouselContent className='-ml-1'>
+            <CarouselContent>
               {videogames.map((game) => (
                 <CarouselGame key={game.name} game={game} />
               ))}
@@ -103,7 +103,7 @@ export default function Home() {
             }}
             orientation="horizontal"
           >
-            <CarouselContent className='-ml-1'>
+            <CarouselContent>
               {toys.map((game) => (
                 <CarouselGame key={game.name} game={game} />
               ))}

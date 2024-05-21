@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 import { Game } from "@/lib/definitions";
 
 export type CartItem = {
@@ -49,12 +49,27 @@ const cartReducer = (state: CartState, action: CartAction) => {
   }
 };
 
+function createInitialState(emptyCart: CartState) {
+  if (typeof window !== 'undefined') {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      return JSON.parse(storedCart);
+    }
+  }
+  return emptyCart
+ 
+}
+
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, dispatch] = useReducer(cartReducer, {
     items: [],
     cartCount: 0,
     cartTotal: 0,
-  });
+  }, createInitialState);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <CartContext.Provider value={{cart, dispatch }}>
@@ -71,26 +86,5 @@ export const useCart = () => {
   return context;
 };
 
-
-
-/*
-  const CartContext = createContext<CartState>({ 
-    items: [], 
-    addToCart: () => { }, 
-    removeFromCart: () => { }, 
-    clearCart: () => { }, 
-    cartCount: 0, 
-    cartTotal: 0 
-  });
-
-  type CartState = {
-  items: CartItem[];
-  addToCart: (game: Game) => void;
-  removeFromCart: (gameId: string) => void;
-  clearCart: () => void;
-  cartCount: number;
-  cartTotal: number;
-};
-*/
 
 

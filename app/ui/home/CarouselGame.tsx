@@ -17,7 +17,7 @@ export default function CarouselGame({ game }: { game: Game }) {
   }
 
   return (
-    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+    <CarouselItem className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 ">
       <Card>
         <Link href={`/game/${game.id}`}>
           <Image

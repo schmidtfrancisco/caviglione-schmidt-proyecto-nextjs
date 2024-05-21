@@ -8,8 +8,14 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { useCart } from "@/lib/hooks/useCart";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 export default function Cart() {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const { cart, dispatch } = useCart();
 
@@ -25,9 +31,9 @@ export default function Cart() {
           <ShoppingCartIcon className="h-6 w-6" />
           <div className="relative">
             <Badge className={cn("absolute -top-5 -right-2 rounded-full bg-red-500 px-1 py-0 text-xs text-white",
-              { 'hidden': cart.cartCount === 0 })
+              { 'hidden': cart.cartCount === 0 && isClient })
             }>
-              {cart.cartCount}
+              {isClient? cart.cartCount : 0}
             </Badge>
           </div>
           <span className="sr-only">Cart</span>
