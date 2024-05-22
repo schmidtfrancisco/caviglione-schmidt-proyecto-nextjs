@@ -1,14 +1,15 @@
 import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import CarouselGame from "@/app/ui/home/CarouselGame";
 import { Game } from '@/lib/definitions'
+import { fetchBoardgames } from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
   
   const game : Game = {
     id: '1',
     name : 'AjeChess',
     description : 'Classic strategy game for 2 players.',
-    img: 'https://t.ly/Ia7tG',
+    images_url: ['https://t.ly/Ia7tG'],
     category: 'Juego de mesa',
     price: 777
   }
@@ -16,7 +17,7 @@ export default function Home() {
     id: '2',
     name : 'Caballito de troya',
     description : 'Probablemente es solo una escoba.',
-    img: 'https://t.ly/QkCcx',
+    images_url: ['https://t.ly/QkCcx'],
     category: 'Juguete',
     price: 99.99
   }
@@ -24,12 +25,12 @@ export default function Home() {
     id: '3',
     name : 'Minecraft',
     description : 'Juego de mundo abierto',
-    img: 'https://t.ly/XLzbu',
+    images_url: ['https://t.ly/XLzbu'],
     category: 'Videojuego',
     price: 4120
   }
   const recommended = [game, gameJuguete, gameVideojuego]
-  const boardGames = [game, game, game, game, game]
+  const boardGames = await fetchBoardgames();
   const toys = [gameJuguete, gameJuguete, gameJuguete]
   const videogames = [gameVideojuego, gameVideojuego, gameVideojuego, gameVideojuego]
 
