@@ -15,7 +15,7 @@ export default function Page({ params }: PageProps) {
     id: '1',
     name: 'AjeChess',
     description: 'Classic strategy game for 2 players.',
-    img: 'https://t.ly/Ia7tG',
+    images_url: ['https://t.ly/Ia7tG'],
     category: 'Juego de mesa',
     price: 777
   }
@@ -30,7 +30,7 @@ export default function Page({ params }: PageProps) {
                 alt="Product Image 1"
                 className="aspect-square object-cover"
                 height={600}
-                src={game.img}
+                src={game.images_url[0]}
                 width={600}
               />
             </CarouselItem>
@@ -39,7 +39,7 @@ export default function Page({ params }: PageProps) {
                 alt="Product Image 2"
                 className="aspect-square object-cover"
                 height={600}
-                src={game.img}
+                src={game.images_url[0]}
                 width={600}
               />
             </CarouselItem>
@@ -48,7 +48,7 @@ export default function Page({ params }: PageProps) {
                 alt="Product Image 3"
                 className="aspect-square object-cover"
                 height={600}
-                src={game.img}
+                src={game.images_url[0]}
                 width={600}
               />
             </CarouselItem>
