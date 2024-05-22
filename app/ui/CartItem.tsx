@@ -24,7 +24,7 @@ export default function CartItem({ game }: { game: Game }) {
             alt="Product Image"
             className="rounded-md"
             height={40}
-            src={game.img}
+            src={game.images_url[0]}
             style={{
               aspectRatio: "40/40",
               objectFit: "cover",

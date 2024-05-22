@@ -5,6 +5,7 @@ import NavLinks from "@/app/ui/Nav-links"
 import Cart from "@/app/ui/Cart"
 import LoginOptions from "@/app/ui/LoginOptions"
 import { Bars3BottomLeftIcon, FlagIcon } from "@heroicons/react/24/outline"
+import { UserRoundCogIcon } from "lucide-react"
 
 
 export default function Navbar() {
@@ -17,13 +18,21 @@ export default function Navbar() {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left">
-          <Link className="flex items-center gap-2" href="#">
-            <FlagIcon className="h-6 w-6" />
-            <span className="text-lg font-semibold">Game Store</span>
-          </Link>
-          <div className="grid gap-2 py-6">
-            <NavLinks />
+        <SheetContent side="left" className="flex flex-col justify-between h-full">
+          <div className="flex flex-col gap-2">
+            <Link className="flex items-center gap-2" href="#">
+              <FlagIcon className="h-6 w-6" />
+              <span className="text-lg font-semibold">Game Store</span>
+            </Link>
+            <div className="grid gap-2 py-6">
+              <NavLinks />
+            </div>
+          </div>
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center gap-2 text-sm">
+              <UserRoundCogIcon className="h-6 w-6" />
+              <p>Iniciar sesión como administrador</p>
+            </Link>
           </div>
         </SheetContent>
       </Sheet>
@@ -32,14 +41,14 @@ export default function Navbar() {
         <FlagIcon className="h-6 w-6" />
         <span className="text-lg font-semibold">Game Store</span>
       </Link>
-      
+
       <nav className="hidden lg:flex lg:flex-row items-center gap-4 mx-auto">
         <NavLinks />
       </nav>
 
       <div className="ml-auto flex items-center gap-4">
         <Cart />
-        <LoginOptions />
+        <LoginOptions className="hidden lg:block" />
       </div>
     </header>
   )
