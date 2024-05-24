@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss"
 import daisyui from "daisyui"
 
 const config = {
-  darkMode: ["class"],
+  darkMode: 'selector',
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
