@@ -15,3 +15,10 @@ export type DbGame = {
 	category: 'Juego de mesa' | 'Videojuego' | 'Juguete';
 	price: number;
 }
+
+export type User = {
+	id: string;
+	name: string;
+	email: string;
+	password: string;
+};

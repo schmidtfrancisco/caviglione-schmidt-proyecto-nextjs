@@ -1,8 +1,8 @@
 import { UserRoundCogIcon } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
+
+import LoginOptionsButton from "@/app/ui/login/LoginOptionsButton"
 
 export default function LoginOptions({ className }: { className?: string }) {
   return (
@@ -21,7 +21,7 @@ export default function LoginOptions({ className }: { className?: string }) {
           <DropdownMenuLabel>Opciones</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="text-xs">
-            <Link href="/" >Iniciar sesión como administrador</Link>
+            <LoginOptionsButton />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -1,11 +1,12 @@
+
 import { Button } from "@/components/ui/button"
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet"
 import Link from "next/link"
 import NavLinks from "@/app/ui/Nav-links"
 import Cart from "@/app/ui/Cart"
-import LoginOptions from "@/app/ui/LoginOptions"
+import LoginOptions from "@/app/ui/login/LoginOptions"
 import { Bars3BottomLeftIcon, FlagIcon } from "@heroicons/react/24/outline"
-import { UserRoundCogIcon } from "lucide-react"
+import LoginOptionsButton from "@/app/ui/login/LoginOptionsButton"
 
 
 export default function Navbar() {
@@ -29,10 +30,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2 text-sm">
-              <UserRoundCogIcon className="h-6 w-6" />
-              <p>Iniciar sesión como administrador</p>
-            </Link>
+            <LoginOptionsButton />
           </div>
         </SheetContent>
       </Sheet>

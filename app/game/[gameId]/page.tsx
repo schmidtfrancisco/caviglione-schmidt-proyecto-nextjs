@@ -1,13 +1,27 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import { Game } from "@/lib/definitions";
+import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 interface PageProps {
   params: {
     gameId: string
   }
+}
+
+const categoryLink = (category: 'Juego de mesa' | 'Videojuego' | 'Juguete') => {
+  return `juegos/${category.toLowerCase().replaceAll(' ', '-')}`
 }
 
 export default function Page({ params }: PageProps) {
@@ -20,67 +34,112 @@ export default function Page({ params }: PageProps) {
     price: 777
   }
 
+
   return (
-    <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-8 px-4">
-      <div className="grid gap-6">
-        <Carousel className="rounded-lg overflow-hidden">
-          <CarouselContent>
-            <CarouselItem>
-              <img
-                alt="Product Image 1"
-                className="aspect-square object-cover"
-                height={600}
-                src={game.images_url[0]}
-                width={600}
-              />
-            </CarouselItem>
-            <CarouselItem>
-              <img
-                alt="Product Image 2"
-                className="aspect-square object-cover"
-                height={600}
-                src={game.images_url[0]}
-                width={600}
-              />
-            </CarouselItem>
-            <CarouselItem>
-              <img
-                alt="Product Image 3"
-                className="aspect-square object-cover"
-                height={600}
-                src={game.images_url[0]}
-                width={600}
-              />
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious className="absolute top-1/2 -translate-y-1/2 left-4 z-10 bg-white/50 hover:bg-white rounded-full p-2 cursor-pointer">
-            <ChevronLeftIcon className="h-6 w-6" />
-          </CarouselPrevious>
-          <CarouselNext className="absolute top-1/2 -translate-y-1/2 right-4 z-10 bg-white/50 hover:bg-white rounded-full p-2 cursor-pointer">
-            <ChevronRightIcon className="h-6 w-6" />
-          </CarouselNext>
-        </Carousel>
-      </div>
-      <div className="grid gap-4">
-        <div className="flex items-center gap-2">
-          <h1 className="text-4xl font-bold">{game.name}</h1>
-          <Badge className="hover:bg-gray-100/50 dark:hover:bg-gray-800/50" variant="secondary">
-            {game.category}
-          </Badge>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+        <div className="lg:max-w-lg lg:self-stretch">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/">Inicio</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                  <Link href="/juegos">Juegos</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                  <Link href={categoryLink(game.category)}>{game.category}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{game.name}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          <div className="mt-10">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{game.name}</h1>
+          </div>
+          <section className="mt-4">
+            <div className="flex items-center">
+              <p className="font-medium text-gray-900">
+                ${game.price}
+              </p>
+              <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
+                <Badge className={cn('text-white px-2 py-1 rounded-full text-xs',
+                  { 'bg-green-800': game.category === 'Juego de mesa' },
+                  { 'bg-blue-600': game.category === 'Videojuego' },
+                  { 'bg-orange-600': game.category === 'Juguete' },
+                )}>
+                  {game.category}
+                </Badge>
+              </div>
+            </div>
+            <div className="mt-4 space-y-6">
+              <p className="text-base text-muted-foreground">{game.description}</p>
+            </div>
+
+            <div className="mt-6 flex items-center">
+
+            </div>
+          </section>
         </div>
 
-        <p className="text-lg text-gray-500">
-          {game.description}
-        </p>
-        <div className="flex items-center gap-4">
-          <span className="text-4xl font-bold">${game.price}</span>
-          <div className="flex gap-2">
-            <Button className="flex-1" size="lg" variant="outline">
-              Add to Cart
-            </Button>
-            <Button className="flex-1" size="lg">
-              Buy Now
-            </Button>
+        <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
+          <div className="aspect-square rounded-lg">
+            <Carousel className="rounded-lg overflow-hidden">
+              <CarouselContent>
+                <CarouselItem>
+                  <img
+                    alt="Product Image 1"
+                    className="aspect-square object-cover"
+                    height={600}
+                    src={game.images_url[0]}
+                    width={600}
+                  />
+                </CarouselItem>
+                <CarouselItem>
+                  <img
+                    alt="Product Image 2"
+                    className="aspect-square object-cover"
+                    height={600}
+                    src={game.images_url[0]}
+                    width={600}
+                  />
+                </CarouselItem>
+                <CarouselItem>
+                  <img
+                    alt="Product Image 3"
+                    className="aspect-square object-cover"
+                    height={600}
+                    src={game.images_url[0]}
+                    width={600}
+                  />
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious className="absolute top-1/2 -translate-y-1/2 left-4 z-10 bg-white/50 hover:bg-white rounded-xl p-2 cursor-pointer">
+                <ChevronLeftIcon className="h-6 w-6" />
+              </CarouselPrevious>
+              <CarouselNext className="absolute top-1/2 -translate-y-1/2 right-4 z-10 bg-white/50 hover:bg-white rounded-xl p-2 cursor-pointer">
+                <ChevronRightIcon className="h-6 w-6" />
+              </CarouselNext>
+            </Carousel>
+          </div>
+        </div>
+        <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
+          <div>
+            <div className="mt-10 flex flex-col lg:flex-row gap-5">
+              <Button size="lg" variant="outline">Agregar al carrito</Button>
+              <Button size="lg">Comprar</Button>
+            </div>
           </div>
         </div>
       </div>
