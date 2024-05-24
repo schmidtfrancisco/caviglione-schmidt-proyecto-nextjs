@@ -1,13 +1,12 @@
 
 import { Button } from "@/components/ui/button"
-import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet"
+import { SheetTrigger, SheetContent, Sheet, SheetClose } from "@/components/ui/sheet"
 import Link from "next/link"
 import NavLinks from "@/app/ui/Nav-links"
 import Cart from "@/app/ui/Cart"
 import LoginOptions from "@/app/ui/login/LoginOptions"
 import { Bars3BottomLeftIcon, FlagIcon } from "@heroicons/react/24/outline"
-import LoginOptionsButton from "@/app/ui/login/LoginOptionsButton"
-
+import SheetLoginOptions from "@/app/ui/login/SheetLoginOptions"
 
 export default function Navbar() {
   return (
@@ -21,7 +20,7 @@ export default function Navbar() {
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col justify-between h-full">
           <div className="flex flex-col gap-2">
-            <Link className="flex items-center gap-2" href="#">
+            <Link className="flex items-center gap-2" href="/">
               <FlagIcon className="h-6 w-6" />
               <span className="text-lg font-semibold">Game Store</span>
             </Link>
@@ -30,7 +29,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex-shrink-0">
-            <LoginOptionsButton />
+            <SheetLoginOptions />
           </div>
         </SheetContent>
       </Sheet>
@@ -46,7 +45,7 @@ export default function Navbar() {
 
       <div className="ml-auto flex items-center gap-4">
         <Cart />
-        <LoginOptions className="hidden lg:block" />
+        <LoginOptions />
       </div>
     </header>
   )

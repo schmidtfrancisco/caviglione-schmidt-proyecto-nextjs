@@ -1,11 +1,12 @@
 'use client';
 
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { HomeIcon, PuzzlePieceIcon } from "@heroicons/react/24/outline"
 import { TbHorseToy} from "react-icons/tb";
 import { Gamepad2Icon } from "lucide-react";
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+
 
 const links = [
   {

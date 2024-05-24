@@ -31,9 +31,10 @@ export default function CarouselGame({ game }: { game: Game }) {
               objectFit: "cover",
             }}
           />
-
-          <CardContent className="p-4">
-            <div className="flex flex-col gap-3">
+        </Link>
+        <CardContent className="p-4">
+          <div className="flex flex-col gap-3">
+            <Link href={`/game/${game.id}`}>
               <div className="flex items-center justify-between">
                 <h3 className="font-bold truncate">{game.name}</h3>
                 <Badge className={cn('text-white px-2 py-1 rounded-full text-xs',
@@ -46,15 +47,15 @@ export default function CarouselGame({ game }: { game: Game }) {
               </div>
               <p className="text-sm text-gray-600 line-clamp-2 md:line-clamp-3">{game.description}</p>
               <p className="text-sm text-gray-800 font-bold">${game.price}</p>
-              <div className="flex flex-col sm:flex-row gap-2 w-full justify-end">
-                <Button onClick={handleAddToCart} size="sm" variant="outline" className="text-xs block">
-                  Agregar al carrito
-                </Button>
-                <Button size="sm">Comprar</Button>
-              </div>
+            </Link>
+            <div className="flex flex-col sm:flex-row gap-2 w-full justify-end">
+              <Button onClick={handleAddToCart} size="sm" variant="outline" className="text-xs block">
+                Agregar al carrito
+              </Button>
+              <Button size="sm">Comprar</Button>
             </div>
-          </CardContent>
-        </Link>
+          </div>
+        </CardContent>
       </Card>
     </CarouselItem>
   );
