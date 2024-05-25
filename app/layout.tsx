@@ -21,11 +21,11 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <CartProvider>
         <body className={cn(
-          'relative h-full font-sans antialiased',
+          'relative h-full font-sans antialiased bg-white',
           inter.className
         )}>
-          <Navbar />
-          <main className="relative flex flex-col min-h-screen p-4">
+          <main className="relative flex flex-col min-h-screen bg-white">
+            <Navbar />
             <div className="flex-grow flex-1">{children}</div>
           </main>
         </body>
