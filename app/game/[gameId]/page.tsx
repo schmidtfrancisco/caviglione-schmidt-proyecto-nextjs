@@ -13,6 +13,8 @@ import { Game } from "@/lib/definitions";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import GameCategoryBadge from "@/app/ui/home/GameCategoryBadge";
+import { fetchGameById } from "@/lib/data";
 
 interface PageProps {
   params: {
@@ -20,19 +22,12 @@ interface PageProps {
   }
 }
 
-const categoryLink = (category: 'Juego de mesa' | 'Videojuego' | 'Juguete') => {
+const categoryLink = (category: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes') => {
   return `juegos/${category.toLowerCase().replaceAll(' ', '-')}`
 }
 
-export default function Page({ params }: PageProps) {
-  const game: Game = {
-    id: '1',
-    name: 'AjeChess',
-    description: 'Classic strategy game for 2 players.',
-    images_url: ['https://t.ly/Ia7tG'],
-    category: 'Juego de mesa',
-    price: 777
-  }
+export default async function Page({ params }: PageProps) {
+  const game: Game = await fetchGameById(params.gameId);
 
 
   return (
@@ -74,13 +69,7 @@ export default function Page({ params }: PageProps) {
                 ${game.price}
               </p>
               <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
-                <Badge className={cn('text-white px-2 py-1 rounded-full text-xs',
-                  { 'bg-green-800': game.category === 'Juego de mesa' },
-                  { 'bg-blue-600': game.category === 'Videojuego' },
-                  { 'bg-orange-600': game.category === 'Juguete' },
-                )}>
-                  {game.category}
-                </Badge>
+                <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs"/>
               </div>
             </div>
             <div className="mt-4 space-y-6">

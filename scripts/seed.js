@@ -6,14 +6,14 @@ WHERE schemaname != 'pg_catalog' AND
     schemaname != 'information_schema';*/
 
 const { db } = require('@vercel/postgres');
-const { boardgames, users } = require('../lib/placeholder-data.js');
+const { games, users } = require('../lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
 async function seedGames(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`;
 
-    await client.sql`CREATE TYPE game_category AS ENUM ('Juego de mesa', 'Videojuego', 'Juguete');`;
+    await client.sql`CREATE TYPE game_category AS ENUM ('Juegos de mesa', 'Videojuegos', 'Juguetes');`;
 
     const createTable = await client.sql`
         CREATE TABLE IF NOT EXISTS gamestore.games (
@@ -28,11 +28,11 @@ async function seedGames(client) {
     console.log('Table created: games');
 
     const insertedGames = await Promise.all(
-      boardgames.map(
+      games.map(
         (game) => client.sql`
           INSERT INTO gamestore.games (name, description, images_url, category, price)
           VALUES
-          (${game.name}, ${game.description}, ARRAY[${toJSON(game.imgs)}], ${game.category}, ${game.price})
+          (${game.name}, ${game.description}, ARRAY[${toJSON(game.images_url)}], ${game.category}, ${game.price})
           ON CONFLICT DO NOTHING;`,
       ),
     );
@@ -99,10 +99,6 @@ main().catch((err) => {
     err,
   );
 });
-
-function toPostgresArray(arr) {
-  return `{${arr.map(item => `"${item}"`).join(',')}}`;
-}
 
 function toJSON(arr) {
   return JSON.stringify(arr);

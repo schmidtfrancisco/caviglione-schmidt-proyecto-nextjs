@@ -3,14 +3,13 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Game } from '@/lib/definitions'
-import { cn } from "@/lib/utils";
 import { useCart } from "@/lib/hooks/useCart";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CarouselItem } from "@/components/ui/carousel";
+import GameCategoryBadge from "./GameCategoryBadge";
 
-export default function CarouselGame({ game }: { game: Game }) {
+export default function GameCarouselItem({ game }: { game: Game }) {
   const { dispatch } = useCart();
   const handleAddToCart = () => {
     dispatch({ type: "ADD_TO_CART", game })
@@ -35,18 +34,14 @@ export default function CarouselGame({ game }: { game: Game }) {
         <CardContent className="p-4">
           <div className="flex flex-col gap-3">
             <Link href={`/game/${game.id}`}>
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold truncate">{game.name}</h3>
-                <Badge className={cn('text-white px-2 py-1 rounded-full text-xs',
-                  { 'bg-green-800': game.category === 'Juego de mesa' },
-                  { 'bg-blue-600': game.category === 'Videojuego' },
-                  { 'bg-orange-600': game.category === 'Juguete' },
-                )}>
-                  {game.category}
-                </Badge>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold truncate">{game.name}</h3>
+                    <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs font-medium"/>
+                </div>
+                <p className="text-sm text-gray-600 line-clamp-2 md:line-clamp-3">{game.description}</p>
+                <p className="text-sm text-gray-800 font-bold">${game.price}</p>
               </div>
-              <p className="text-sm text-gray-600 line-clamp-2 md:line-clamp-3">{game.description}</p>
-              <p className="text-sm text-gray-800 font-bold">${game.price}</p>
             </Link>
             <div className="flex flex-col sm:flex-row gap-2 w-full justify-end">
               <Button onClick={handleAddToCart} size="sm" variant="outline" className="text-xs block">

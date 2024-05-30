@@ -1,14 +1,16 @@
 'use client';
 
+import Image from "next/image";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import CartItem from "./CartItem"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useCart } from "@/lib/hooks/useCart";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Cart() {
   const [isClient, setIsClient] = useState(false)
@@ -33,7 +35,7 @@ export default function Cart() {
             <Badge className={cn("absolute -top-5 -right-2 rounded-full bg-red-500 px-1 py-0 text-xs text-white",
               { 'hidden': cart.cartCount === 0 && isClient })
             }>
-              {isClient? cart.cartCount : 0}
+              {isClient ? cart.cartCount : 0}
             </Badge>
           </div>
           <span className="sr-only">Cart</span>
@@ -44,27 +46,46 @@ export default function Cart() {
       <DropdownMenuContent align="end" className="w-80">
         <DropdownMenuLabel>Tu carrito ({cart.cartCount})</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        {(cart.items.length === 0) ? (
 
-        <ScrollArea className="h-[400px]">
-          {cart.items.map((item) => (
-            <CartItem key={item.game.id} game={item.game} />
-          ))}
-        </ScrollArea>
+          <div className="flex flex-col items-center justify-between w-full gap-2">
+            <Image
+              src="/emptycart.png"
+              alt="No hay items en el carrito"
+              width={200}
+              height={200}
+            />
 
-
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <div className="flex items-center justify-between w-full">
-            <p className="font-medium">Total</p>
-            <p className="font-medium">${cartTotal}</p>
+            <p className="font-medium">No hay juegos en el carrito</p>
+            <Link href="/juegos"
+              className={cn(buttonVariants({ size: "sm", variant: "default" }), "m-2")}>
+              Explorar juegos
+            </Link>
           </div>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Button className="w-full">Ir a pagar</Button>
-        </DropdownMenuItem>
+
+        ) : (
+          <>
+            <ScrollArea className="h-[400px]">
+              {cart.items.map((item) => (
+                <CartItem key={item.game.id} game={item.game} />
+              ))}
+            </ScrollArea>
+
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <div className="flex items-center justify-between w-full">
+                <p className="font-medium">Total</p>
+                <p className="font-medium">${cartTotal}</p>
+              </div>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Button className="w-full">Ir a pagar</Button>
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
 
-    </DropdownMenu>
+    </DropdownMenu >
   )
 }
