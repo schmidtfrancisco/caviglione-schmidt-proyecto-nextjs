@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import {
@@ -10,11 +9,11 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Game } from "@/lib/definitions";
-import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import GameCategoryBadge from "@/app/ui/home/GameCategoryBadge";
 import { fetchGameById } from "@/lib/data";
+import AddToCartButton from "@/app/ui/AddToCartButton";
 
 interface PageProps {
   params: {
@@ -126,7 +125,7 @@ export default async function Page({ params }: PageProps) {
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
           <div>
             <div className="mt-10 flex flex-col lg:flex-row gap-5">
-              <Button size="lg" variant="outline">Agregar al carrito</Button>
+              <AddToCartButton game={game} size={"lg"}/>
               <Button size="lg">Comprar</Button>
             </div>
           </div>

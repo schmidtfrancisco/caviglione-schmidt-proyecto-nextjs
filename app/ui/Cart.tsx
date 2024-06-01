@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button, buttonVariants } from "@/components/ui/button"
-import CartItem from "./CartItem"
+import CartItem from "@/app/ui/CartItem"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useCart } from "@/lib/hooks/useCart";
 import { Badge } from "@/components/ui/badge";

@@ -3,17 +3,13 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Game } from '@/lib/definitions'
-import { useCart } from "@/lib/hooks/useCart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CarouselItem } from "@/components/ui/carousel";
 import GameCategoryBadge from "./GameCategoryBadge";
+import AddToCartButton from "@/app/ui/AddToCartButton";
 
 export default function GameCarouselItem({ game }: { game: Game }) {
-  const { dispatch } = useCart();
-  const handleAddToCart = () => {
-    dispatch({ type: "ADD_TO_CART", game })
-  }
 
   return (
     <CarouselItem className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
@@ -44,9 +40,7 @@ export default function GameCarouselItem({ game }: { game: Game }) {
               </div>
             </Link>
             <div className="flex flex-col sm:flex-row gap-2 w-full justify-end">
-              <Button onClick={handleAddToCart} size="sm" variant="outline" className="text-xs block">
-                Agregar al carrito
-              </Button>
+              <AddToCartButton game={game} className="text-xs block"/>
               <Button size="sm">Comprar</Button>
             </div>
           </div>

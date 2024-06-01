@@ -1,11 +1,13 @@
 'use client';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
-export default function PagePagination({maxPage}: { maxPage: number}) {
+import { usePathname, useSearchParams } from 'next/navigation';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { generatePagination } from '@/lib/utils';
+
+export default function PagePagination({ maxPage }: { maxPage: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
+  const currentPage = Number(searchParams.get('pag')) || 1;
 
   const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
@@ -13,26 +15,39 @@ export default function PagePagination({maxPage}: { maxPage: number}) {
     return `${pathname}?${params.toString()}`;
   };
 
+  const allPages = generatePagination(currentPage, maxPage);
+
+  console.log(allPages);
   return (
     <div className="flex justify-center my-8 ">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious href="#" isActive={currentPage === 1}/>
+            <PaginationPrevious
+              href={createPageURL(currentPage - 1)}
+              isDisabled={currentPage <= 1}
+            />
           </PaginationItem>
+
+          {allPages.map((page, index) => (
+            <PaginationItem key={index}>
+              {(page === '...') ?
+                <PaginationEllipsis /> :
+                <PaginationLink
+                  href={createPageURL(page)}
+                  isActive={currentPage === page}
+                >
+                  {page}
+                </PaginationLink>
+              }
+            </PaginationItem>
+          ))}
+
           <PaginationItem>
-            <PaginationLink href="#" >1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">
-              2
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
+            <PaginationNext
+              href={createPageURL(currentPage + 1)}
+              isDisabled={currentPage >= maxPage}
+            />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
