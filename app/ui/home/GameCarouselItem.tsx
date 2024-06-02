@@ -40,8 +40,7 @@ export default function GameCarouselItem({ game }: { game: Game }) {
               </div>
             </Link>
             <div className="flex flex-col sm:flex-row gap-2 w-full justify-end">
-              <AddToCartButton game={game} className="text-xs block"/>
-              <Button size="sm">Comprar</Button>
+              <AddToCartButton game={game} size={"sm"} className="text-xs block"/>
             </div>
           </div>
         </CardContent>

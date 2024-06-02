@@ -22,7 +22,6 @@ export default function GameCard({ game }: { game: Game }) {
             <h4 className="font-semibold text-base md:text-lg">${game.price}</h4>
             <div className="flex gap-2 mt-4 mr-4 justify-end">
               <AddToCartButton game={game} />
-              <Button className="" size="sm">Comprar</Button>
             </div>
           </div>
         </div>
