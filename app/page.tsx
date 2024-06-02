@@ -1,7 +1,5 @@
 import GameCarouselContent from "@/app/ui/home/GameCarouselContent";
-import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import  GameCarouselItem  from "@/app/ui/home/GameCarouselItem";
-import { Game } from '@/lib/definitions'
+import { Carousel, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Suspense } from "react";
 import { CarouselGameSkeleton } from "./ui/skeletons";
 
