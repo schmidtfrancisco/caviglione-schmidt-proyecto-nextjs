@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Game } from "@/lib/definitions";
 import { useCart } from "@/lib/hooks/useCart";
-import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline"
+import { formatPrice } from "@/lib/utils";
+import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline"
+import Image from "next/image";
 
 
-export default function CartItem({ game }: { game: Game }) {
+export default function CartItem({ game, quantity }: { game: Game, quantity: number }) {
 
   const { cart, dispatch } = useCart();
 
@@ -16,11 +18,17 @@ export default function CartItem({ game }: { game: Game }) {
     console.log(cart)
   };
 
+  const handleUpdateQuantity = (id: string, quantity: number) => {
+    dispatch({ type: "UPDATE_QUANTITY", id, quantity })
+  };
+
+  const preventClousure = (event: Event) => event.preventDefault();
+
   return (
-    <DropdownMenuItem>
+    <DropdownMenuItem onSelect={preventClousure} className="hover:none">
       <div className="flex items-center justify-between w-full gap-2">
         <div className="flex items-center gap-2">
-          <img
+          <Image
             alt="Product Image"
             className="rounded-md"
             height={40}
@@ -32,13 +40,35 @@ export default function CartItem({ game }: { game: Game }) {
             width={40}
           />
           <div>
-            <p className="font-medium">{game.name}</p>
-            <p className="text-sm text-gray-500">${game.price}</p>
+            <p className="text-sm font-medium pl-2">{game.name}</p>
+            <div className="flex items-center gap-1">
+              {(quantity === 1) ? (
+                <Button onClick={() => handleRemoveFromCart(game.id)} size="icon" variant="ghost" className="hover:bg-gray-200" >
+                <TrashIcon className="h-4 w-4" />
+              </Button>
+              ) : (
+              <Button
+                onClick={() => handleUpdateQuantity(game.id, quantity - 1)}
+                variant="ghost"
+                size="icon"
+                className="p-0 m-0">
+                <MinusIcon className="h-4 w-4" />
+              </Button>
+              )}
+              <span className="text-sm">{quantity} u.</span>
+              <Button
+                onClick={() => handleUpdateQuantity(game.id, quantity + 1)}
+                variant="ghost"
+                size="icon"
+              >
+                <PlusIcon className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
-        <Button onClick={() => handleRemoveFromCart(game.id)} size="icon" variant="ghost" className="hover:bg-gray-200" >
-          <XMarkIcon className="h-4 w-4" />
-        </Button>
+
+        <p className="text-sm text-gray-500">{formatPrice(game.price)}</p>
+
       </div>
     </DropdownMenuItem>
 

@@ -14,6 +14,7 @@ import Link from "next/link";
 import GameCategoryBadge from "@/app/ui/home/GameCategoryBadge";
 import { fetchGameById } from "@/lib/data";
 import AddToCartButton from "@/app/ui/AddToCartButton";
+import { formatPrice } from "@/lib/utils";
 
 interface PageProps {
   params: {
@@ -65,7 +66,7 @@ export default async function Page({ params }: PageProps) {
           <section className="mt-4">
             <div className="flex items-center">
               <p className="font-medium text-gray-900">
-                ${game.price}
+                {formatPrice(game.price)}
               </p>
               <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
                 <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs"/>
@@ -124,9 +125,9 @@ export default async function Page({ params }: PageProps) {
         </div>
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
           <div>
-            <div className="mt-10 flex flex-col lg:flex-row gap-5">
-              <AddToCartButton game={game} size={"lg"}/>
-              <Button size="lg">Comprar</Button>
+            <div className="mt-10 flex flex-col gap-5">
+              <AddToCartButton game={game} size={"lg"} quantityOption={true}/>
+              <Button size="lg" className="lg:max-w-[360px]">Comprar</Button>
             </div>
           </div>
         </div>

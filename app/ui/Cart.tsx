@@ -8,7 +8,7 @@ import CartItem from "@/app/ui/CartItem"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useCart } from "@/lib/hooks/useCart";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -19,9 +19,7 @@ export default function Cart() {
     setIsClient(true)
   }, [])
 
-  const { cart, dispatch } = useCart();
-
-  const cartTotal = cart.items.reduce((total, item) => total + item.game.price, 0);
+  const { cart, dispatch, cartTotal, cartCount } = useCart();
 
   return (
     <DropdownMenu>
@@ -33,9 +31,9 @@ export default function Cart() {
           <ShoppingCartIcon className="h-6 w-6" />
           <div className="relative">
             <Badge className={cn("absolute -top-5 -right-2 rounded-full bg-red-500 px-1 py-0 text-xs text-white",
-              { 'hidden': cart.cartCount === 0 && isClient })
+              { 'hidden': cartCount === 0 && isClient })
             }>
-              {isClient ? cart.cartCount : 0}
+              {isClient ? cartCount : 0}
             </Badge>
           </div>
           <span className="sr-only">Cart</span>
@@ -44,9 +42,9 @@ export default function Cart() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-80">
-        <DropdownMenuLabel>Tu carrito ({cart.cartCount})</DropdownMenuLabel>
+        <DropdownMenuLabel>Tu carrito ({cartCount})</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {(cart.items.length === 0) ? (
+        {(cartCount === 0) ? (
 
           <div className="flex flex-col items-center justify-between w-full gap-2">
             <Image
@@ -67,7 +65,7 @@ export default function Cart() {
           <>
             <ScrollArea className="h-[400px]">
               {cart.items.map((item) => (
-                <CartItem key={item.game.id} game={item.game} />
+                <CartItem key={item.game.id} game={item.game} quantity={item.quantity}/>
               ))}
             </ScrollArea>
 
@@ -75,7 +73,7 @@ export default function Cart() {
             <DropdownMenuItem>
               <div className="flex items-center justify-between w-full">
                 <p className="font-medium">Total</p>
-                <p className="font-medium">${cartTotal}</p>
+                <p className="font-medium">{formatPrice(cartTotal)}</p>
               </div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />

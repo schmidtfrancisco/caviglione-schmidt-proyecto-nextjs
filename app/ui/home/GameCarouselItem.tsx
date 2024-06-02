@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CarouselItem } from "@/components/ui/carousel";
 import GameCategoryBadge from "./GameCategoryBadge";
 import AddToCartButton from "@/app/ui/AddToCartButton";
+import { formatPrice } from "@/lib/utils";
 
 export default function GameCarouselItem({ game }: { game: Game }) {
 
@@ -36,7 +37,7 @@ export default function GameCarouselItem({ game }: { game: Game }) {
                     <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs font-medium"/>
                 </div>
                 <p className="text-sm text-gray-600 line-clamp-2 md:line-clamp-3">{game.description}</p>
-                <p className="text-sm text-gray-800 font-bold">${game.price}</p>
+                <p className="text-sm text-gray-800 font-bold">{formatPrice(game.price)}</p>
               </div>
             </Link>
             <div className="flex flex-col sm:flex-row gap-2 w-full justify-end">

@@ -22,7 +22,7 @@ async function seedGames(client) {
             description TEXT NOT NULL,
             images_url TEXT[] NOT NULL,
             category game_category NOT NULL,
-            price NUMERIC(10, 2) NOT NULL
+            price INT NOT NULL
         );`;
 
     console.log('Table created: games');

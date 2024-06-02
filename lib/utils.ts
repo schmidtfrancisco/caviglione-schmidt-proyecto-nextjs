@@ -6,6 +6,14 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
+export function formatPrice(price: number) {
+  return (price / 100).toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  });
+}
+
+
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.

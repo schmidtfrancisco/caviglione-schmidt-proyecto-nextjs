@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Game } from "@/lib/definitions";
 import AddToCartButton from "@/app/ui/AddToCartButton";
 import Image from "next/image";
+import { formatPrice } from "@/lib/utils";
 
 
 export default function GameCard({ game }: { game: Game }) {
@@ -19,7 +20,7 @@ export default function GameCard({ game }: { game: Game }) {
           <div className="flex-1 pt-4 pb-2">
             <h3 className="font-semibold text-lg md:text-xl">{game.name}</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400">{game.description}</p>
-            <h4 className="font-semibold text-base md:text-lg">${game.price}</h4>
+            <h4 className="font-semibold text-base md:text-lg">{formatPrice(game.price)}</h4>
             <div className="flex gap-2 mt-4 mr-4 justify-end">
               <AddToCartButton game={game} />
             </div>
