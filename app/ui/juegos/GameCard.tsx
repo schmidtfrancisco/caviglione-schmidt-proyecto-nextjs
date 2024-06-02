@@ -22,7 +22,7 @@ export default function GameCard({ game }: { game: Game }) {
             <p className="text-sm text-gray-500 dark:text-gray-400">{game.description}</p>
             <h4 className="font-semibold text-base md:text-lg">{formatPrice(game.price)}</h4>
             <div className="flex gap-2 mt-4 mr-4 justify-end">
-              <AddToCartButton game={game} />
+              <AddToCartButton game={game} buttonClassName="min-w-[150px]"/>
             </div>
           </div>
         </div>

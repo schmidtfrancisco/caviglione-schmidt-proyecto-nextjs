@@ -9,8 +9,8 @@ import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline"
 import { cn } from '@/lib/utils';
 
 export default function AddToCartButton(
-  { game, quantityOption = false, className, ...props }:
-    { game: Game, quantityOption?: boolean, className?: string } & Pick<ButtonProps, "size">
+  { game, quantityOption = false, buttonClassName, ...props }:
+    { game: Game, quantityOption?: boolean, buttonClassName?: string } & Pick<ButtonProps, "size">
 ) {
   const { dispatch } = useCart();
   const [quantity, setQuantity] = useState(1);
@@ -33,17 +33,17 @@ export default function AddToCartButton(
   }
 
   return (
-    <div className='flex items-center gap-2'>
+    <div className={cn({'flex items-center gap-2': quantityOption})}>
       <Button
         onClick={handleAddToCart}
         size={props.size}
         variant="outline"
-        className={cn(className, 'min-w-56',)}
+        className={cn(buttonClassName, 'w-full lg:w-auto')}
       >
         {isAdded ? (
-          <div className="flex items-center gap-2" >
+          <div className="flex items-center justify-center gap-2" >
             <CheckIcon className="h-4 w-4 text-green-700" />
-            Agregado con éxito
+            Agregado!
           </div>
         ) :
           "Agregar al carrito"
@@ -59,7 +59,7 @@ export default function AddToCartButton(
           >
             <MinusIcon className="h-4 w-4" />
           </Button>
-          <span className="text-sm font-semibold text-center w-3">{quantity}</span>
+          <span className="text-sm font-semibold text-center w-4">{quantity}</span>
           <Button
             onClick={() => setQuantity(quantity + 1)}
             variant="outline"

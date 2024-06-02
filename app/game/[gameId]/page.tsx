@@ -126,8 +126,8 @@ export default async function Page({ params }: PageProps) {
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
           <div>
             <div className="mt-10 flex flex-col gap-5">
-              <AddToCartButton game={game} size={"lg"} quantityOption={true}/>
-              <Button size="lg" className="lg:max-w-[360px]">Comprar</Button>
+              <AddToCartButton game={game} size={"lg"} quantityOption={true} buttonClassName="min-w-[182px]"/>
+              <Button size="lg" className="lg:max-w-[310px] m-w">Comprar</Button>
             </div>
           </div>
         </div>
