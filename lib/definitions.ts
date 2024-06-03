@@ -13,3 +13,8 @@ export type User = {
 	email: string;
 	password: string;
 };
+
+export type Category = {
+	name: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes';
+	description: string;
+}

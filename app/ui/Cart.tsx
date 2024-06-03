@@ -45,7 +45,6 @@ export default function Cart() {
         <DropdownMenuLabel>Tu carrito ({cartCount})</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {(cartCount === 0) ? (
-
           <div className="flex flex-col items-center justify-between w-full gap-2">
             <Image
               src="/emptycart.png"
@@ -53,14 +52,14 @@ export default function Cart() {
               width={200}
               height={200}
             />
-
             <p className="font-medium">No hay juegos en el carrito</p>
-            <Link href="/juegos"
-              className={cn(buttonVariants({ size: "sm", variant: "default" }), "m-2")}>
-              Explorar juegos
-            </Link>
+            <DropdownMenuItem asChild>
+              <Link href="/juegos"
+                className={cn(buttonVariants({ size: "sm", variant: "default" }), "m-2 cursor-pointer")}>
+                Explorar juegos
+              </Link>
+            </DropdownMenuItem>
           </div>
-
         ) : (
           <>
             <ScrollArea className="h-[400px]">
