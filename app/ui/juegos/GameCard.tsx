@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Game } from "@/lib/definitions";
 import AddToCartButton from "@/app/ui/AddToCartButton";
 import Image from "next/image";

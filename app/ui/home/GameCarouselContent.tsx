@@ -1,26 +1,15 @@
 import GameCarouselItem from "@/app/ui/home/GameCarouselItem";
-import { Game } from '@/lib/definitions'
-import { fetchGamesByCategory } from "@/lib/data";
+import { Category, Game } from '@/lib/definitions'
+import { fetchGamesByCategoryWithLimit } from "@/lib/data";
 import { CarouselContent } from "@/components/ui/carousel";
 
 
-interface GameCarouselContentProps {
-  category?: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes',
-  recommended?: boolean
-}
-
 export default async function GameCarouselContent(
-  {category, recommended = false}: GameCarouselContentProps,
+  {category }: {category: Category},
 ) {
-
-  let games: Game[] = [];
-
-  if (recommended) {
-    games = await fetchGamesByCategory(category || 'Juegos de mesa');
-  } else if (category) {
-    games = await fetchGamesByCategory(category);
-  } 
-
+  const GAMES_PER_CAROUSEL = 10;
+  const games = await fetchGamesByCategoryWithLimit(category, GAMES_PER_CAROUSEL);
+   
   return (
     <CarouselContent>
       {games.map((game) => (

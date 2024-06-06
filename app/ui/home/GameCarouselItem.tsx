@@ -3,19 +3,18 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Game } from '@/lib/definitions'
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CarouselItem } from "@/components/ui/carousel";
 import GameCategoryBadge from "./GameCategoryBadge";
 import AddToCartButton from "@/app/ui/AddToCartButton";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, getCategoryLink } from "@/lib/utils";
 
 export default function GameCarouselItem({ game }: { game: Game }) {
 
   return (
     <CarouselItem className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
       <Card>
-        <Link href={`/game/${game.id}`}>
+        <Link href={`${getCategoryLink(game.category)}/${game.id}`}>
           <Image
             alt={game.name}
             className="w-full h-48 object-cover rounded-t-md"
@@ -30,7 +29,7 @@ export default function GameCarouselItem({ game }: { game: Game }) {
         </Link>
         <CardContent className="p-4">
           <div className="flex flex-col gap-3">
-            <Link href={`/game/${game.id}`}>
+            <Link href={`${getCategoryLink(game.category)}/${game.id}`}>
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold truncate">{game.name}</h3>

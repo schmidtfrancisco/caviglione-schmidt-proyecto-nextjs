@@ -1,10 +1,12 @@
+import { Category } from "@/lib/definitions";
+import { getCategoryLink } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Category({ category, src }: { category: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes', src: string }) {
+export default function CategoryCard({ category, src }: { category: Category, src: string }) {
   return (
     <div className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300 ease-in-out hover:-translate-y-2">
-      <Link href="#" className="absolute inset-0 z-10">
+      <Link href={getCategoryLink(category)} className="absolute inset-0 z-10">
         <span className="sr-only">Explorar</span>
       </Link>
       <Image

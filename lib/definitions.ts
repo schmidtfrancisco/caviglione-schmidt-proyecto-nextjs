@@ -1,9 +1,15 @@
+export enum Category{
+	JUEGOS_DE_MESA = 'Juegos de mesa',
+	VIDEOJUEGOS = 'Videojuegos',
+	JUGUETES = 'Juguetes'
+}
+
 export type Game = {
 	id: string;
 	name: string;
 	description: string;
 	images_url: string[];
-	category: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes';
+	category: Category;
 	price: number;
 };
 
@@ -14,7 +20,3 @@ export type User = {
 	password: string;
 };
 
-export type Category = {
-	name: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes';
-	description: string;
-}

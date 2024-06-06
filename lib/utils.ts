@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { Category } from "@/lib/definitions";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -11,6 +12,22 @@ export function formatPrice(price: number) {
     style: "currency",
     currency: "ARS",
   });
+}
+
+export function getCategoryLink(category: Category){
+  return `/juegos/${category.toLowerCase().replaceAll(' ', '-')}`
+}
+
+export function linkToCategory(link: string){
+  switch (link) {
+    case 'juegos-de-mesa': 
+      return Category.JUEGOS_DE_MESA;
+    case 'videojuegos':
+      return Category.VIDEOJUEGOS;
+    case 'juguetes':
+      return Category.JUGUETES;
+    default: return Category.JUEGOS_DE_MESA
+  } 
 }
 
 

@@ -25,7 +25,7 @@ export default function Cart() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="bg-gray-900 hover:bg-gray-800 text-white hover:text-gray-300 rounded-full"
+          className="bg-white text-black hover:bg-gray-700 hover:text-gray-300"
           size="icon"
         >
           <ShoppingCartIcon className="h-6 w-6" />

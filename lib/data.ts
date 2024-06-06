@@ -1,8 +1,8 @@
 import { sql } from '@vercel/postgres';
-import { Game } from '@/lib/definitions';
+import { Category, Game } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
-export async function fetchGamesByCategory(category: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes') {
+export async function fetchGamesByCategory(category: Category) {
   noStore();
 
   try {
@@ -13,6 +13,39 @@ export async function fetchGamesByCategory(category: 'Juegos de mesa' | 'Videoju
       SELECT *
       FROM gamestore.games 
       WHERE category = ${category};
+    `;
+
+    const games: Game[] = data.rows.map((dbGame) => {
+      return {
+        id: dbGame.id,
+        name: dbGame.name,
+        description: dbGame.description,
+        images_url: JSON.parse(dbGame.images_url),
+        category: dbGame.category,
+        price: dbGame.price
+      };
+    });
+
+    return games;
+
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch games');
+  }
+}
+
+export async function fetchGamesByCategoryWithLimit(category: Category, limit: number) {
+  noStore();
+
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Category:', category);
+
+    const data = await sql`
+      SELECT *
+      FROM gamestore.games 
+      WHERE category = ${category}
+      LIMIT ${limit};
     `;
 
     const games: Game[] = data.rows.map((dbGame) => {
@@ -126,6 +159,44 @@ export async function fetchFilteredGames(
   }
 } 
 
+export async function fetchFilteredGamesByCategory(
+  category: Category,
+  query: string,
+  currentPage: number
+) { 
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  noStore();
+
+  try {
+    const data = await sql`
+      SELECT *
+      FROM gamestore.games
+      WHERE category = ${category}
+      AND name ILIKE ${`%${query}%`}
+      LIMIT ${ITEMS_PER_PAGE}
+      OFFSET ${offset};
+    `;
+
+    const games: Game[] = data.rows.map((dbGame) => {
+      return {
+        id: dbGame.id,
+        name: dbGame.name,
+        description: dbGame.description,
+        images_url: JSON.parse(dbGame.images_url),
+        category: dbGame.category,
+        price: dbGame.price
+      };
+    });
+
+    return games;
+
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch games');
+  }
+}
+
+
 export async function fetchGamesCount(query: string) {
   noStore();
 
@@ -134,6 +205,25 @@ export async function fetchGamesCount(query: string) {
       SELECT COUNT(*)
       FROM gamestore.games
       WHERE name ILIKE ${`%${query}%`};
+    `;
+    
+    const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch games count');
+  }
+}
+
+export async function fetchGamesByCategoryCount(category: Category, query: string) {
+  noStore();
+
+  try {
+    const data = await sql` 
+      SELECT COUNT(*)
+      FROM gamestore.games
+      WHERE category = ${category}
+      AND name ILIKE ${`%${query}%`};
     `;
     
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);

@@ -9,10 +9,10 @@ import SheetLoginOptions from "@/app/ui/login/SheetLoginOptions"
 
 export default function Navbar() {
   return (
-    <header className="flex h-16 w-full shrink-0 items-center px-4 md:px-6 bg-gray-900 text-white">
+    <header className="flex h-16 w-full shrink-0 items-center justify-between px-4 md:px-6 md:border-b md:border-gray-200">
       <Sheet>
         <SheetTrigger asChild>
-          <Button className="lg:hidden bg-gray-900" size="icon">
+          <Button className="lg:hidden bg-white text-black hover:bg-gray-700 hover:text-gray-300" size="icon">
             <Bars3BottomLeftIcon strokeWidth={2} className="h-6 w-6" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
@@ -38,14 +38,16 @@ export default function Navbar() {
         <span className="text-lg font-semibold">Game Store</span>
       </Link>
 
-      <nav className="hidden lg:flex lg:flex-row items-center gap-4 mx-auto">
-        <NavLinks />
-      </nav>
+      <nav className="flex flex-row gap-4 items-center">
+        <div className="hidden lg:flex lg:flex-row items-center gap-4 ml-auto justify-self-end">
+          <NavLinks />
+        </div>
 
-      <div className="ml-auto flex items-center gap-4">
-        <Cart />
-        <LoginOptions />
-      </div>
+        <div className="ml-auto flex items-center gap-4">
+          <Cart />
+          <LoginOptions />
+        </div>
+      </nav>
     </header>
   )
 }

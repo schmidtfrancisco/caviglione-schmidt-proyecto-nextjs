@@ -8,22 +8,18 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Game } from "@/lib/definitions";
+import { Category, Game } from "@/lib/definitions";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import GameCategoryBadge from "@/app/ui/home/GameCategoryBadge";
 import { fetchGameById } from "@/lib/data";
 import AddToCartButton from "@/app/ui/AddToCartButton";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, getCategoryLink } from "@/lib/utils";
 
 interface PageProps {
   params: {
     gameId: string
   }
-}
-
-const categoryLink = (category: 'Juegos de mesa' | 'Videojuegos' | 'Juguetes') => {
-  return `juegos/${category.toLowerCase().replaceAll(' ', '-')}`
 }
 
 export default async function Page({ params }: PageProps) {
@@ -50,7 +46,7 @@ export default async function Page({ params }: PageProps) {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                  <Link href={categoryLink(game.category)}>{game.category}</Link>
+                  <Link href={getCategoryLink(game.category)}>{game.category}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
