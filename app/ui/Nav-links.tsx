@@ -74,9 +74,8 @@ export default function NavLinks({ isForSidebar = false }: { isForSidebar?: bool
             {subLinks.map((link) => {
               const LinkIcon = link.icon;
               return (
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem key={link.name} asChild>
                   <Link
-                    key={link.name}
                     href={link.href}
                     className={
                       cn('text-sm flex align-middle items-center gap-2 w-full my-1 rounded-lg p-2 cursor-pointer hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
