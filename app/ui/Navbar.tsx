@@ -9,7 +9,7 @@ import SheetLoginOptions from "@/app/ui/login/SheetLoginOptions"
 
 export default function Navbar() {
   return (
-    <header className="flex h-16 w-full shrink-0 items-center justify-between px-4 md:px-6 md:border-b md:border-gray-200">
+    <header className="fixed top-0 left-0 z-50 flex h-16 w-full shrink-0 items-center justify-between px-4 bg-white border-b border-gray-200 md:px-6">
       <Sheet>
         <SheetTrigger asChild>
           <Button className="lg:hidden bg-white text-black hover:bg-gray-700 hover:text-gray-300" size="icon">
@@ -24,7 +24,7 @@ export default function Navbar() {
               <span className="text-lg font-semibold">Game Store</span>
             </Link>
             <div className="grid gap-2 py-6">
-              <NavLinks />
+              <NavLinks isForSidebar />
             </div>
           </div>
           <div className="flex-shrink-0">

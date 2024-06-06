@@ -21,7 +21,7 @@ export default async function Page(
   return (
     <div className="p-4 md:p-6">
       <section className="grid grid-cols-1 gap-6 p-4 md:p-6 max-w-screen-sm mx-auto">
-        <Search />
+        <Search placeholder="Buscar juegos ..."/>
         <GamesList query={query} currentPage={currentPage} />
       </section>
       <PagePagination maxPage={maxPage} />

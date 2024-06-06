@@ -2,7 +2,8 @@ import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@
 import TableMenu from "@/app/ui/admin/TableMenu"
 
 // TODO: Importar datos de la db
-export default function ProductsTable({products: {data: products}}) {
+export default function ProductsTable(//{//products: {data: products}}
+	) {
 	return(
 		<div className="border shadow-sm rounded-lg p-2">
 			{

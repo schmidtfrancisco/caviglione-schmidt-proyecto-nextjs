@@ -63,9 +63,9 @@ export default async function Home() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <CategoryCard category={Category.JUEGOS_DE_MESA} src="/juegos-de-mesa.png" />
-            <CategoryCard category={Category.VIDEOJUEGOS} src="/videojuegos.png" />
-            <CategoryCard category={Category.JUGUETES} src="/juguetes.png" />
+            <CategoryCard category={Category.JUEGOS_DE_MESA} description="Para todas las edades" src="/juegos-de-mesa.png" />
+            <CategoryCard category={Category.VIDEOJUEGOS} description="Para todas las plataformas" src="/videojuegos.png" />
+            <CategoryCard category={Category.JUGUETES} description="Para los más pequeños" src="/juguetes.png" />
           </div>
         </div>
       </section>
