@@ -1,3 +1,5 @@
+'use client'
+
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import TableMenu from "@/app/ui/admin/TableMenu"
 

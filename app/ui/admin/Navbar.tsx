@@ -1,8 +1,7 @@
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
-import PackageIcon from "@/app/ui/admin/PackageIcon"
 import Package2Icon from "@/app/ui/admin/Package2Icon"
-import ShoppingCartIcon from "@/app/ui/admin/ShoppingCartIcon"
+import LogOutIcon from "@/app/ui/admin/LogOutIcon"
+import NavLinks from "@/app/ui/admin/NavLinks"
+import { signOut } from '@/auth';
 
 export default function Navbar() {
 	return (
@@ -16,9 +15,10 @@ export default function Navbar() {
 				</div>
 				<div className="flex-1">
 					<nav className="grid items-start px-4 text-sm font-medium">
+						{ /**
 						<Link
-							className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
-							href="#"
+							className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+							href="/admin"
 						>
 							<ShoppingCartIcon className="h-4 w-4" />
 							Orders
@@ -26,11 +26,29 @@ export default function Navbar() {
 						</Link>
 						<Link
 							className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-							href="#"
+							href="/admin/products"
 						>
 							<PackageIcon className="h-4 w-4" />
 							Products
 						</Link>
+						 */}
+						<div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
+							<NavLinks/>
+							<form className="m-0"
+								action={async () => {
+									'use server';
+									await signOut();
+								}}
+							>
+								<button
+									className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+									type="submit"
+								>
+									<LogOutIcon className="h-4 w-4" />
+									<div>Cerrar sesión</div>
+								</button>
+							</form>
+						</div>
 					</nav>
 				</div>
 			</div>

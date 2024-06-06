@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { SheetTrigger, SheetContent, Sheet, SheetClose } from "@/components/ui/sheet"
+import { SheetTrigger, SheetContent, Sheet} from "@/components/ui/sheet"
 import Link from "next/link"
 import NavLinks from "@/app/ui/Nav-links"
 import Cart from "@/app/ui/Cart"
