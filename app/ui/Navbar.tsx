@@ -9,7 +9,7 @@ import SheetLoginOptions from "@/app/ui/login/SheetLoginOptions"
 
 export default function Navbar() {
   return (
-    <header className="fixed top-0 left-0 z-50 flex h-16 w-full shrink-0 items-center justify-between px-4 bg-white border-b border-gray-200 md:px-6">
+    <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between px-4 bg-white border-b border-gray-200 md:px-6">
       <Sheet>
         <SheetTrigger asChild>
           <Button className="lg:hidden bg-white text-black hover:bg-gray-700 hover:text-gray-300" size="icon">

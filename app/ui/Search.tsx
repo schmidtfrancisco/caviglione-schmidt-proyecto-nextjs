@@ -7,7 +7,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 
-export default function Search({placeholder} : {placeholder?: string}) {
+export default function Search({ placeholder }: { placeholder?: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -23,16 +23,16 @@ export default function Search({placeholder} : {placeholder?: string}) {
     }
 
     replace(`${pathname}?${params.toString()}`);
-    
+
   }, 500);
 
   return (
-    <div className="flex flex-row items-center gap-4">
-      <MagnifyingGlassIcon className="h-6 w-6 text-gray-500" />
+    <div className="relative ml-auto">
+      <MagnifyingGlassIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
       <Input
+        className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] bg-white"
+        placeholder="Buscar..."
         type="search"
-        placeholder={placeholder || 'Buscar...'}
-        className="w-full"
         onChange={(ev) => {
           handleSearch(ev.target.value)
         }}
@@ -41,3 +41,4 @@ export default function Search({placeholder} : {placeholder?: string}) {
     </div>
   )
 }
+

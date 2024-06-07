@@ -1,16 +1,14 @@
 'use client';
 
-import ShoppingCartIcon from '@/app/ui/admin/ShoppingCartIcon'
-import PackageIcon from '@/app/ui/admin/PackageIcon'
+import { ShoppingCartIcon } from "@heroicons/react/24/outline"
+import { Package } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
 const links = [
-	{ name: 'Orders', href: '/admin', icon: ShoppingCartIcon },
-	{ name: 'Products', href: '/admin/products', icon: PackageIcon},
+	{ name: 'Pedidos', href: '/admin', icon: ShoppingCartIcon },
+	{ name: 'Productos', href: '/admin/products', icon: Package},
 ];
 
 export default function NavLinks() {

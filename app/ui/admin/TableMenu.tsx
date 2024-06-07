@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
-import MoveHorizontalIcon from "@/app/ui/admin/MoveHorizontalIcon"
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline"
 
 export default function TableMenu() {
 	return(
@@ -8,7 +8,7 @@ export default function TableMenu() {
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button size="icon" variant="ghost">
-						<MoveHorizontalIcon className="w-4 h-4" />
+						<EllipsisHorizontalIcon className="w-6 h-6" />
 						<span className="sr-only">Actions</span>
 					</Button>
 				</DropdownMenuTrigger>
