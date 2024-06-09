@@ -13,7 +13,7 @@ interface SearchParams {
   
 }
 
-export default function Page( {searchParams} : {searchParams: any}) {
+export default async function Page( {searchParams} : {searchParams: any}) {
   const client = new MercadoPagoConfig({ accessToken: "TEST-8968989067718937-060722-adfaca3b8c9a39eda01ba86f17a1c264-686744806" });
   console.log(searchParams);
 
@@ -22,7 +22,7 @@ export default function Page( {searchParams} : {searchParams: any}) {
   const paymentId = searchParams.payment_id;
   console.log(paymentId);
 
-  const payment = new Payment(client).get({ id: paymentId });
+  const payment = await new Payment(client).get({ id: paymentId });
   console.log(payment);
   
   return (
