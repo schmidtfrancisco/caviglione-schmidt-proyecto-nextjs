@@ -46,7 +46,7 @@ export async function generatePreference(
         },
       },
       back_urls: {
-        success: 'https://localhost:3000/pago/finalizado',
+        success: 'https://caviglione-schmidt-proyecto-nextjs.vercel.app//pago/finalizado',
         failure: 'https://www.your-site.com/failure',
         pending: 'https://www.your-site.com/pending'
       },
