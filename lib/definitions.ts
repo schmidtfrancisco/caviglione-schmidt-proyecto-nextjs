@@ -25,6 +25,19 @@ export type CartItem = {
   quantity: number;
 };
 
+export type Order = {
+	id: string;
+	name: string;
+	lastname: string;
+	email: string;
+	address: string;
+	zip: string;
+	addressNumber: number;
+	items: CartItem[];
+	total: number;
+	date: string;
+};
+
 export type MPItem = {
 	id: string;
 	title: string;

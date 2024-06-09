@@ -1,3 +1,4 @@
+import { Order } from "@/lib/definitions";
 import { MercadoPagoConfig, Payment } from "mercadopago";
 
 
@@ -24,6 +25,27 @@ export default async function Page( {searchParams} : {searchParams: any}) {
 
   const payment = await new Payment(client).get({ id: paymentId });
   console.log(payment);
+
+  const amount = payment.transaction_amount!!;
+  const payerMp = payment.payer!!;
+
+
+  const addittionalInfo = payment.additional_info!!;
+  const payer = addittionalInfo.payer!!;
+  const address = payer.address!!;
+
+  const order: Order = {
+    id: paymentId,
+    name: payer.first_name!!,
+    lastname: payer.last_name!!,
+    email: payerMp.email!!,
+    address: address.street_name!!,
+    zip: address.zip_code!!,
+    addressNumber: address.street_number!!,
+    items: [],
+    total: amount,
+    date: new Date().toISOString(),
+  };
   
   return (
     <div>
