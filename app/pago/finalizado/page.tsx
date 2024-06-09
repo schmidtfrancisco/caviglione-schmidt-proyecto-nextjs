@@ -15,11 +15,11 @@ interface SearchParams {
 
 export default function Page( {searchParams} : {searchParams: any}) {
   const client = new MercadoPagoConfig({ accessToken: "TEST-8968989067718937-060722-adfaca3b8c9a39eda01ba86f17a1c264-686744806" });
-  console.log(searchParams.toString);
+  console.log(searchParams);
 
-  const preferenceId = searchParams.get('preference_id');
+  const preferenceId = searchParams.preference_id;
   console.log(preferenceId);
-  const paymentId = searchParams.get('payment_id') as string;
+  const paymentId = searchParams.payment_id;
   console.log(paymentId);
 
   const payment = new Payment(client).get({ id: paymentId });
