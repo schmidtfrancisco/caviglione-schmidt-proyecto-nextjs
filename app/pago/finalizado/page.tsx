@@ -47,6 +47,7 @@ export default async function Page( {searchParams} : {searchParams: any}) {
     date: new Date().toISOString(),
   };
   
+  console.log(order);
   return (
     <div>
       <h1>Gracias por tu compra</h1>
