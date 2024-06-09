@@ -20,3 +20,18 @@ export type User = {
 	password: string;
 };
 
+export type CartItem = {
+  game: Game;
+  quantity: number;
+};
+
+export type MPItem = {
+	id: string;
+	title: string;
+	unit_price: number;
+	quantity: number;
+	picture_url: string;
+	description: string;
+	currency_id: string;
+};
+

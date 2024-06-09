@@ -76,8 +76,11 @@ export default function Cart() {
               </div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Button className="w-full">Ir a pagar</Button>
+            <DropdownMenuItem asChild>
+              <Link href="/pago"
+                className={cn(buttonVariants({ size: "sm", variant: "default" }), "cursor-pointer w-full")}>
+                Ir a pagar
+              </Link>
             </DropdownMenuItem>
           </>
         )}

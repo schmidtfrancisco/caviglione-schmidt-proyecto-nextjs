@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { Category } from "@/lib/definitions";
+import { CartItem, Category, MPItem } from "@/lib/definitions";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -73,3 +73,18 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export default function mapToMPItems(cartItems: CartItem[]) {
+  return cartItems.map((item) => {
+    return {
+      id: item.game.id,
+      title: item.game.name,
+      unit_price: item.game.price/100,
+      quantity: item.quantity,
+      picture_url: item.game.images_url[0],
+      description: item.game.description,
+      currency_id: "ARS",
+    };
+  }
+  );
+}
