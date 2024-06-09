@@ -2,11 +2,9 @@
 
 import { createContext, useReducer, useContext, useEffect } from "react";
 import { Game } from "@/lib/definitions";
+import { CartItem } from "@/lib/definitions";
 
-export type CartItem = {
-  game: Game;
-  quantity: number;
-};
+
 
 export type CartAction = AddToCart | RemoveFromCart | ClearCart | UpdateQuantity;
 
