@@ -55,6 +55,8 @@ export async function generatePreference(
 
     const preference = new Preference(client);
 
+  
+
     const result = await preference.create({ body });
 
     return (result.id);
