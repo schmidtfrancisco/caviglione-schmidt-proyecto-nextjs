@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { generatePreference } from "@/lib/actions";
 import { useCart } from "@/lib/hooks/useCart";
-import mapToMPItems from "@/lib/utils";
+import { mapToMPItems } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 export default function PaymentSection() {
