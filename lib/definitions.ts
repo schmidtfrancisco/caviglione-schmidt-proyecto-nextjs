@@ -25,17 +25,21 @@ export type CartItem = {
   quantity: number;
 };
 
-export type Order = {
+export type OrderItem = {
 	id: string;
+	quantity: number;
+};
+
+export type Order = {
+	payment_id: string;
 	name: string;
 	lastname: string;
 	email: string;
 	address: string;
 	zip: string;
 	addressNumber: number;
-	items: CartItem[];
+	items: OrderItem[];
 	total: number;
-	date: string;
 };
 
 export type MPItem = {

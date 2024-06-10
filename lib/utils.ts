@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { CartItem, Category, MPItem } from "@/lib/definitions";
+import { CartItem, Category, MPItem, OrderItem } from "@/lib/definitions";
+import { Items } from "mercadopago/dist/clients/commonTypes";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -14,20 +15,20 @@ export function formatPrice(price: number) {
   });
 }
 
-export function getCategoryLink(category: Category){
+export function getCategoryLink(category: Category) {
   return `/juegos/${category.toLowerCase().replaceAll(' ', '-')}`
 }
 
-export function linkToCategory(link: string){
+export function linkToCategory(link: string) {
   switch (link) {
-    case 'juegos-de-mesa': 
+    case 'juegos-de-mesa':
       return Category.JUEGOS_DE_MESA;
     case 'videojuegos':
       return Category.VIDEOJUEGOS;
     case 'juguetes':
       return Category.JUGUETES;
     default: return Category.JUEGOS_DE_MESA
-  } 
+  }
 }
 
 
@@ -41,7 +42,7 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the current page is among the first 3 pages,
   // show the first 3, an ellipsis, and the last 2 pages.
   if (currentPage <= 2) {
-    return [1, 2, 3,'...', totalPages - 1, totalPages];
+    return [1, 2, 3, '...', totalPages - 1, totalPages];
   }
 
   // If the current page is among the first 3 pages,
@@ -74,12 +75,12 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
-export default function mapToMPItems(cartItems: CartItem[]) {
+export function mapToMPItems(cartItems: CartItem[]) {
   return cartItems.map((item) => {
     return {
       id: item.game.id,
       title: item.game.name,
-      unit_price: item.game.price/100,
+      unit_price: item.game.price / 100,
       quantity: item.quantity,
       picture_url: item.game.images_url[0],
       description: item.game.description,
@@ -87,4 +88,13 @@ export default function mapToMPItems(cartItems: CartItem[]) {
     };
   }
   );
+}
+
+export function mapToOrderItems(items: Items[]): OrderItem[] {
+  return items.map((item) => {
+    return {
+      id: item.id,
+      quantity: item.quantity,
+    };
+  });
 }

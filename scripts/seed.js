@@ -84,11 +84,56 @@ async function seedUsers(client) {
   }
 }
 
+
+async function seedOrders(client) {
+  try {
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS gamestore.orders (
+        id SERIAL PRIMARY KEY,
+        payment_id INT NOT NULL,
+        client VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        address VARCHAR(255) NOT NULL,
+        addressNumber VARCHAR(255) NOT NULL,
+        zip VARCHAR(255) NOT NULL,
+        total INT NOT NULL,
+        date DATE DEFAULT CURRENT_DATE
+      );
+    `;
+
+    console.log('Table created: orders');
+
+  } catch (error) {
+    console.error('Error seeding orders:', error);
+    throw error;
+  }
+}
+
+async function seedGamesOrders(client) {
+  try {
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS gamestore.games_orders (
+        game_id UUID REFERENCES gamestore.games(id),
+        order_id INT REFERENCES gamestore.orders(id),
+        quantity INT NOT NULL,
+        PRIMARY KEY (game_id, order_id)
+      );
+    `;
+
+    console.log('Table created: games_orders');
+  } catch (error) {
+    console.error('Error seeding games_orders:', error);
+    throw error;
+  }
+}
+
 async function main() {
   const client = await db.connect()
 
   await seedGames(client)
   await seedUsers(client);
+  await seedOrders(client);
+  await seedGamesOrders(client);
 
   await client.end()
 }

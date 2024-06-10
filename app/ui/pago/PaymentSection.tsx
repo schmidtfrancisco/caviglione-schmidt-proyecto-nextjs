@@ -8,16 +8,16 @@ import { Label } from "@/components/ui/label";
 import { generatePreference } from "@/lib/actions";
 import { useCart } from "@/lib/hooks/useCart";
 import mapToMPItems from "@/lib/utils";
-import { useState } from "react";
-;
+import { useEffect, useState } from "react";
+
 export default function PaymentSection() {
-  const {cart, cartTotal, cartCount} = useCart();
+  const { cart, cartTotal, cartCount } = useCart();
   const [preferenceId, setPreferenceId] = useState<string>("");
-  
+
   async function continuePayment(formData: FormData) {
     const mpItems = mapToMPItems(cart.items);
     const preferenceId = await generatePreference(formData, mpItems);
-    setPreferenceId(preferenceId??"");
+    setPreferenceId(preferenceId ?? "");
   }
 
   return (
@@ -27,7 +27,7 @@ export default function PaymentSection() {
           <CardTitle className="text-center">Información del pago</CardTitle>
         </CardHeader>
         <CardContent>
-          
+
           <form action={continuePayment}>
             <Label htmlFor="name">Nombre</Label>
             <Input
@@ -63,6 +63,7 @@ export default function PaymentSection() {
                 <Input
                   id="adressNumber"
                   type="adressNumber"
+
                   name="addressNumber"
                 />
               </div>
@@ -77,7 +78,7 @@ export default function PaymentSection() {
             </div>
 
 
-            <Button 
+            <Button
               type="submit"
             >
               Continuar
@@ -86,13 +87,12 @@ export default function PaymentSection() {
           </form>
 
         </CardContent>
-        <CardFooter>
-          <p>Metodo de pago</p>
-        </CardFooter>
+        
+        {preferenceId !== "" && <WallletBrick preferenceId={preferenceId} />}
       </Card>
 
-      {preferenceId !== "" && <WallletBrick preferenceId={preferenceId} />}
       
+
     </div>
   )
 } 
