@@ -78,8 +78,8 @@ export async function createOrder(
       (payment_id, client, email, address, addressNumber, zip, total)
       VALUES
       (${order.payment_id}, ${client}, ${order.email}, ${order.address}, ${order.addressNumber}, ${order.zip}, ${order.total})
-      RETURNING id
       ON CONFLICT (id) DO NOTHING
+      RETURNING id
     `;
 
     const orderId = result.rows[0].id;

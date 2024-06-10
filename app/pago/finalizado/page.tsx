@@ -30,6 +30,7 @@ export default async function Page( {searchParams} : {searchParams: any}) {
   const addittionalInfo = payment.additional_info!!;
   const payer = addittionalInfo.payer!!;
   const address = payer.address!!;
+
   const orderItems = mapToOrderItems(addittionalInfo.items!!);
 
   const order: Order = {
@@ -39,7 +40,7 @@ export default async function Page( {searchParams} : {searchParams: any}) {
     email: payerMp.email!!,
     address: address.street_name!!,
     zip: address.zip_code!!,
-    addressNumber: address.street_number!!,
+    addressNumber: Number(address.street_number!!),
     items: orderItems,
     total: amount,
   };

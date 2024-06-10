@@ -90,7 +90,7 @@ async function seedOrders(client) {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS gamestore.orders (
         id SERIAL PRIMARY KEY,
-        payment_id INT NOT NULL,
+        payment_id VARCHAR(255) NOT NULL,
         client VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
         address VARCHAR(255) NOT NULL,

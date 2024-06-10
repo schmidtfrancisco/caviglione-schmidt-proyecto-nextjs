@@ -94,7 +94,7 @@ export function mapToOrderItems(items: Items[]): OrderItem[] {
   return items.map((item) => {
     return {
       id: item.id,
-      quantity: item.quantity,
+      quantity: Number(item.quantity),
     };
   });
 }
