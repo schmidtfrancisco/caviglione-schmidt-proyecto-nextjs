@@ -1,4 +1,3 @@
-import { createPreference } from "@/lib/payments";
 import PaymentSection from "@/app/ui/pago/PaymentSection";
 import ResumeCart from "@/app/ui/pago/ResumeCart";
 

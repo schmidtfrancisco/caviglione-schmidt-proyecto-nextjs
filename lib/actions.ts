@@ -39,7 +39,6 @@ export async function generatePreference(
       payer: {
         name: formData.get('name')?.toString() || 'Test',
         surname: formData.get('lastname')?.toString() || 'User',
-        
         address: {
           zip_code: formData.get('zip')?.toString() || '06233200',
           street_name: formData.get('address')?.toString() || 'Street',
