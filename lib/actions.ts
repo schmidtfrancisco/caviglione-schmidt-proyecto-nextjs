@@ -39,7 +39,7 @@ export async function generatePreference(
       payer: {
         name: formData.get('name')?.toString() || 'Test',
         surname: formData.get('lastname')?.toString() || 'User',
-        email: formData.get('email')?.toString() || 'your_test_email@example.com',
+        
         address: {
           zip_code: formData.get('zip')?.toString() || '06233200',
           street_name: formData.get('address')?.toString() || 'Street',
@@ -71,7 +71,7 @@ export async function createOrder(
   order: Order
 ) {
   const client = order.name + order.lastname;
-  const amountInCents = order.total * 100;
+  const amountInCents = Math.trunc(order.total * 100);
 
   try {
     const result = await sql`

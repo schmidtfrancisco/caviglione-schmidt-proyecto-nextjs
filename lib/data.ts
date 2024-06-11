@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { Category, Game } from '@/lib/definitions';
+import { Category, Game, OrdersTable } from '@/lib/definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
 export async function fetchGamesByCategory(category: Category) {
@@ -231,5 +231,20 @@ export async function fetchGamesByCategoryCount(category: Category, query: strin
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch games count');
+  }
+}
+
+export async function fetchOrders() {
+  noStore();
+  try {
+    const data = await sql<OrdersTable>`
+      SELECT *
+      FROM gamestore.orders;
+    `;
+    
+    return data.rows;
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch orders');
   }
 }

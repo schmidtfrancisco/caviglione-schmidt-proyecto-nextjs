@@ -42,6 +42,18 @@ export type Order = {
 	total: number;
 };
 
+export type OrdersTable = {
+	id: string;
+	payment_id: string;
+	client: string;
+	email: string;
+	address: string;
+	addressNumber: number;
+	zip: string;
+	total: number;
+	date: Date;
+};
+
 export type MPItem = {
 	id: string;
 	title: string;
