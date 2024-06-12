@@ -8,6 +8,7 @@ import { CarouselItem } from "@/components/ui/carousel";
 import GameCategoryBadge from "./GameCategoryBadge";
 import AddToCartButton from "@/app/ui/AddToCartButton";
 import { formatPrice, getCategoryLink } from "@/lib/utils";
+import GameCldImage from "../juegos/GameCldImage";
 
 export default function GameCarouselItem({ game }: { game: Game }) {
 
@@ -15,16 +16,12 @@ export default function GameCarouselItem({ game }: { game: Game }) {
     <CarouselItem className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
       <Card>
         <Link href={`${getCategoryLink(game.category)}/${game.id}`}>
-          <Image
+          <GameCldImage
             alt={game.name}
-            className="w-full h-48 object-cover rounded-t-md"
+            className="rounded-t-md"
             height={250}
             width={400}
             src={game.images_url[0]}
-            style={{
-              aspectRatio: "400/250",
-              objectFit: "cover",
-            }}
           />
         </Link>
         <CardContent className="p-4">

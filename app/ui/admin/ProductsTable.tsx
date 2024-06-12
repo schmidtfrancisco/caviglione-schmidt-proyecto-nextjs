@@ -3,6 +3,7 @@ import TableMenu from "@/app/ui/admin/TableMenu"
 import { fetchFilteredGames } from "@/lib/data";
 import Image from "next/image";
 import { formatPrice } from "@/lib/utils";
+import GameCldImage from "../juegos/GameCldImage";
 
 export default async function ProductsTable(
 	{ query, currentPage }: { query: string, currentPage: number },
@@ -12,11 +13,11 @@ export default async function ProductsTable(
 
 	return (
 		<div className="border shadow-sm rounded-lg p-2">
-		
+
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead className="w-[40px]"></TableHead>
+						<TableHead className="w-[80px]"></TableHead>
 						<TableHead className="">Nombre</TableHead>
 						<TableHead className="hidden md:table-cell">Categoría</TableHead>
 						<TableHead className="hidden md:table-cell">Precio</TableHead>
@@ -26,19 +27,20 @@ export default async function ProductsTable(
 				<TableBody>
 					{games.map((game) => (
 						<TableRow key={game.id}>
-							<TableCell className="font-medium"><Image alt={game.name}
-								className="rounded-md"
-								height={32}
-								src={game.images_url[0]}
-								style={{ aspectRatio: "32/32", objectFit: "cover" }}
-								width={32}>
-							</Image>
+							<TableCell className="font-medium">
+								<GameCldImage alt={game.name}
+									className="rounded-md"
+									height={80}
+									src={game.images_url[0]}
+									width={80}
+								/>
 							</TableCell>
 							<TableCell className="">{game.name}</TableCell>
 							<TableCell className="hidden md:table-cell">{game.category}</TableCell>
 							<TableCell className="hidden md:table-cell">{formatPrice(game.price)}</TableCell>
 							<TableCell className="text-right">
-								<TableMenu />
+								{//<TableMenu />
+								}
 							</TableCell>
 						</TableRow>
 					))

@@ -8,7 +8,6 @@ import { AuthError } from 'next-auth';
 import { MPItem, Order } from '@/lib/definitions';
 import MercadoPagoConfig, { Preference } from 'mercadopago';
 import { sql } from '@vercel/postgres';
-import { z } from 'zod';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -132,7 +131,7 @@ export type PreferenceResponse = {
 
 const onlyLetters = (value: string) => /^[A-Za-z]+$/.test(value);
 
-const FormSchema = z.object({
+const PaymentFormSchema = z.object({
   name: z.string().refine(onlyLetters, {
     message: 'El nombre debe contener solo letras'
   }),
@@ -152,7 +151,7 @@ export async function generatePreference(
   mpItems: any
 ): Promise<PreferenceResponse> {
 
-  const validatedData = FormSchema.safeParse(Object.fromEntries(formData.entries()));
+  const validatedData = PaymentFormSchema.safeParse(Object.fromEntries(formData.entries()));
 
   console.log(mpItems);
 

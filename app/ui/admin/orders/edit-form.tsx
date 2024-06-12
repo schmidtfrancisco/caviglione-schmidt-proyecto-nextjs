@@ -12,7 +12,7 @@ import { updateOrder } from '@/lib/actions';
 import { useFormState } from 'react-dom';
 
 export default function EditInvoiceForm({ order }: { order: OrderForm }) {
-	const initialState = { message: null, errors: {} };
+	const initialState = { message: "", errors: {} };
   const updateOrderWithId = updateOrder.bind(null, order.id);
   const [state, dispatch] = useFormState(updateOrderWithId, initialState);
   return (

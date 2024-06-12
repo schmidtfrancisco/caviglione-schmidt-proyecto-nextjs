@@ -3,6 +3,7 @@ import AddToCartButton from "@/app/ui/AddToCartButton";
 import Image from "next/image";
 import { formatPrice, getCategoryLink } from "@/lib/utils";
 import Link from "next/link";
+import GameCldImage from "./GameCldImage";
 
 
 export default function GameCard({ game }: { game: Game }) {
@@ -11,12 +12,12 @@ export default function GameCard({ game }: { game: Game }) {
     <div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-950">
       <div className="flex items-center gap-4">
         <Link href={`${getCategoryLink(game.category)}/${game.id}`}>
-          <Image
+          <GameCldImage
             alt="Product Image"
-            className="w-[100px] md:w-[150px] aspect-square object-cover rounded-lg m-1"
-            height={250}
+            className="rounded-lg m-1"
+            height={150}
             src={game.images_url[0]}
-            width={250}
+            width={150}
           />
         </Link>
         <div className="flex-1 pt-4 pb-2">
