@@ -5,19 +5,14 @@ import { useCart } from "@/lib/hooks/useCart";
 import Link from "next/link";
 import Image from "next/image";
 import { cn, formatPrice } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import ResumeCartItem from "@/app/ui/pago/ResumeCartItem";
 import { Separator } from "@/components/ui/separator";
-import { useContext } from "react";
-import { PaymentContext } from "./PaymentContext";
+
 
 export default function ResumeCart() {
 
-  const { cart, dispatch, cartTotal, cartCount, isCartConfirmed, setIsCartConfirmed } = useCart();
-
-  const { isFormCompleted, setActiveStep } = useContext(PaymentContext)
-
-
+  const { cart, dispatch, cartTotal, cartCount } = useCart();
 
   return (
     <div className="flex flex-col gap-6">
