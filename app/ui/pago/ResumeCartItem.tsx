@@ -23,7 +23,7 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
 
   return (
     <>
-      <div className="flex flex-row gap-4 justify-between">
+      <div className="flex flex-col md:flex-row gap-4 justify-between">
         <div className="flex flex-row gap-2">
           <Image
             src={game.images_url[0]}
@@ -46,7 +46,7 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
               >
                 <MinusIcon className="h-4 w-4" />
               </Button>
-              <span className="text-sm">{quantity} un.</span>
+              <span className="text-sm text-center">{quantity} un.</span>
               <Button
                 onClick={() => handleUpdateQuantity(game.id, quantity + 1)}
                 variant="ghost"
@@ -69,7 +69,7 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2 justify-self-end">
+        <div className="flex items-center gap-2 justify-end md:justify-self-end">
           <p className="font-medium text-right">{formatPrice(game.price)}</p>
         </div>
       </div>
