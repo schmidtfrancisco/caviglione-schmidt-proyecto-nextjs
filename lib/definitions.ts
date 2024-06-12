@@ -54,6 +54,12 @@ export type OrdersTable = {
 	date: Date;
 };
 
+export type OrderForm = {
+	id: string;
+	total: number;
+	status: 'pending' | 'paid';
+};
+
 export type MPItem = {
 	id: string;
 	title: string;

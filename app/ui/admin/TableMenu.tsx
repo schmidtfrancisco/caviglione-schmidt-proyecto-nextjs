@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline"
+import { UpdateOrder, DeleteOrder } from "@/app/ui/admin/orders/options"
+import { fetchOrders } from "@/lib/data";
+import { OrdersTable } from "@/lib/definitions";
 
-export default function TableMenu() {
+export default async function TableMenu({order}: {order: OrdersTable}) {
 	return(
 		<>
 			<DropdownMenu>
@@ -16,9 +19,10 @@ export default function TableMenu() {
 					{
 						// TODO: Cambiar todos los items por Links (creo)
 					}
+					
 					<DropdownMenuItem>View order</DropdownMenuItem>
-					<DropdownMenuItem>Edit order</DropdownMenuItem>
-					<DropdownMenuItem>Remove order</DropdownMenuItem>
+					<DropdownMenuItem><UpdateOrder id={order.id}/></DropdownMenuItem>
+					<DropdownMenuItem><DeleteOrder id={order.id}/></DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</>

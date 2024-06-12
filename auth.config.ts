@@ -10,11 +10,8 @@ export const authConfig = {
       const isOnAdmin = nextUrl.pathname.startsWith('/admin')
       if (isOnAdmin) {
         if (isLoggedIn) return true
-        return false; //Redirecciona al login.
+        return false;
       } else if (isLoggedIn) {
-				return Response.redirect(new URL('/admin', nextUrl))
-			}
-			if(!isOnAdmin && isLoggedIn) {
 				return Response.redirect(new URL('/admin', nextUrl))
 			}
       return true;

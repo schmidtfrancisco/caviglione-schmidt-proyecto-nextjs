@@ -1,11 +1,102 @@
 'use server'
 
+import { z } from 'zod';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation'
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { MPItem, Order } from '@/lib/definitions';
 import MercadoPagoConfig, { Preference } from 'mercadopago';
 import { sql } from '@vercel/postgres';
 import { z } from 'zod';
+
+const FormSchema = z.object({
+  id: z.string(),
+  total: z.coerce
+		.number()
+		.gt(0, { message: 'Please enter an amount greater than $0.' }),
+  status: z.enum(['pending', 'paid'], {
+		invalid_type_error: 'Please select an invoice status.'
+	}),
+  date: z.string(),
+});
+
+const CreateOrder = FormSchema.omit({ id: true, date: true });
+const UpdateOrder = FormSchema.omit({ id: true, date: true });
+
+export type State = {
+  errors?: {
+    total?: string[];
+    status?: string[];
+  };
+  message?: string | null;
+};
+
+export async function createOrder(prevState: State, formData: FormData) {
+	const validatedFields = CreateOrder.safeParse({
+    customerId: formData.get('customerId'),
+    amount: formData.get('amount'),
+    status: formData.get('status'),
+  });
+
+	if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Invoice.',
+    };
+  }
+
+	const { total, status } = validatedFields.data;
+	const amountInCents = total * 100;
+	const date = new Date().toISOString().split('T')[0];
+
+	try {
+		await sql`
+			INSERT INTO invoices (customer_id, amount, status, date)
+			VALUES (${amountInCents}, ${status}, ${date})
+		`;
+	} catch (error) {
+		return { message: 'Database Error: Failed to Delete Invoice.' };
+	}
+
+	revalidatePath('/dashboard/invoices');
+	redirect('/dashboard/invoices');
+}
+
+export async function updateOrder(id: string, prevState: State, formData: FormData) {
+  const validatedFields = UpdateOrder.safeParse({
+    total: formData.get('total'),
+    status: formData.get('status'),
+  });
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Order.',
+    };
+  }
+  const { total, status } = validatedFields.data;
+  const totalInCents = total * 100;
+	try {
+		await sql`
+			UPDATE orders
+			SET total = ${totalInCents}, status = ${status}
+			WHERE id = ${id}
+		`;
+	} catch (error) {
+		return { message: 'Database Error: Failed to Update Order.' };
+	}
+  revalidatePath('/admin');
+  redirect('/admin');
+}
+
+export async function deleteOrder(id: string) {
+	try {
+		await sql`DELETE FROM invoices WHERE id = ${id}`;
+	} catch (error) {
+		return { message: 'Database Error: Failed to Delete Invoice.' };
+	}
+  revalidatePath('/dashboard/invoices');
+}
 
 export async function authenticate(
   prevState: string | undefined,
@@ -116,6 +207,7 @@ export async function generatePreference(
   }
 }
 
+/**
 export async function createOrder(
   order: Order
 ) {
@@ -149,3 +241,4 @@ export async function createOrder(
     console.log(error);
   }
 }
+	 */

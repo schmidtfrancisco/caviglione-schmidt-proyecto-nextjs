@@ -26,7 +26,7 @@ export default async function OrdersTable() {
 							<TableCell className="hidden md:table-cell">{order.client}</TableCell>
 							<TableCell className="text-right">{formatPrice(order.total)}</TableCell>
 							<TableCell className="text-right">
-								<TableMenu/>
+								<TableMenu order={order}/>
 							</TableCell>
 						</TableRow>
 					))

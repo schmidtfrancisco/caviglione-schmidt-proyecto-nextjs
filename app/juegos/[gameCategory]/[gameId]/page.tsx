@@ -15,6 +15,7 @@ import GameCategoryBadge from "@/app/ui/home/GameCategoryBadge";
 import { fetchGameById } from "@/lib/data";
 import AddToCartButton from "@/app/ui/AddToCartButton";
 import { formatPrice, getCategoryLink } from "@/lib/utils";
+import GameCldImage from "@/app/ui/juegos/GameCldImage";
 
 interface PageProps {
   params: {
@@ -24,7 +25,10 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const game: Game = await fetchGameById(params.gameId);
-
+	const images: string[] = [
+		"GameStore/chess1", "GameStore/batallanaval1", "GameStore/catan1", "GameStore/carcassonne1",
+		"GameStore/dixit1", "GameStore/pandemic1", "GameStore/azul1", "GameStore/terraformingmars1",
+		"GameStore/7wonders1", "GameStore/tickettoride1", "GameStore/splendor1", "GameStore/gloomhaven1",]
 
   return (
     <div className="bg-white">
@@ -83,31 +87,13 @@ export default async function Page({ params }: PageProps) {
             <Carousel className="rounded-lg overflow-hidden">
               <CarouselContent>
                 <CarouselItem>
-                  <img
-                    alt="Product Image 1"
-                    className="aspect-square object-cover"
-                    height={600}
-                    src={game.images_url[0]}
-                    width={600}
-                  />
+                  <GameCldImage src={images[0]} alt="Product Image 1"/>
                 </CarouselItem>
                 <CarouselItem>
-                  <img
-                    alt="Product Image 2"
-                    className="aspect-square object-cover"
-                    height={600}
-                    src={game.images_url[0]}
-                    width={600}
-                  />
+                  <GameCldImage src={images[1]} alt="Product Image 2"/>
                 </CarouselItem>
                 <CarouselItem>
-                  <img
-                    alt="Product Image 3"
-                    className="aspect-square object-cover"
-                    height={600}
-                    src={game.images_url[0]}
-                    width={600}
-                  />
+                  <GameCldImage src={images[2]} alt="Product Image 3"/>
                 </CarouselItem>
               </CarouselContent>
               <CarouselPrevious className="absolute top-1/2 -translate-y-1/2 left-4 z-10 bg-white/50 hover:bg-white rounded-xl p-2 cursor-pointer">

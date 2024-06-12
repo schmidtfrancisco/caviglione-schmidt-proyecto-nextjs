@@ -1,7 +1,6 @@
 import CategoryCard from "./ui/home/CategoryCard";
 import Link from "next/link";
-import Image from "next/image";
-import homeImage from '../public/home.png'
+import HomeImage from '@/app/ui/home/HomeImage'
 import { ArrowRightIcon, ArrowDownIcon } from "@heroicons/react/24/outline";
 import { buttonVariants } from "@/components/ui/button";
 import CategoryGamesSection from "./ui/home/CategoryGamesSection";
@@ -42,10 +41,7 @@ export default async function Home() {
               </Link>
             </div>
           </div>
-          <Image
-            src={homeImage}
-            alt="Home Image"
-          />
+          <HomeImage/>
         </div>
       </section>
 
