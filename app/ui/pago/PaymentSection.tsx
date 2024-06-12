@@ -1,24 +1,35 @@
 'use client'
 
 import WallletBrick from "@/app/ui/pago/WalletBrick";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { generatePreference } from "@/lib/actions";
 import { useCart } from "@/lib/hooks/useCart";
-import { mapToMPItems } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { formatPrice } from "@/lib/utils";
+import { useContext } from "react";
+import { PaymentContext } from "./PaymentContext";
+import { DicesIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import PaymentDataForm from "./PaymentDataForm";
 
 export default function PaymentSection() {
-  const { cart, cartTotal, cartCount } = useCart();
-  const [preferenceId, setPreferenceId] = useState<string>("");
+  const { cartTotal, cartCount, isCartConfirmed, setIsCartConfirmed } = useCart();
+  const { activeStep, setActiveStep, setPreferenceId } = useContext(PaymentContext);
 
-  async function continuePayment(formData: FormData) {
-    const mpItems = mapToMPItems(cart.items);
-    const preferenceId = await generatePreference(formData, mpItems);
-    setPreferenceId(preferenceId ?? "");
+
+  const handleContinue = () => {
+    setIsCartConfirmed(true)
+    setActiveStep(2)
   }
+
+  const handleBack = () => {
+    setActiveStep((prevStep) => prevStep - 1)
+    setPreferenceId("")
+  }
+
+  const ENVIO = 1000;
+  const total = cartTotal + ENVIO;
 
   return (
     <div>
@@ -26,73 +37,105 @@ export default function PaymentSection() {
         <CardHeader>
           <CardTitle className="text-center">Información del pago</CardTitle>
         </CardHeader>
+        <Separator />
         <CardContent>
+          <Accordion type="single" value={`step-${activeStep}`} collapsible>
 
-          <form action={continuePayment}>
-            <Label htmlFor="name">Nombre</Label>
-            <Input
-              id="name"
-              type="name"
-              name="name"
-            />
+            <AccordionItem value="step-1" disabled={activeStep !== 1}>
+              <AccordionTrigger>
+                <div className="flex items-center justify-between">
+                  <div className="text-lg font-bold text-gray-700">1. Confirmar selección</div>
+                  {activeStep === 1 && (
+                    <Badge variant="outline" className="ml-4 bg-sky-700 text-white font-normal">
+                      Actual
+                    </Badge>
+                  )}
+                </div>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-row gap-1 items-center">
+                    <DicesIcon className="w-6 h-6" />
+                    <p>Seleccionaste {cartCount} {cartCount === 1 ? "juego" : "juegos"} para el subtotal de {formatPrice(cartTotal)}</p>
+                  </div>
+                  <h3 className="font-bold underline">Detalle</h3>
+                  <div className="flex flex-col gap-1 mx-auto md:w-4/5">
+                    <div className="flex flex-row justify-between">
+                      <p>Subtotal</p>
+                      <p>{formatPrice(cartTotal)}</p>
+                    </div>
+                    <div className="flex flex-row justify-between">
+                      <p>Envio</p>
+                      <p>$ {ENVIO}</p>
+                    </div>
+                    <div className="flex flex-row justify-between">
+                      <p className="font-bold">Total</p>
+                      <p className="font-bold">{formatPrice(total)}</p>
+                    </div>
+                  </div>
+                  {isCartConfirmed ? (
+                    <div className="flex flex-row gap-1 w-full">
+                    <Button className="w-full" variant="outline" onClick={() => setIsCartConfirmed(false)}>
+                      Editar carrito
+                    </Button>
+                    <Button className="w-full" onClick={handleContinue}>
+                      Continuar
+                    </Button>
+                  </div>
+                  ) : (
+                    <Button className="w-full mx-auto md:w-4/5" onClick={handleContinue}>
+                      Confirmar selección
+                    </Button>
+                  )}
 
-            <Label htmlFor="lastname">Apellido</Label>
-            <Input
-              id="lastname"
-              type="lastname"
-              name="lastname"
-            />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              name="email"
-            />
+            <AccordionItem value="step-2" disabled={activeStep !== 2}>
+              <AccordionTrigger>
+                <div className="flex items-center justify-between">
+                  <div className="text-lg font-bold text-gray-700">2. Datos personales y envío</div>
+                  {activeStep === 2 && (
+                    <Badge variant="outline" className="ml-4 bg-sky-700 text-white font-normal">
+                      Actual
+                    </Badge>
+                  )}
+                </div>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-4">
+                  <PaymentDataForm />
+                </div>
+              </AccordionContent>
 
-            <Label htmlFor="address">Calle</Label>
-            <Input
-              id="address"
-              type="address"
-              name="address"
-            />
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="adressNumber">Número</Label>
-                <Input
-                  id="adressNumber"
-                  type="adressNumber"
-
-                  name="addressNumber"
-                />
-              </div>
-              <div>
-                <Label htmlFor="zip">Código Postal</Label>
-                <Input
-                  id="zip"
-                  type="zip"
-                  name="zip"
-                />
-              </div>
-            </div>
-
-
-            <Button
-              type="submit"
-            >
-              Continuar
-            </Button>
-
-          </form>
-
+            </AccordionItem>
+            <AccordionItem value="step-3" disabled={activeStep !== 3}>
+              <AccordionTrigger>
+                <div className="flex items-center justify-between">
+                  <div className="text-lg font-bold text-gray-700">3. Pagar</div>
+                  {activeStep === 3 && (
+                    <Badge variant="outline" className="ml-4">
+                      Actual
+                    </Badge>
+                  )}
+                </div>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-bold text-gray-700">Vas a pagar {formatPrice(total)}</h3>
+                  <WallletBrick />
+                  <div className="flex justify-between">
+                    <Button variant="outline" onClick={handleBack} className="ml-auto">
+                      Volver
+                    </Button>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </CardContent>
-        
-        {preferenceId !== "" && <WallletBrick preferenceId={preferenceId} />}
       </Card>
-
-      
-
     </div>
   )
 } 

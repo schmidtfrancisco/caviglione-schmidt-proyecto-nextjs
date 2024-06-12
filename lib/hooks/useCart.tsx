@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useReducer, useContext, useEffect } from "react";
+import { createContext, useReducer, useContext, useEffect, useState } from "react";
 import { Game } from "@/lib/definitions";
 import { CartItem } from "@/lib/definitions";
 
@@ -22,6 +22,8 @@ const CartContext = createContext<{
   dispatch: React.Dispatch<CartAction>;
   cartTotal: number;
   cartCount: number;
+  isCartConfirmed: boolean;
+  setIsCartConfirmed: React.Dispatch<React.SetStateAction<boolean>>
 } | undefined>(undefined);
 
 const cartReducer = (state: CartState, action: CartAction) => {
@@ -108,6 +110,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, dispatch] = useReducer(cartReducer, {
     items: [],
   }, createInitialState);
+  const [isCartConfirmed, setIsCartConfirmed] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -117,7 +120,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const cartCount = cart.items.reduce((count, item) => count + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{cart, dispatch, cartTotal, cartCount } }>
+    <CartContext.Provider value={{cart, dispatch, cartTotal, cartCount, isCartConfirmed, setIsCartConfirmed } }>
       {children}
     </CartContext.Provider>     
   );

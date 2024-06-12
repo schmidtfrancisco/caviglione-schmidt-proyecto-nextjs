@@ -11,7 +11,7 @@ import Image from "next/image";
 
 export default function ResumeCartItem({ game, quantity }: { game: Game, quantity: number }) {
 
-  const { cart, dispatch } = useCart();
+  const { cart, dispatch, isCartConfirmed } = useCart();
   const handleRemoveFromCart = (id: string) => {
     dispatch({ type: "REMOVE_FROM_CART", id })
     console.log(cart)
@@ -35,8 +35,9 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
           <div>
             <h3 className="font-medium text-lg pl-2">{game.name}</h3>
             <div className="flex items-center gap-1">
-
-              <Button
+              {!isCartConfirmed ? (
+                <>
+                <Button
                 onClick={() => handleUpdateQuantity(game.id, quantity - 1)}
                 variant="ghost"
                 size="icon"
@@ -61,8 +62,11 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
                 <TrashIcon className="h-4 w-4 mr-1" />
                 Eliminar
               </Button>
+              </>
+              ) : (
+                <p className="text-sm pl-3 pt-1">Cantidad: {quantity}</p>
+              )}
             </div>
-
           </div>
         </div>
         <div className="flex items-center gap-2 justify-self-end">

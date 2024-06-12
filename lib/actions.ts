@@ -5,6 +5,7 @@ import { AuthError } from 'next-auth';
 import { MPItem, Order } from '@/lib/definitions';
 import MercadoPagoConfig, { Preference } from 'mercadopago';
 import { sql } from '@vercel/postgres';
+import { z } from 'zod';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -25,24 +26,64 @@ export async function authenticate(
   }
 }
 
+export type FormState = {
+  errors?: {
+    name?: string[];
+    lastname?: string[];
+  };
+  message?: string | null;
+}
+
+export type PreferenceResponse = {
+  formState?: FormState
+  preferenceId?: string
+}
+
+const onlyLetters = (value: string) => /^[A-Za-z]+$/.test(value);
+
+const FormSchema = z.object({
+  name: z.string().refine(onlyLetters, {
+    message: 'El nombre debe contener solo letras'
+  }),
+  lastname: z.string()
+    .refine(onlyLetters, {
+      message: 'El apellido debe contener solo letras'
+    }),
+  address: z.string(),
+  addressNumber: z.coerce.number(),
+  zip: z.string(),
+});
+
 const client = new MercadoPagoConfig({ accessToken: "TEST-8968989067718937-060722-adfaca3b8c9a39eda01ba86f17a1c264-686744806" });
 
 export async function generatePreference(
   formData: FormData,
   mpItems: any
-) {
+): Promise<PreferenceResponse> {
+
+  const validatedData = FormSchema.safeParse(Object.fromEntries(formData.entries()));
 
   console.log(mpItems);
+
+  if (!validatedData.success) {
+    return {
+      formState: {
+        errors: validatedData.error.flatten().fieldErrors,
+        message: "Datos incorrectos. Verifique y vuelva a intentar."
+      }
+    };
+  }
+
   try {
     const body = {
-      items: mpItems,	
+      items: mpItems,
       payer: {
-        name: formData.get('name')?.toString() || 'Test',
-        surname: formData.get('lastname')?.toString() || 'User',
+        name: validatedData.data.name,
+        surname: validatedData.data.lastname,
         address: {
-          zip_code: formData.get('zip')?.toString() || '06233200',
-          street_name: formData.get('address')?.toString() || 'Street',
-          street_number: Number(formData.get('addressNumber')),
+          zip_code: validatedData.data.zip,
+          street_name: validatedData.data.address,
+          street_number: validatedData.data.addressNumber,
         },
       },
       back_urls: {
@@ -51,18 +92,27 @@ export async function generatePreference(
         pending: 'https://www.your-site.com/pending'
       },
       auto_return: 'approved',
+      shipments: {
+        cost: 1000,
+        mode: "not_specified",
+      }
     };
 
     const preference = new Preference(client);
-
-  
-
     const result = await preference.create({ body });
 
-    return (result.id);
+    return {
+      preferenceId: result.id
+    };
 
   } catch (error) {
     console.log(error);
+
+    return {
+      formState: {
+        message: "Ocurrio un error. Intente de nuevo."
+      }
+    };
   }
 }
 

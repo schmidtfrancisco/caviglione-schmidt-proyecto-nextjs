@@ -64,7 +64,7 @@ export default function Cart() {
           <>
             <ScrollArea className="h-[400px]">
               {cart.items.map((item) => (
-                <CartItem key={item.game.id} game={item.game} quantity={item.quantity}/>
+                <CartItem key={item.game.id} game={item.game} quantity={item.quantity} />
               ))}
             </ScrollArea>
 

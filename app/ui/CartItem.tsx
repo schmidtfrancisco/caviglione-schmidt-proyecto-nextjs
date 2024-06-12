@@ -11,7 +11,7 @@ import Image from "next/image";
 
 export default function CartItem({ game, quantity }: { game: Game, quantity: number }) {
 
-  const { cart, dispatch } = useCart();
+  const { cart, dispatch, isCartConfirmed } = useCart();
 
   const handleRemoveFromCart = (id: string) => {
     dispatch({ type: "REMOVE_FROM_CART", id })
@@ -42,27 +42,34 @@ export default function CartItem({ game, quantity }: { game: Game, quantity: num
           <div>
             <p className="text-sm font-medium pl-2">{game.name}</p>
             <div className="flex items-center gap-1">
-              {(quantity === 1) ? (
-                <Button onClick={() => handleRemoveFromCart(game.id)} size="icon" variant="ghost" className="hover:bg-gray-200" >
-                <TrashIcon className="h-4 w-4" />
-              </Button>
+              {!isCartConfirmed ? (
+                <>
+                  {(quantity === 1) ? (
+                    <Button onClick={() => handleRemoveFromCart(game.id)} size="icon" variant="ghost" className="hover:bg-gray-200" >
+                      <TrashIcon className="h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => handleUpdateQuantity(game.id, quantity - 1)}
+                      variant="ghost"
+                      size="icon"
+                      className="p-0 m-0">
+                      <MinusIcon className="h-4 w-4" />
+                    </Button>
+                  )}
+                  <span className="text-sm">{quantity} u.</span>
+                  <Button
+                    onClick={() => handleUpdateQuantity(game.id, quantity + 1)}
+                    variant="ghost"
+                    size="icon"
+                  >
+                    <PlusIcon className="h-4 w-4" />
+                  </Button>
+                </>
               ) : (
-              <Button
-                onClick={() => handleUpdateQuantity(game.id, quantity - 1)}
-                variant="ghost"
-                size="icon"
-                className="p-0 m-0">
-                <MinusIcon className="h-4 w-4" />
-              </Button>
+                <p className="text-xs pl-3">Cant.: {quantity}</p>
               )}
-              <span className="text-sm">{quantity} u.</span>
-              <Button
-                onClick={() => handleUpdateQuantity(game.id, quantity + 1)}
-                variant="ghost"
-                size="icon"
-              >
-                <PlusIcon className="h-4 w-4" />
-              </Button>
+
             </div>
           </div>
         </div>
