@@ -9,7 +9,7 @@ export default function Status({ status }: { status: OrderStatus }) {
         'inline-flex items-center rounded-full px-2 py-1 text-xs',
         {
           'bg-gray-100 text-gray-500': status === 'Aprobado',
-          'bg-red-500 text-white': status === 'Rechazado',
+          'bg-red-500 text-white': status === 'Cancelado',
           'bg-orange-500 text-white': status === 'Enviado',
           'bg-green-500 text-white': status === 'Entregado',
         },
@@ -27,9 +27,9 @@ export default function Status({ status }: { status: OrderStatus }) {
           <CheckIcon className="ml-1 w-4 text-white" />
         </>
       ) : null}
-      {status === 'Rechazado' ? (
+      {status === 'Cancelado' ? (
         <>
-          Rechazado
+          Cancelado
           <XMarkIcon className="ml-1 w-4 text-white" />
         </>
       ) : null}
