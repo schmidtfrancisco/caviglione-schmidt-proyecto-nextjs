@@ -13,14 +13,13 @@ const FormSchema = z.object({
   id: z.string(),
   total: z.coerce
 		.number()
-		.gt(0, { message: 'Please enter an amount greater than $0.' }),
-  status: z.enum(['pending', 'paid'], {
-		invalid_type_error: 'Please select an invoice status.'
+		.gt(0, { message: 'Ingrese un monto mayor a $0.' }),
+  status: z.enum(['Aprobado', 'Enviado', 'Entregado', 'Cancelado'], {
+		invalid_type_error: 'Por favor seleccione un estado',
 	}),
   date: z.string(),
 });
 
-const CreateOrder = FormSchema.omit({ id: true, date: true });
 const UpdateOrder = FormSchema.omit({ id: true, date: true });
 
 export type State = {
@@ -184,14 +183,14 @@ export async function updateOrder(id: string, prevState: State, formData: FormDa
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Update Order.',
+      message: 'Campos inválidos. Error al actualizar el pedido.',
     };
   }
   const { total, status } = validatedFields.data;
   const totalInCents = total * 100;
 	try {
 		await sql`
-			UPDATE orders
+			UPDATE gamestore.orders
 			SET total = ${totalInCents}, status = ${status}
 			WHERE id = ${id}
 		`;

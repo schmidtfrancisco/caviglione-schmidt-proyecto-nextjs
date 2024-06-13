@@ -6,18 +6,6 @@ import { deleteOrder } from '@/lib/actions';
 import DeleteWarning from '@/app/ui/admin/deleteWarning';
 import { useState } from 'react';
 
-export function CreateOrder() {
-	return (
-		<Link
-		href="/admin/create"
-		className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-		>
-			<span className="hidden md:block">Create Order</span>{' '}
-			<PlusIcon className="h-5 md:ml-4" />
-		</Link>
-	);
-}
-
 export function UpdateOrder({ id }: { id: string }) {
 	return (
 		<Link
@@ -25,7 +13,7 @@ export function UpdateOrder({ id }: { id: string }) {
 			className="rounded-md border p-2 hover:bg-gray-100 flex items-center w-full"
 		>
 			<PencilIcon className="w-5 mr-2" />
-			<span className="ml-1">Edit</span>
+			<span className="ml-1">Editar</span>
 		</Link>
 	);
 }
@@ -51,7 +39,7 @@ export function DeleteOrder({ id }: { id: string }) {
 					onClick={handleButtonClick}
 				>
 					<TrashIcon className="w-5 mr-2" />
-					<span className="ml-1">Delete</span>
+					<span className="ml-1">Eliminar</span>
 				</button>
 			</form>
 			{showAlert && (

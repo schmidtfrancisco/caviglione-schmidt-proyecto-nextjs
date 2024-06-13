@@ -10,7 +10,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     NotFound();
   }
   return (
-    <main>
+    <div className="p-4">
       <Breadcrumbs
         breadcrumbs={[
           { label: 'Invoices', href: '/dashboard/invoices' },
@@ -21,9 +21,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           },
         ]}
       />
-      {
-        //<Form order={order}/>
-      }
-    </main>
+        <Form order={order}/>
+    </div>
   );
 }
