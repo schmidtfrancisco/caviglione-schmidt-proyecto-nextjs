@@ -18,7 +18,7 @@ export default function Status({ status }: { status: OrderStatus }) {
       {status === 'Enviado' ? (
         <>
           Enviado
-          <ArrowRightCircleIcon className="ml-1 w-4 text-gray-500" />
+          <ArrowRightCircleIcon className="ml-1 w-4 text-white" />
         </>
       ) : null}
       {status === 'Entregado' ? (
@@ -36,7 +36,7 @@ export default function Status({ status }: { status: OrderStatus }) {
       {status === 'Aprobado' ? (
         <>
           Aprobado
-          <CreditCardIcon className="ml-1 w-4 text-white" />
+          <CreditCardIcon className="ml-1 w-4 text-gray-500" />
         </>
       ) : null}
     </span>
