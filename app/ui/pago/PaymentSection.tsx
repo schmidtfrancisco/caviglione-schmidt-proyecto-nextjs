@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/lib/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { PaymentContext } from "./PaymentContext";
 import { DicesIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -28,8 +28,14 @@ export default function PaymentSection() {
     setPreferenceId("")
   }
 
+  useEffect(() => {
+    if (cartCount === 0) {
+      setActiveStep(0);
+    }
+  }, [cartCount, setActiveStep]);
+
   const ENVIO = 1000;
-  const total = cartTotal + ENVIO;
+  const total = cartTotal + (ENVIO*100);
 
   return (
     <div>
@@ -59,14 +65,14 @@ export default function PaymentSection() {
                     <p>Seleccionaste {cartCount} {cartCount === 1 ? "juego" : "juegos"} para el subtotal de {formatPrice(cartTotal)}</p>
                   </div>
                   <h3 className="font-bold underline">Detalle</h3>
-                  <div className="flex flex-col gap-1 mx-auto md:w-4/5">
+                  <div className="flex flex-col gap-1 mx-auto w-full md:w-4/5">
                     <div className="flex flex-row justify-between">
                       <p>Subtotal</p>
                       <p>{formatPrice(cartTotal)}</p>
                     </div>
                     <div className="flex flex-row justify-between">
                       <p>Envio</p>
-                      <p>$ {ENVIO}</p>
+                      <p>{formatPrice(ENVIO*100)}</p>
                     </div>
                     <div className="flex flex-row justify-between">
                       <p className="font-bold">Total</p>

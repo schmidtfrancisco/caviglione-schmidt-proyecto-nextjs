@@ -7,7 +7,7 @@ import { PaymentContext } from "../ui/pago/PaymentContext";
 
 
 export default function Page() {
-  const [activeStep, setActiveStep] = useState<number>(1)
+  const [activeStep, setActiveStep] = useState<number>(1);
   const [preferenceId, setPreferenceId] = useState<string>("");
 
   return (

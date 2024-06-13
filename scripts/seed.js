@@ -86,6 +86,8 @@ async function seedUsers(client) {
 
 
 async function seedOrders(client) {
+  await client.sql`CREATE TYPE order_status AS ENUM ('Aprobado', 'Cancelado', 'Enviado', 'Entregado');`;
+
   try {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS gamestore.orders (
@@ -97,6 +99,7 @@ async function seedOrders(client) {
         addressNumber VARCHAR(255) NOT NULL,
         zip VARCHAR(255) NOT NULL,
         total INT NOT NULL,
+        status order_status NOT NULL,
         date DATE DEFAULT CURRENT_DATE
       );
     `;

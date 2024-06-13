@@ -16,14 +16,12 @@ interface SearchParams {
   
 }
 
-export default async function Page( {searchParams} : {searchParams: any}) {
+export default async function Page( {searchParams} : {searchParams: SearchParams}) {
   const client = new MercadoPagoConfig({ accessToken: "TEST-8968989067718937-060722-adfaca3b8c9a39eda01ba86f17a1c264-686744806" });
-  console.log(searchParams);
-
+ 
   const paymentId = searchParams.payment_id;
 
   const payment = await new Payment(client).get({ id: paymentId });
-  console.log(payment);
 
   const amount = payment.transaction_amount!!;
   const payerMp = payment.payer!!;
@@ -42,6 +40,7 @@ export default async function Page( {searchParams} : {searchParams: any}) {
     zip: address.zip_code!!,
     addressNumber: Number(address.street_number!!),
     items: orderItems,
+    status: "Aprobado",
     total: amount,
   };
   

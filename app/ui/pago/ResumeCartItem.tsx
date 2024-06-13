@@ -7,7 +7,7 @@ import { useCart } from "@/lib/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { MinusIcon, PlusIcon } from "lucide-react";
-import Image from "next/image";
+import GameCldImage from "../juegos/GameCldImage";
 
 export default function ResumeCartItem({ game, quantity }: { game: Game, quantity: number }) {
 
@@ -25,12 +25,12 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
     <>
       <div className="flex flex-col md:flex-row gap-4 justify-between">
         <div className="flex flex-row gap-2">
-          <Image
+          <GameCldImage
             src={game.images_url[0]}
             alt="Product Image"
             width={80}
             height={80}
-            className="rounded-md object-cover"
+            className="rounded-md"
           />
           <div>
             <h3 className="font-medium text-lg pl-2">{game.name}</h3>

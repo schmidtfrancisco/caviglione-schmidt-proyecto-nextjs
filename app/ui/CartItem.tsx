@@ -7,6 +7,7 @@ import { useCart } from "@/lib/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline"
 import Image from "next/image";
+import GameCldImage from "./juegos/GameCldImage";
 
 
 export default function CartItem({ game, quantity }: { game: Game, quantity: number }) {
@@ -28,15 +29,11 @@ export default function CartItem({ game, quantity }: { game: Game, quantity: num
     <DropdownMenuItem onSelect={preventClousure} className="hover:none">
       <div className="flex items-center justify-between w-full gap-2">
         <div className="flex items-center gap-2">
-          <Image
+          <GameCldImage
             alt="Product Image"
             className="rounded-md"
             height={40}
             src={game.images_url[0]}
-            style={{
-              aspectRatio: "40/40",
-              objectFit: "cover",
-            }}
             width={40}
           />
           <div>

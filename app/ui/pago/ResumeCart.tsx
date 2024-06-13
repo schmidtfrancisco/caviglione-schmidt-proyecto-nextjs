@@ -48,7 +48,7 @@ export default function ResumeCart() {
           <></>
         ) : (
           <CardFooter className="flex items-center justify-between">
-            <div className="font-bold text-lg text-gray-700">Total</div>
+            <div className="font-bold text-lg text-gray-700">Subtotal</div>
             <div className="font-medium text-lg text-slate-700">{formatPrice(cartTotal)}</div>
           </CardFooter>
         )}

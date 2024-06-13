@@ -30,6 +30,8 @@ export type OrderItem = {
 	quantity: number;
 };
 
+export type OrderStatus = 'Aprobado' | 'Enviado' | 'Entregado' | 'Cancelado';
+
 export type Order = {
 	payment_id: string;
 	name: string;
@@ -39,6 +41,7 @@ export type Order = {
 	zip: string;
 	addressNumber: number;
 	items: OrderItem[];
+	status: OrderStatus;
 	total: number;
 };
 
@@ -50,6 +53,7 @@ export type OrdersTable = {
 	address: string;
 	addressNumber: number;
 	zip: string;
+	status: OrderStatus;
 	total: number;
 	date: Date;
 };
@@ -57,7 +61,7 @@ export type OrdersTable = {
 export type OrderForm = {
 	id: string;
 	total: number;
-	status: 'pending' | 'paid';
+	status: OrderStatus;
 };
 
 export type MPItem = {

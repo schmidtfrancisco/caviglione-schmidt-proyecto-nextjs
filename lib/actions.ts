@@ -31,71 +31,6 @@ export type State = {
   message?: string | null;
 };
 
-export async function createOrder(prevState: State, formData: FormData) {
-	const validatedFields = CreateOrder.safeParse({
-    customerId: formData.get('customerId'),
-    amount: formData.get('amount'),
-    status: formData.get('status'),
-  });
-
-	if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Invoice.',
-    };
-  }
-
-	const { total, status } = validatedFields.data;
-	const amountInCents = total * 100;
-	const date = new Date().toISOString().split('T')[0];
-
-	try {
-		await sql`
-			INSERT INTO invoices (customer_id, amount, status, date)
-			VALUES (${amountInCents}, ${status}, ${date})
-		`;
-	} catch (error) {
-		return { message: 'Database Error: Failed to Delete Invoice.' };
-	}
-
-	revalidatePath('/dashboard/invoices');
-	redirect('/dashboard/invoices');
-}
-
-export async function updateOrder(id: string, prevState: State, formData: FormData) {
-  const validatedFields = UpdateOrder.safeParse({
-    total: formData.get('total'),
-    status: formData.get('status'),
-  });
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Update Order.',
-    };
-  }
-  const { total, status } = validatedFields.data;
-  const totalInCents = total * 100;
-	try {
-		await sql`
-			UPDATE orders
-			SET total = ${totalInCents}, status = ${status}
-			WHERE id = ${id}
-		`;
-	} catch (error) {
-		return { message: 'Database Error: Failed to Update Order.' };
-	}
-  revalidatePath('/admin');
-  redirect('/admin');
-}
-
-export async function deleteOrder(id: string) {
-	try {
-		await sql`DELETE FROM invoices WHERE id = ${id}`;
-	} catch (error) {
-		return { message: 'Database Error: Failed to Delete Invoice.' };
-	}
-  revalidatePath('/dashboard/invoices');
-}
 
 export async function authenticate(
   prevState: string | undefined,
@@ -206,20 +141,20 @@ export async function generatePreference(
   }
 }
 
-/**
+
 export async function createOrder(
   order: Order
 ) {
-  const client = order.name + order.lastname;
+  const client = order.name + " " + order.lastname;
   const amountInCents = Math.trunc(order.total * 100);
 
   try {
     const result = await sql`
       INSERT INTO gamestore.orders
-      (payment_id, client, email, address, addressNumber, zip, total)
+      (payment_id, client, email, address, addressNumber, zip, status, total)
       VALUES
-      (${order.payment_id}, ${client}, ${order.email}, ${order.address}, ${order.addressNumber}, ${order.zip}, ${amountInCents})
-      ON CONFLICT (id) DO NOTHING
+      (${order.payment_id}, ${client}, ${order.email}, ${order.address}, ${order.addressNumber}, ${order.zip}, ${order.status}, ${amountInCents})
+      ON CONFLICT (payment_id) DO NOTHING
       RETURNING id
     `;
 
@@ -240,4 +175,38 @@ export async function createOrder(
     console.log(error);
   }
 }
-	 */
+
+export async function updateOrder(id: string, prevState: State, formData: FormData) {
+  const validatedFields = UpdateOrder.safeParse({
+    total: formData.get('total'),
+    status: formData.get('status'),
+  });
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Order.',
+    };
+  }
+  const { total, status } = validatedFields.data;
+  const totalInCents = total * 100;
+	try {
+		await sql`
+			UPDATE orders
+			SET total = ${totalInCents}, status = ${status}
+			WHERE id = ${id}
+		`;
+	} catch (error) {
+		return { message: 'Database Error: Failed to Update Order.' };
+	}
+  revalidatePath('/admin');
+  redirect('/admin');
+}
+
+export async function deleteOrder(id: string) {
+	try {
+		await sql`DELETE FROM invoices WHERE id = ${id}`;
+	} catch (error) {
+		return { message: 'Database Error: Failed to Delete Invoice.' };
+	}
+  revalidatePath('/dashboard/invoices');
+}

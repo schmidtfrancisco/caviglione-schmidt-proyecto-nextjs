@@ -2,6 +2,7 @@ import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@
 import TableMenu from "@/app/ui/admin/TableMenu"
 import { fetchOrders } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
+import Status from "./orders/status";
 
 export default async function OrdersTable() {
 	const orders = await fetchOrders();
@@ -14,6 +15,7 @@ export default async function OrdersTable() {
 						<TableHead className="w-[100px]">Pedido</TableHead>
 						<TableHead className="hidden md:table-cell">Fecha</TableHead>
 						<TableHead className="hidden md:table-cell">Cliente</TableHead>
+						<TableHead className="hidden md:table-cell">Estado</TableHead>
 						<TableHead className="text-right">Total</TableHead>
 						<TableHead className="text-right">Actions</TableHead>
 					</TableRow>
@@ -24,6 +26,7 @@ export default async function OrdersTable() {
 							<TableCell className="font-medium">{order.id}</TableCell>
 							<TableCell className="hidden md:table-cell">{order.date.toLocaleDateString()}</TableCell>
 							<TableCell className="hidden md:table-cell">{order.client}</TableCell>
+							<TableCell className="hidden md:table-cell"><Status status={order.status}/></TableCell>
 							<TableCell className="text-right">{formatPrice(order.total)}</TableCell>
 							<TableCell className="text-right">
 								<TableMenu order={order}/>

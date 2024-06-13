@@ -248,3 +248,20 @@ export async function fetchOrders() {
     throw new Error('Failed to fetch orders');
   }
 }
+
+export async function fetchOrderById(id: string) {
+  noStore();
+  try {
+    const data = await sql<OrdersTable>`
+      SELECT *
+      FROM gamestore.orders
+      WHERE id = ${id}
+      LIMIT 1;
+    `;
+    
+    return data.rows[0];
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch order');
+  }
+}
