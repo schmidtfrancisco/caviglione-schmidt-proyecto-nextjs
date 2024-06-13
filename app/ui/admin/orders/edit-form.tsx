@@ -3,7 +3,6 @@
 import { OrderForm, OrderStatus } from '@/lib/definitions';
 import {
   CheckIcon,
-  ClockIcon,
   CurrencyDollarIcon,
   ArrowRightCircleIcon, CreditCardIcon, XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -11,6 +10,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { updateOrder } from '@/lib/actions';
 import { useFormState } from 'react-dom';
+import { Input } from '@/components/ui/input';
 
 
 export default function EditInvoiceForm({ order }: { order: OrderForm }) {
@@ -26,7 +26,7 @@ export default function EditInvoiceForm({ order }: { order: OrderForm }) {
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
-              <input
+              <Input
                 id="total"
                 name="total"
                 type="number"
@@ -54,9 +54,9 @@ export default function EditInvoiceForm({ order }: { order: OrderForm }) {
             Estado del pedido
           </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col justify-center md:flex-row gap-4">
               <div className="flex items-center">
-                <input
+                <Input
                   id="approved"
                   name="status"
                   type="radio"
@@ -72,7 +72,7 @@ export default function EditInvoiceForm({ order }: { order: OrderForm }) {
                 </label>
               </div>
               <div className="flex items-center">
-                <input
+                <Input
                   id="sent"
                   name="status"
                   type="radio"
@@ -88,7 +88,7 @@ export default function EditInvoiceForm({ order }: { order: OrderForm }) {
                 </label>
               </div>
               <div className="flex items-center">
-                <input
+                <Input
                   id="delivered"
                   name="status"
                   type="radio"
@@ -104,7 +104,7 @@ export default function EditInvoiceForm({ order }: { order: OrderForm }) {
                 </label>
               </div>
               <div className="flex items-center">
-                <input
+                <Input
                   id="canceled"
                   name="status"
                   type="radio"

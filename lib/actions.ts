@@ -203,9 +203,9 @@ export async function updateOrder(id: string, prevState: State, formData: FormDa
 
 export async function deleteOrder(id: string) {
 	try {
-		await sql`DELETE FROM invoices WHERE id = ${id}`;
+		await sql`DELETE FROM gamestore.orders WHERE id = ${id}`;
 	} catch (error) {
 		return { message: 'Database Error: Failed to Delete Invoice.' };
 	}
-  revalidatePath('/dashboard/invoices');
+  revalidatePath('/admin');
 }
