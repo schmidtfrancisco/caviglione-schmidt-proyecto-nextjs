@@ -35,35 +35,33 @@ export function DeleteOrder({ id }: { id: string }) {
 	};
 
 	return (
-		<>
-			<AlertDialog >
-				<AlertDialogTrigger className='rounded-md border p-2 hover:bg-gray-100 flex items-center w-full'>
-						<TrashIcon className="w-5 mr-2" />
-						<span className="ml-1 text-sm">Eliminar</span>
-				</AlertDialogTrigger>
+		<AlertDialog >
+			<AlertDialogTrigger className='rounded-md border p-2 hover:bg-gray-100 flex items-center w-full'>
+				<TrashIcon className="w-5 md:mr-2" />
+				<span className="hidden md:block ml-1 text-sm">Eliminar</span>
+			</AlertDialogTrigger>
 
-				<AlertDialogContent>
-					<AlertDialogHeader>
-						<AlertDialogTitle className='flex items-center'>
-							<ExclamationCircleIcon className="w-8 h-8 mr-2 text-red-600" />
-							Eliminar pedido
-						</AlertDialogTitle>
-						<AlertDialogDescription>
-							¿Seguro que quieres eliminar este pedido?
-						</AlertDialogDescription>
-					</AlertDialogHeader>
-					<AlertDialogFooter>
-						<AlertDialogCancel >Cancelar</AlertDialogCancel>
-						<AlertDialogAction 
-							onClick={deleteOrderWithId}
-							className="bg-red-500 hover:bg-red-600 text-white"
-						>
-							Eliminar
-						</AlertDialogAction>
-					</AlertDialogFooter>
-				</AlertDialogContent>
-			</AlertDialog>
-		</>
+			<AlertDialogContent>
+				<AlertDialogHeader>
+					<AlertDialogTitle className='flex items-center'>
+						<ExclamationCircleIcon className="w-8 h-8 mr-2 text-red-600" />
+						Eliminar pedido
+					</AlertDialogTitle>
+					<AlertDialogDescription>
+						¿Seguro que quieres eliminar este pedido?
+					</AlertDialogDescription>
+				</AlertDialogHeader>
+				<AlertDialogFooter>
+					<AlertDialogCancel >Cancelar</AlertDialogCancel>
+					<AlertDialogAction
+						onClick={deleteOrderWithId}
+						className="bg-red-500 hover:bg-red-600 text-white"
+					>
+						Eliminar
+					</AlertDialogAction>
+				</AlertDialogFooter>
+			</AlertDialogContent>
+		</AlertDialog>
 	);
 }
 

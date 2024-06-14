@@ -1,16 +1,29 @@
-import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
+import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table, TableCaption } from "@/components/ui/table"
 import TableMenu from "@/app/ui/admin/TableMenu"
-import { fetchOrders } from "@/lib/data";
+import { fetchFilteredOrders, fetchFilteredOrdersByState } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
 import Status from "./orders/status";
 import { DeleteOrder, UpdateOrder } from "./orders/options";
 
-export default async function OrdersTable() {
-	const orders = await fetchOrders();
-
+export default async function OrdersTable(
+	{ query, state, currentPage }: { query: string, state: string, currentPage: number },
+) {
+	let orders;
+	if (state === '') {
+		orders = await fetchFilteredOrders(query, currentPage);
+	}
+	else {
+		orders = await fetchFilteredOrdersByState(query, state, currentPage);
+	}
 	return (
 		<>
+
 			<div className="md:hidden">
+				{orders?.length === 0 && (
+					<div className="w-full rounded-md bg-white p-4 text-center">
+						<p className="text-sm italic">No hay pedidos</p>
+					</div>
+				)}
 				{orders?.map((order) => (
 					<div
 						key={order.id}
@@ -34,40 +47,43 @@ export default async function OrdersTable() {
 							</div>
 							<div className="flex justify-end gap-2">
 								<UpdateOrder id={order.id} />
-								<DeleteOrder id={order.id}  />
+								<DeleteOrder id={order.id} />
 							</div>
 						</div>
 					</div>
 				))}
 			</div>
 			<div className="hidden border shadow-sm rounded-lg p-2 md:block">
-			<Table>
-				<TableHeader>
-					<TableRow>
-						<TableHead className="w-[100px]">Pedido</TableHead>
-						<TableHead className="hidden md:table-cell">Fecha</TableHead>
-						<TableHead className="hidden md:table-cell">Cliente</TableHead>
-						<TableHead className="text-center">Estado</TableHead>
-						<TableHead className="text-right">Total</TableHead>
-						<TableHead className="text-right">Acciones</TableHead>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					{orders.map((order) => (
-						<TableRow key={order.id}>
-							<TableCell className="font-medium"># {order.id}</TableCell>
-							<TableCell className="hidden md:table-cell">{order.date.toLocaleDateString()}</TableCell>
-							<TableCell className="hidden md:table-cell">{order.client}</TableCell>
-							<TableCell className="text-center"><Status status={order.status} /></TableCell>
-							<TableCell className="text-right">{formatPrice(order.total)}</TableCell>
-							<TableCell className="text-right">
-								<TableMenu order={order} />
-							</TableCell>
+				<Table>
+					{orders?.length === 0 && (
+						<TableCaption>No hay pedidos</TableCaption>
+					)}
+					<TableHeader>
+						<TableRow>
+							<TableHead className="w-[100px]">Pedido</TableHead>
+							<TableHead className="hidden md:table-cell">Fecha</TableHead>
+							<TableHead className="hidden md:table-cell">Cliente</TableHead>
+							<TableHead className="text-center">Estado</TableHead>
+							<TableHead className="text-right">Total</TableHead>
+							<TableHead className="text-right">Acciones</TableHead>
 						</TableRow>
-					))
-					}
-				</TableBody>
-			</Table>
+					</TableHeader>
+					<TableBody>
+						{orders.map((order) => (
+							<TableRow key={order.id}>
+								<TableCell className="font-medium"># {order.id}</TableCell>
+								<TableCell className="hidden md:table-cell">{order.date.toLocaleDateString()}</TableCell>
+								<TableCell className="hidden md:table-cell">{order.client}</TableCell>
+								<TableCell className="text-center"><Status status={order.status} /></TableCell>
+								<TableCell className="text-right">{formatPrice(order.total)}</TableCell>
+								<TableCell className="text-right">
+									<TableMenu order={order} />
+								</TableCell>
+							</TableRow>
+						))
+						}
+					</TableBody>
+				</Table>
 			</div>
 		</>
 	)

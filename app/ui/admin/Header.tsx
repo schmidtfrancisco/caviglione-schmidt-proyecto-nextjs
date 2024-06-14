@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import Search from "@/app/ui/Search";
+import Filter from "@/app/ui/admin/orders/filter";
 
 export default function Header() {
 	const pathname = usePathname()
@@ -15,8 +16,9 @@ export default function Header() {
 						{"Productos": pathname === "/admin/products",}
 					)}</h1>
 				</div>
-				<div className="flex flex-1 items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-					<Search placeholder="Buscar..." />
+				<div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+					{pathname === "/admin" && <Filter />}
+					<Search placeholder={`Buscar ${pathname === "/admin" ? "pedidos..." : "productos..."}`} />
 				</div>
 			</header>
 		</>

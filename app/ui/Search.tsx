@@ -31,7 +31,7 @@ export default function Search({ placeholder }: { placeholder?: string }) {
       <MagnifyingGlassIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
       <Input
         className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] bg-white"
-        placeholder="Buscar..."
+        placeholder={`${placeholder || 'Buscar...'}`} 
         type="search"
         onChange={(ev) => {
           handleSearch(ev.target.value)
