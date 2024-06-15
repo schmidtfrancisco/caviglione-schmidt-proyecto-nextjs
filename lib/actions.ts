@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation'
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
-import { MPItem, Order } from '@/lib/definitions';
+import { Order } from '@/lib/definitions/orders-definitions';
 import MercadoPagoConfig, { Preference } from 'mercadopago';
 import { sql } from '@vercel/postgres';
 
@@ -165,7 +165,7 @@ export async function createOrder(
           INSERT INTO gamestore.games_orders
           (order_id, game_id, quantity)
           VALUES
-          (${orderId}, ${item.id}, ${item.quantity})
+          (${orderId}, ${item.game_id}, ${item.quantity})
           ON CONFLICT (order_id, game_id) DO NOTHING
         `;
       }),
