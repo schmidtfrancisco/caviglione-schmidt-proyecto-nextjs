@@ -1,5 +1,5 @@
 export type OrderItem = {
-	order_id: string;	
+	order_id?: string;	
 	game_id	: string;
 	quantity: number;
 };

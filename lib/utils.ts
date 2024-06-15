@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { CartItem, Category, MPItem, OrderItem } from "@/lib/definitions";
+import { CartItem, Category } from "@/lib/definitions";
+import { OrderItem } from "@/lib/definitions/orders-definitions";
 import { Items } from "mercadopago/dist/clients/commonTypes";
 
 export function cn(...inputs: ClassValue[]) {
@@ -93,7 +94,7 @@ export function mapToMPItems(cartItems: CartItem[]) {
 export function mapToOrderItems(items: Items[]): OrderItem[] {
   return items.map((item) => {
     return {
-      id: item.id,
+      game_id: item.id,
       quantity: Number(item.quantity),
     };
   });
