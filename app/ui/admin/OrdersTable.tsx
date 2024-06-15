@@ -1,9 +1,10 @@
-import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table, TableCaption } from "@/components/ui/table"
 import TableMenu from "@/app/ui/admin/TableMenu"
-import { fetchFilteredOrders, fetchFilteredOrdersByState } from "@/lib/data";
+import { fetchFilteredOrders, fetchFilteredOrdersByState } from "@/lib/data/orders-data";
 import { formatPrice } from "@/lib/utils";
-import Status from "./orders/status";
-import { DeleteOrder, UpdateOrder } from "./orders/options";
+import Status from "@/app/ui/admin/orders/status";
+import { DeleteOrder, UpdateOrder } from "@/app/ui/admin/orders/options";
+import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table, TableCaption } from "@/components/ui/table"
+import { SeeOrderDetails } from "./orders/SeeOrderDetails";
 
 export default async function OrdersTable(
 	{ query, state, currentPage }: { query: string, state: string, currentPage: number },
@@ -17,7 +18,6 @@ export default async function OrdersTable(
 	}
 	return (
 		<>
-
 			<div className="md:hidden">
 				{orders?.length === 0 && (
 					<div className="w-full rounded-md bg-white p-4 text-center">
@@ -46,6 +46,7 @@ export default async function OrdersTable(
 								<p>{order.date.toLocaleDateString()}</p>
 							</div>
 							<div className="flex justify-end gap-2">
+								<SeeOrderDetails id={order.id} />
 								<UpdateOrder id={order.id} />
 								<DeleteOrder id={order.id} />
 							</div>

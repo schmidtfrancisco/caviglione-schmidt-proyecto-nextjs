@@ -1,13 +1,13 @@
 'use client'	
 
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { Badge } from "@/components/ui/badge";
+
 
 export default function Filter() {
   const searchParams = useSearchParams();

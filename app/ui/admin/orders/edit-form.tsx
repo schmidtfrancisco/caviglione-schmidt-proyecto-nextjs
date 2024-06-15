@@ -1,16 +1,17 @@
 'use client';
 
-import { OrderForm, OrderStatus } from '@/lib/definitions';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { OrderForm } from '@/lib/definitions/orders-definitions';
 import {
   CheckIcon,
   CurrencyDollarIcon,
   ArrowRightCircleIcon, CreditCardIcon, XMarkIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { updateOrder } from '@/lib/actions';
 import { useFormState } from 'react-dom';
-import { Input } from '@/components/ui/input';
+
 
 
 export default function EditInvoiceForm({ order }: { order: OrderForm }) {

@@ -1,5 +1,5 @@
 import { createOrder } from "@/lib/actions";
-import { Order } from "@/lib/definitions";
+import { Order } from "@/lib/definitions/orders-definitions";
 import { mapToOrderItems } from "@/lib/utils";
 import { MercadoPagoConfig, Payment } from "mercadopago";
 

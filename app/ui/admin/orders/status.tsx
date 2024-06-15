@@ -1,4 +1,4 @@
-import { OrderStatus } from '@/lib/definitions';
+import { OrderStatus } from '@/lib/definitions/orders-definitions';
 import { CheckIcon, ArrowRightCircleIcon, CreditCardIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
