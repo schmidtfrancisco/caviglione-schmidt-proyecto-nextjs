@@ -25,7 +25,7 @@ export type OrdersTable = {
 	client: string;
 	email: string;
 	address: string;
-	addressNumber: number;
+	addressnumber: number;
 	zip: string;
 	status: OrderStatus;
 	total: number;
