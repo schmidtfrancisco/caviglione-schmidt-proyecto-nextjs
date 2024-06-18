@@ -20,10 +20,8 @@ export default function SuccessPayment(
     dispatch({ type: "CLEAR_CART" });
   };
 
-  useEffect(() => {
-    handleEmptyCart();
-  }, []);
-
+  handleEmptyCart();
+  
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
