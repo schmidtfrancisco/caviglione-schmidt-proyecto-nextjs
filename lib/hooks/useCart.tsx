@@ -4,8 +4,6 @@ import { createContext, useReducer, useContext, useEffect, useState } from "reac
 import { Game } from "@/lib/definitions";
 import { CartItem } from "@/lib/definitions";
 
-
-
 export type CartAction = AddToCart | RemoveFromCart | ClearCart | UpdateQuantity;
 
 type AddToCart = { type: "ADD_TO_CART"; game: Game; quantity?: number };

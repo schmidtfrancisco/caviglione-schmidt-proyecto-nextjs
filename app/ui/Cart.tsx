@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline"
+import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/outline"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button, buttonVariants } from "@/components/ui/button"
 import CartItem from "@/app/ui/CartItem"
@@ -38,11 +38,19 @@ export default function Cart() {
           </div>
           <span className="sr-only">Cart</span>
         </Button>
-
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-80">
-        <DropdownMenuLabel>Tu carrito ({cartCount})</DropdownMenuLabel>
+        <DropdownMenuLabel className="flex items-center justify-between">
+          Tu carrito ({cartCount})
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => dispatch({ type: "CLEAR_CART" })}
+          >
+            <TrashIcon className="h-4 w-4" />
+          </Button>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {(cartCount === 0) ? (
           <div className="flex flex-col items-center justify-between w-full gap-2">

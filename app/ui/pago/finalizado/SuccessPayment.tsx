@@ -6,7 +6,6 @@ import PaymentOrderItem from "@/app/ui/pago/finalizado/PaymentOrderItem";
 import { CircleCheckIcon } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
 import { OrderItem } from "@/lib/definitions/orders-definitions";
-import { useEffect } from "react";
 import { useCart } from "@/lib/hooks/useCart";
 
 export default function SuccessPayment(
@@ -16,12 +15,8 @@ export default function SuccessPayment(
 
   const { dispatch } = useCart();
 
-  const handleEmptyCart = () => {
-    dispatch({ type: "CLEAR_CART" });
-  };
+  dispatch({ type: "CLEAR_CART" });
 
-  handleEmptyCart();
-  
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
