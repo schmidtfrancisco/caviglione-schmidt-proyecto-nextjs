@@ -128,3 +128,20 @@ export async function fetchOrderItems(orderId: string) {
     throw new Error('Failed to fetch order items');
   }
 }
+
+export async function existsOrderWithPaymentId(paymentId: string) {
+  noStore();
+  try {
+    const data = await sql`
+      SELECT *
+      FROM gamestore.orders
+      WHERE payment_id = ${paymentId}
+      LIMIT 1;
+    `;
+    
+    return data.rows.length > 0;
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch order');
+  }
+}

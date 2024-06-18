@@ -170,6 +170,8 @@ export async function createOrder(
         `;
       }),
     );
+
+    return orderId;
   } catch (error) {
     console.log(error);
   }
