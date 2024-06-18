@@ -32,7 +32,7 @@ interface SearchParams {
 export default async function Page({ searchParams }: { searchParams: SearchParams }) {
   const paymentId = searchParams.payment_id;
 
-  const existPayment = true
+  const existPayment = false
   //await existsOrderWithPaymentId(paymentId);
   if (existPayment) {
     return (
