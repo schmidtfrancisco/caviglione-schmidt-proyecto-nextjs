@@ -130,9 +130,8 @@ export async function fetchOrderItems(orderId: string) {
 }
 
 export async function existsOrderWithPaymentId(paymentId: string) {
-  noStore();
   try {
-    const data = await sql`
+    const data = await sql<OrdersTable>`
       SELECT *
       FROM gamestore.orders
       WHERE payment_id = ${paymentId}
