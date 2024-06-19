@@ -146,7 +146,7 @@ export async function createOrder(
 ) {
   const client = order.name + " " + order.lastname;
   const amountInCents = Math.trunc(order.total * 100);
-  const date = new Date().toLocaleDateString('es-AR');
+  const date = new Date().toISOString().split('T')[0];
 
   try {
     const result = await sql`
