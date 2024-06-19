@@ -27,9 +27,10 @@ export async function fetchFilteredOrders(query: string, currentPage: number) {
       FROM gamestore.orders
       WHERE (client ILIKE ${`%${query}%`}
       OR email ILIKE ${`%${query}%`})
+      ORDER BY gamestore.orders.date DESC
       LIMIT ${ITEMS_PER_PAGE}
       OFFSET ${offset}
-      ORDER BY gamestore.orders.date DESC;
+      ;
     `;
     
     return data.rows;
@@ -49,9 +50,10 @@ export async function fetchFilteredOrdersByState(query: string, state: string, c
       WHERE status = ${state}
       AND (client ILIKE ${`%${query}%`}
       OR email ILIKE ${`%${query}%`})
+      ORDER BY gamestore.orders.date DESC
       LIMIT ${ITEMS_PER_PAGE}
       OFFSET ${offset}
-      ORDER BY gamestore.orders.date DESC;;
+      ;
     `;
     
     return data.rows;
