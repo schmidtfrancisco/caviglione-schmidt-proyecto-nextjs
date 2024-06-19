@@ -3,11 +3,11 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/lib/hooks/useCart";
 import Link from "next/link";
-import Image from "next/image";
 import { cn, formatPrice } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import ResumeCartItem from "@/app/ui/pago/ResumeCartItem";
 import { Separator } from "@/components/ui/separator";
+import { CldImage } from "next-cloudinary";
 
 
 export default function ResumeCart() {
@@ -23,8 +23,8 @@ export default function ResumeCart() {
         <Separator className="mb-6" />
         <CardContent>
           <div className="flex flex-col items-center justify-between w-full gap-2">
-            <Image
-              src="/emptycart.png"
+            <CldImage
+              src="GameStore/emptycart"
               alt="No hay items en el carrito"
               width={300}
               height={300}

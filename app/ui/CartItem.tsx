@@ -6,7 +6,6 @@ import { Game } from "@/lib/definitions";
 import { useCart } from "@/lib/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline"
-import Image from "next/image";
 import GameCldImage from "./juegos/GameCldImage";
 
 

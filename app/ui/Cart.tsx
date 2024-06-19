@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/outline"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -11,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn, formatPrice } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
 
 export default function Cart() {
   const [isClient, setIsClient] = useState(false)
@@ -54,8 +54,8 @@ export default function Cart() {
         <DropdownMenuSeparator />
         {(cartCount === 0) ? (
           <div className="flex flex-col items-center justify-between w-full gap-2">
-            <Image
-              src="/emptycart.png"
+            <CldImage
+              src="GameStore/emptycart"
               alt="No hay items en el carrito"
               width={200}
               height={200}

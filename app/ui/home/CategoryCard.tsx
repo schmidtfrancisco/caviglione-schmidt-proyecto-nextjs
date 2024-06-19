@@ -1,6 +1,6 @@
 import { Category } from "@/lib/definitions";
 import { getCategoryLink } from "@/lib/utils";
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 import Link from "next/link";
 
 export default function CategoryCard({ category, description, src }: { category: Category, description: string, src: string }) {
@@ -10,12 +10,11 @@ export default function CategoryCard({ category, description, src }: { category:
         <span className="sr-only">Explorar</span>
       </Link>
       <div className="h-[200px] relative w-full">
-      <Image
+      <CldImage
         src={src}
         alt={category}
         fill
-        objectFit="cover"
-        className="group-hover:scale-105 transition-transform duration-300 ease-in-out"
+        className="group-hover:scale-105 transition-transform duration-300 ease-in-out object-cover"
       />
       </div>
       <div className="bg-white p-4 dark:bg-gray-950">

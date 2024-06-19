@@ -5,7 +5,7 @@ import Search from "@/app/ui/Search"
 import { fetchGamesByCategoryCount } from "@/lib/data/products-data"
 import { Category } from "@/lib/definitions"
 import { cn, linkToCategory } from "@/lib/utils"
-import Image from "next/image"
+import { CldImage } from "next-cloudinary"
 
 
 interface PageProps {
@@ -34,8 +34,8 @@ export default async function Page({ params, searchParams }: PageProps) {
               "text-5xl md:text-7xl font-bold text-center md:text-left text-gray-700 flex items-center mx-auto")}
             >
               <span>{category}</span>
-              <Image
-              src="/oso.webp"
+              <CldImage
+              src="GameStore/oso"
               alt={category}
               width={80}
               height={80}

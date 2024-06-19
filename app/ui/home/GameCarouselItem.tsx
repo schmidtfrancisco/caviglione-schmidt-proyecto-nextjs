@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image"
 import Link from "next/link"
 import { Game } from '@/lib/definitions'
 import { Card, CardContent } from "@/components/ui/card";
