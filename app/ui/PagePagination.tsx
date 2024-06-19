@@ -26,6 +26,7 @@ export default function PagePagination({ maxPage }: { maxPage: number }) {
             <PaginationPrevious
               href={createPageURL(currentPage - 1)}
               isDisabled={currentPage <= 1}
+              className='border-1'
             />
           </PaginationItem>
 
@@ -47,6 +48,7 @@ export default function PagePagination({ maxPage }: { maxPage: number }) {
             <PaginationNext
               href={createPageURL(currentPage + 1)}
               isDisabled={currentPage >= maxPage}
+              className='border-red-600 border-1'
             />
           </PaginationItem>
         </PaginationContent>

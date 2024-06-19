@@ -69,17 +69,17 @@ const PaginationPrevious = ({
     {isDisabled ? (
       <div className="flex gap-1 text-sm items-center pr-2.5 text-gray-500 ">
         <ChevronLeft className="h-4 w-4" />
-        <span>Anterior</span>
+        <span className="hidden sm:inline">Anterior</span>
       </div>
     ) : (
       <PaginationLink
         aria-label="Go to previous page"
         size="default"
-        className={cn("gap-1 pl-2.5", className)}
+        className={cn("gap-1 pl-2.5 pr-3", className)}
         {...props}
       >
         <ChevronLeft className="h-4 w-4" />
-        <span>Anterior</span>
+        <span className="hidden sm:inline">Anterior</span>
       </PaginationLink>
     )}
   </>
@@ -94,17 +94,17 @@ const PaginationNext = ({
   <>
     {isDisabled ? (
       <div className="flex gap-1 text-sm items-center pl-2.5 text-gray-500">
-        <span>Siguiente</span>
+        <span className="hidden sm:inline">Siguiente</span>
         <ChevronRight className="h-4 w-4" />
       </div>
     ) : (
       <PaginationLink
         aria-label="Go to next page"
         size="default"
-        className={cn("gap-1 pr-2.5", className)}
+        className={cn("gap-1 pr-2.5 pl-3", className)}
         {...props}
       >
-        <span>Siguiente</span>
+        <span className="hidden sm:inline">Siguiente</span>
         <ChevronRight className="h-4 w-4" />
       </PaginationLink>
 
