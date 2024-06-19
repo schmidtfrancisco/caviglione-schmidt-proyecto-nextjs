@@ -12,8 +12,8 @@ export function SeeOrderDetails({ id }: { id: number }) {
         <span className="ml-1 text-sm">Ver</span>
       </DialogTrigger>
 
-      <DialogContent className="w-11/12 rounded-lg sm:max-w-[600px] min-h-fit max-h-svh pr-0">
-        <ScrollArea className="h-full pr-6">
+      <DialogContent className="w-11/12 rounded-lg sm:max-w-[600px] h-fit max-h-svh pr-0">
+        <ScrollArea className="max-h-[95svh] pr-6 py-4">
           <OrderDetails id={id} />
           <DialogFooter className="mt-3">
             <DialogClose asChild>
