@@ -28,7 +28,8 @@ export async function fetchFilteredOrders(query: string, currentPage: number) {
       WHERE (client ILIKE ${`%${query}%`}
       OR email ILIKE ${`%${query}%`})
       LIMIT ${ITEMS_PER_PAGE}
-      OFFSET ${offset};
+      OFFSET ${offset}
+      ORDER BY gamestore.orders.date DESC;
     `;
     
     return data.rows;
@@ -49,7 +50,8 @@ export async function fetchFilteredOrdersByState(query: string, state: string, c
       AND (client ILIKE ${`%${query}%`}
       OR email ILIKE ${`%${query}%`})
       LIMIT ${ITEMS_PER_PAGE}
-      OFFSET ${offset};
+      OFFSET ${offset}
+      ORDER BY gamestore.orders.date DESC;;
     `;
     
     return data.rows;
@@ -83,8 +85,7 @@ export async function fetchOrdersCount(query: string) {
       SELECT COUNT(*)
       FROM gamestore.orders
       WHERE (client ILIKE ${`%${query}%`}
-      OR email ILIKE ${`%${query}%`})
-      ORDER BY date DESC;
+      OR email ILIKE ${`%${query}%`});
     `;
     
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
@@ -103,8 +104,7 @@ export async function fetchOrdersCountByState(query: string, state: string) {
       FROM gamestore.orders
       WHERE (client ILIKE ${`%${query}%`}
       OR email ILIKE ${`%${query}%`})
-      AND status = ${state}
-      ORDER BY date DESC;
+      AND status = ${state};
     `;
     
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
