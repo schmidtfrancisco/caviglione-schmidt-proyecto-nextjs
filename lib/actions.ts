@@ -146,13 +146,14 @@ export async function createOrder(
 ) {
   const client = order.name + " " + order.lastname;
   const amountInCents = Math.trunc(order.total * 100);
+  const date = new Date().toLocaleDateString('es-AR');
 
   try {
     const result = await sql`
       INSERT INTO gamestore.orders
-      (payment_id, client, email, address, addressNumber, zip, status, total)
+      (payment_id, client, email, address, addressNumber, zip, total, status, date)
       VALUES
-      (${order.payment_id}, ${client}, ${order.email}, ${order.address}, ${order.addressNumber}, ${order.zip}, ${order.status}, ${amountInCents})
+      (${order.payment_id}, ${client}, ${order.email}, ${order.address}, ${order.addressNumber}, ${order.zip}, ${amountInCents}, ${order.status}, ${date})
       ON CONFLICT (payment_id) DO NOTHING
       RETURNING id
     `;

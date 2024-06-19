@@ -83,7 +83,8 @@ export async function fetchOrdersCount(query: string) {
       SELECT COUNT(*)
       FROM gamestore.orders
       WHERE (client ILIKE ${`%${query}%`}
-      OR email ILIKE ${`%${query}%`});
+      OR email ILIKE ${`%${query}%`})
+      ORDER BY date DESC;
     `;
     
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
@@ -102,7 +103,8 @@ export async function fetchOrdersCountByState(query: string, state: string) {
       FROM gamestore.orders
       WHERE (client ILIKE ${`%${query}%`}
       OR email ILIKE ${`%${query}%`})
-      AND status = ${state};
+      AND status = ${state}
+      ORDER BY date DESC;
     `;
     
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);

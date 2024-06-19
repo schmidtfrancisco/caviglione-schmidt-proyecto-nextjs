@@ -27,9 +27,9 @@ export type OrdersTable = {
 	address: string;
 	addressnumber: number;
 	zip: string;
-	status: OrderStatus;
 	total: number;
-	date: Date;
+	status: OrderStatus;
+	date: string;
 };
 
 export type GameOrdersTable = {
