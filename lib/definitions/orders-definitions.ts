@@ -20,7 +20,7 @@ export type Order = {
 };
 
 export type OrdersTable = {
-	id: string;
+	id: number;
 	payment_id: string;
 	client: string;
 	email: string;

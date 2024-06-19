@@ -59,7 +59,7 @@ export async function fetchFilteredOrdersByState(query: string, state: string, c
   }
 }
 
-export async function fetchOrderById(id: string) {
+export async function fetchOrderById(id: number) {
   noStore();
   try {
     const data = await sql<OrdersTable>`
@@ -113,7 +113,7 @@ export async function fetchOrdersCountByState(query: string, state: string) {
   }
 }
 
-export async function fetchOrderItems(orderId: string) {
+export async function fetchOrderItems(orderId: number) {
   noStore();
   try {
     const data = await sql<OrderItem>`

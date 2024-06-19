@@ -4,7 +4,7 @@ import NotFound from '@/app/admin/(Orders)/[id]/edit/not-found';
 import { fetchOrderById } from '@/lib/data/orders-data';
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const id = params.id;
+  const id = Number(params.id);
   const order = await fetchOrderById(id);
   if (!order) {
     NotFound();

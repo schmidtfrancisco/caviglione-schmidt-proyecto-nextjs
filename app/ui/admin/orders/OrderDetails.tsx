@@ -6,7 +6,7 @@ import OrderItem from "./OrderItem";
 import { Joystick } from "lucide-react";
 import { ListBulletIcon, UserCircleIcon, EnvelopeIcon, CalendarDaysIcon, TruckIcon } from "@heroicons/react/24/outline";
 
-export default async function OrderDetails({ id }: { id: string }) {
+export default async function OrderDetails({ id }: { id: number }) {
   const order = await fetchOrderById(id);
   const orderItems = await fetchOrderItems(id);
 

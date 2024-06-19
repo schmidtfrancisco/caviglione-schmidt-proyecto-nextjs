@@ -12,11 +12,11 @@ import { sql } from '@vercel/postgres';
 const FormSchema = z.object({
   id: z.string(),
   total: z.coerce
-		.number()
-		.gt(0, { message: 'Ingrese un monto mayor a $0.' }),
+    .number()
+    .gt(0, { message: 'Ingrese un monto mayor a $0.' }),
   status: z.enum(['Aprobado', 'Enviado', 'Entregado', 'Cancelado'], {
-		invalid_type_error: 'Por favor seleccione un estado',
-	}),
+    invalid_type_error: 'Por favor seleccione un estado',
+  }),
   date: z.string(),
 });
 
@@ -177,7 +177,7 @@ export async function createOrder(
   }
 }
 
-export async function updateOrder(id: string, prevState: State, formData: FormData) {
+export async function updateOrder(id: number, prevState: State, formData: FormData) {
   const validatedFields = UpdateOrder.safeParse({
     total: formData.get('total'),
     status: formData.get('status'),
@@ -190,24 +190,34 @@ export async function updateOrder(id: string, prevState: State, formData: FormDa
   }
   const { total, status } = validatedFields.data;
   const totalInCents = total * 100;
-	try {
-		await sql`
+  try {
+    await sql`
 			UPDATE gamestore.orders
 			SET total = ${totalInCents}, status = ${status}
 			WHERE id = ${id}
 		`;
-	} catch (error) {
-		return { message: 'Database Error: Failed to Update Order.' };
-	}
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Order.' };
+  }
   revalidatePath('/admin');
   redirect('/admin');
 }
 
-export async function deleteOrder(id: string) {
-	try {
-		await sql`DELETE FROM gamestore.orders WHERE id = ${id}`;
-	} catch (error) {
-		return { message: 'Database Error: Failed to Delete Invoice.' };
-	}
-  revalidatePath('/admin');
+export async function deleteOrder(id: number) {
+  console.log(id, 'borrando');
+  try {
+    await sql`
+      DELETE FROM gamestore.games_orders
+      WHERE order_id = ${id}
+    `;
+
+    await sql`
+      DELETE FROM gamestore.orders 
+      WHERE id = ${id}
+    `;
+    revalidatePath('/admin');
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Invoice.' };
+  }
+
 }

@@ -15,7 +15,7 @@ import {
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-export function UpdateOrder({ id }: { id: string }) {
+export function UpdateOrder({ id }: { id: number }) {
 	return (
 		<Link
 			href={'/admin/' + id + '/edit'}
@@ -27,7 +27,7 @@ export function UpdateOrder({ id }: { id: string }) {
 	);
 }
 
-export function DeleteOrder({ id }: { id: string }) {
+export function DeleteOrder({ id }: { id: number }) {
 	const deleteOrderWithId = () => {
 		deleteOrder(id);
 	};

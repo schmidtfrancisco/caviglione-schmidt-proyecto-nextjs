@@ -96,7 +96,7 @@ async function seedOrders(client) {
         client VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
         address VARCHAR(255) NOT NULL,
-        addressNumber VARCHAR(255) NOT NULL,
+        addressNumber INT NOT NULL,
         zip VARCHAR(255) NOT NULL,
         total INT NOT NULL,
         status order_status NOT NULL,

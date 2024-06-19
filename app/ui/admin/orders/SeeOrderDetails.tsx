@@ -4,7 +4,7 @@ import OrderDetails from './OrderDetails';
 import { DocumentTextIcon } from '@heroicons/react/24/outline';
 import { Button } from "@/components/ui/button";
 
-export function SeeOrderDetails({ id }: { id: string }) {
+export function SeeOrderDetails({ id }: { id: number }) {
   return (
     <Dialog>
       <DialogTrigger className='rounded-md border p-2 hover:bg-gray-100 flex items-center w-full'>

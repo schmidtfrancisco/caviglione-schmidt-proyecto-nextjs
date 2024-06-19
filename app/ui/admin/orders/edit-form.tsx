@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { OrderForm } from '@/lib/definitions/orders-definitions';
+import { OrderForm, OrdersTable } from '@/lib/definitions/orders-definitions';
 import {
   CheckIcon,
   CurrencyDollarIcon,
@@ -14,7 +14,7 @@ import { useFormState } from 'react-dom';
 
 
 
-export default function EditInvoiceForm({ order }: { order: OrderForm }) {
+export default function EditInvoiceForm({ order }: { order: OrdersTable }) {
 	const initialState = { message: "", errors: {} };
   const updateOrderWithId = updateOrder.bind(null, order.id);
   const [state, dispatch] = useFormState(updateOrderWithId, initialState);
