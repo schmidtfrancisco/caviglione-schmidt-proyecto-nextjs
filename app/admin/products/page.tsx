@@ -1,7 +1,7 @@
 import Header from "@/app/ui/admin/Header"
-import ProductsTable from "@/app/ui/admin/ProductsTable"
+import ProductsTable from "@/app/ui/admin/products/ProductsTable"
 import PagePagination from "@/app/ui/PagePagination";
-import { fetchGamesCount } from "@/lib/data";
+import { fetchGamesCount } from "@/lib/data/products-data";
 
 export default async function Component({ searchParams }: { 
 	searchParams: { 

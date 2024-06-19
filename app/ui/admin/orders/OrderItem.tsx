@@ -1,5 +1,5 @@
 import GameCldImage from "@/app/ui/juegos/GameCldImage";
-import { fetchGameById } from "@/lib/data";
+import { fetchGameById } from "@/lib/data/products-data";
 import { formatPrice } from "@/lib/utils";
 
 export default async function OrderItem({ gameId, quantity }: { gameId: string, quantity: number }) {

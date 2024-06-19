@@ -1,4 +1,4 @@
-import { fetchGameById } from "@/lib/data";
+import { fetchGameById } from "@/lib/data/products-data";
 import { formatPrice } from "@/lib/utils";
 
 export default async function PaymentOrderItem({gameId, quantity}: {gameId: string, quantity: number}) {

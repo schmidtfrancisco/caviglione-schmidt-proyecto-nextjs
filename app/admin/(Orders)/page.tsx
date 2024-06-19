@@ -1,6 +1,6 @@
 import Header from "@/app/ui/admin/Header"
 import PagePagination from "@/app/ui/PagePagination"
-import OrdersTable from "@/app/ui/admin/OrdersTable"
+import OrdersTable from "@/app/ui/admin/orders/OrdersTable"
 import { fetchOrdersCount, fetchOrdersCountByState } from "@/lib/data/orders-data"
 
 export default async function Component({searchParams} : {

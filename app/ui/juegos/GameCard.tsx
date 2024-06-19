@@ -31,6 +31,5 @@ export default function GameCard({ game }: { game: Game }) {
         </div>
       </div>
     </div>
-
   )
 }

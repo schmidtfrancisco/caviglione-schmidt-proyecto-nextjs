@@ -1,7 +1,7 @@
 import Search from "@/app/ui/Search";
 import GamesList from "@/app/ui/juegos/GamesList";
 import PagePagination from "../ui/PagePagination";
-import { fetchGamesCount } from "@/lib/data";
+import { fetchGamesCount } from "@/lib/data/products-data";
 import { outfit } from "../ui/fonts";
 import { cn } from "@/lib/utils";
 

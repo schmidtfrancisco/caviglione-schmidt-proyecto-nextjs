@@ -5,7 +5,7 @@ import { UpdateOrder, DeleteOrder } from "@/app/ui/admin/orders/options"
 import { SeeOrderDetails } from "@/app/ui/admin/orders/SeeOrderDetails"
 import { OrdersTable } from "@/lib/definitions/orders-definitions";
 
-export default function TableMenu({ order }: { order: OrdersTable }) {
+export default function OrdersTableMenu({ order }: { order: OrdersTable }) {
 
 	return (
 		<DropdownMenu>

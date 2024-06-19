@@ -1,9 +1,9 @@
-import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
-import TableMenu from "@/app/ui/admin/TableMenu"
-import { fetchFilteredGames } from "@/lib/data";
-import Image from "next/image";
+import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table, TableFooter } from "@/components/ui/table"
+import { fetchFilteredGames } from "@/lib/data/products-data";
 import { formatPrice } from "@/lib/utils";
-import GameCldImage from "../juegos/GameCldImage";
+import GameCldImage from "../../juegos/GameCldImage";
+import ProductsTableMenu from "@/app/ui/admin/products/ProductsTableMenu";
+import { CreateProduct } from "@/app/ui/admin/products/ProductOptions";
 
 export default async function ProductsTable(
 	{ query, currentPage }: { query: string, currentPage: number },
@@ -13,7 +13,6 @@ export default async function ProductsTable(
 
 	return (
 		<div className="border shadow-sm rounded-lg p-2">
-
 			<Table>
 				<TableHeader>
 					<TableRow>
@@ -39,13 +38,19 @@ export default async function ProductsTable(
 							<TableCell className="hidden md:table-cell">{game.category}</TableCell>
 							<TableCell className="hidden md:table-cell">{formatPrice(game.price)}</TableCell>
 							<TableCell className="text-right">
-								{//<TableMenu />
-								}
+								<ProductsTableMenu game={game}/>
 							</TableCell>
 						</TableRow>
 					))
 					}
 				</TableBody>
+				<TableFooter>
+					<TableRow>
+						<TableCell className="md:table-cell" colSpan={6}>
+							<CreateProduct/>
+						</TableCell>
+					</TableRow>
+				</TableFooter>
 			</Table>
 		</div>
 	)

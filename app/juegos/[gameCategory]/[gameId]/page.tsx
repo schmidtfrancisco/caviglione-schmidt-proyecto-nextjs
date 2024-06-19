@@ -12,7 +12,7 @@ import { Category, Game } from "@/lib/definitions";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import GameCategoryBadge from "@/app/ui/home/GameCategoryBadge";
-import { fetchGameById } from "@/lib/data";
+import { fetchGameById } from "@/lib/data/products-data";
 import AddToCartButton from "@/app/ui/AddToCartButton";
 import { formatPrice, getCategoryLink } from "@/lib/utils";
 import GameCldImage from "@/app/ui/juegos/GameCldImage";

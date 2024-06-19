@@ -1,5 +1,5 @@
 import GameCard from "@/app/ui/juegos/GameCard";
-import { fetchFilteredGames, fetchFilteredGamesByCategory } from "@/lib/data";
+import { fetchFilteredGames, fetchFilteredGamesByCategory } from "@/lib/data/products-data";
 
 import { Category, Game } from "@/lib/definitions";
 

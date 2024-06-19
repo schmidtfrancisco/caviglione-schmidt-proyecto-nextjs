@@ -1,10 +1,10 @@
-import TableMenu from "@/app/ui/admin/TableMenu"
 import { fetchFilteredOrders, fetchFilteredOrdersByState } from "@/lib/data/orders-data";
 import { formatPrice } from "@/lib/utils";
 import Status from "@/app/ui/admin/orders/status";
 import { DeleteOrder, UpdateOrder } from "@/app/ui/admin/orders/options";
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table, TableCaption } from "@/components/ui/table"
-import { SeeOrderDetails } from "./orders/SeeOrderDetails";
+import { SeeOrderDetails } from "./SeeOrderDetails"
+import OrdersTableMenu from "@/app/ui/admin/orders/OrdersTableMenu";
 
 export default async function OrdersTable(
 	{ query, state, currentPage }: { query: string, state: string, currentPage: number },
@@ -78,7 +78,7 @@ export default async function OrdersTable(
 								<TableCell className="text-center"><Status status={order.status} /></TableCell>
 								<TableCell className="text-right">{formatPrice(order.total)}</TableCell>
 								<TableCell className="text-right">
-									<TableMenu order={order} />
+									<OrdersTableMenu order={order} />
 								</TableCell>
 							</TableRow>
 						))
