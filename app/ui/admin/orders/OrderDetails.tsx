@@ -23,7 +23,7 @@ export default async function OrderDetails({ id }: { id: number }) {
           </div>
           <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
             <CalendarDaysIcon className="w-4 h-4" />
-            Realizado el {order.date}
+            Realizado el {order.date.toLocaleDateString('es-AR')}
           </div>
         </div>
         <Status status={order.status} />

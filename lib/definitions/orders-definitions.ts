@@ -29,7 +29,7 @@ export type OrdersTable = {
 	zip: string;
 	total: number;
 	status: OrderStatus;
-	date: string;
+	date: Date;
 };
 
 export type GameOrdersTable = {

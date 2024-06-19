@@ -43,7 +43,7 @@ export default async function OrdersTable(
 								<p className="text-lg font-medium">
 									{formatPrice(order.total)}
 								</p>
-								<p>{order.date}</p>
+								<p>{order.date.toLocaleDateString('es-AR')}</p>
 							</div>
 							<div className="flex justify-end gap-2">
 								<SeeOrderDetails id={order.id} />
@@ -73,7 +73,7 @@ export default async function OrdersTable(
 						{orders.map((order) => (
 							<TableRow key={order.id}>
 								<TableCell className="font-medium"># {order.id}</TableCell>
-								<TableCell className="hidden md:table-cell">{order.date}</TableCell>
+								<TableCell className="hidden md:table-cell">{order.date.toLocaleDateString('es-AR')}</TableCell>
 								<TableCell className="hidden md:table-cell">{order.client}</TableCell>
 								<TableCell className="text-center"><Status status={order.status} /></TableCell>
 								<TableCell className="text-right">{formatPrice(order.total)}</TableCell>
