@@ -26,8 +26,41 @@ export default async function Page({ params, searchParams }: PageProps) {
   const maxPage = await fetchGamesByCategoryCount(category, query);
 
   return (
-    <div className="p-1 md:p-6">
-      <section className="flex flex-col md:flex-row justify-center">
+    <div className="flex flex-col p-1 md:px-6">
+      <div className="flex flex-col w-5/6 md:flex-row justify-between md:items-end">
+        <h1 className={cn(outfit.className,
+          "text-5xl md:text-7xl font-bold md:text-left text-gray-700 flex items-center")}
+        >
+          {category}
+          <CldImage
+            src="GameStore/oso"
+            alt={category}
+            width={80}
+            height={80}
+            className="w-32 h-32"
+          />
+        </h1>
+        <Search placeholder={`Buscar ${category.toLowerCase()} ...`} className="hidden lg:flex ml-auto" />
+      </div>
+      <section className="flex flex-col md:flex-row w-full">
+        <div className="w-full md:w-1/4 md:grow-0 p-4">
+          <div className="flex items-center mb-6">
+            FILTROS
+          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-2 md:gap-4 md:p-6 md:w-3/5">
+          <GamesList query={query} currentPage={currentPage} category={category} />
+        </div>
+      </section>
+      <PagePagination maxPage={maxPage} />
+    </div>
+  )
+
+}
+
+/*
+
+  <section className="flex flex-col md:flex-row justify-center">
         <div className="md:basis-1/3 md:grow-0">
           <div className="flex items-center mb-6">
             <h1 className={cn(outfit.className,
@@ -50,8 +83,6 @@ export default async function Page({ params, searchParams }: PageProps) {
           <GamesList query={query} currentPage={currentPage} category={category} />
         </div>
       </section>
-      <PagePagination maxPage={maxPage} />
-    </div>
-  )
 
-}
+
+*/
