@@ -1,6 +1,7 @@
 
 import { CldImage } from "next-cloudinary"
 import Image from "next/image"
+import { notFound } from "next/navigation"
 import { outfit } from "@/components/fonts"
 import { cn, linkToCategory } from "@/lib/utils"
 import { Category } from "@/lib/definitions/products-definitions"
@@ -20,7 +21,11 @@ interface PageProps {
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
-  const category: Category = linkToCategory(params.gameCategory);
+  const category: Category | null = linkToCategory(params.gameCategory);
+
+  if (!category) {
+    notFound();
+  }
 
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.pag) || 1;

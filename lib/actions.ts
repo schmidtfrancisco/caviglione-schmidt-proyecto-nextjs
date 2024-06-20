@@ -63,7 +63,7 @@ export type PreferenceResponse = {
   preferenceId?: string
 }
 
-const onlyLetters = (value: string) => /^[A-Za-z]+$/.test(value);
+const onlyLetters = (value: string) => /^[A-Za-z\s]+$/.test(value);
 
 const PaymentFormSchema = z.object({
   name: z.string().refine(onlyLetters, {

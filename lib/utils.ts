@@ -28,7 +28,7 @@ export function linkToCategory(link: string) {
       return Category.VIDEOJUEGOS;
     case 'juguetes':
       return Category.JUGUETES;
-    default: return Category.JUEGOS_DE_MESA
+    default: return null
   }
 }
 

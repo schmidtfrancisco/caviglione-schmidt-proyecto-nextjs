@@ -69,7 +69,7 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
 
 export async function fetchGameById(id: string) {
   try {
-    
+
     const data = await sql`
       SELECT *
       FROM gamestore.games 
@@ -78,6 +78,11 @@ export async function fetchGameById(id: string) {
     `;
 
     const dbGame = data.rows[0];
+
+    if (!dbGame) {
+      return null;
+    }
+    
     const game: Game = {
       id: dbGame.id,
       name: dbGame.name,

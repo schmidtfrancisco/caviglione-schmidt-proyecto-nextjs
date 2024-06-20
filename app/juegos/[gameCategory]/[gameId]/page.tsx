@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { formatPrice, getCategoryLink } from "@/lib/utils";
 import { Category, Game } from "@/lib/definitions/products-definitions";
 import { fetchGameById } from "@/lib/data/products-data";
@@ -25,7 +26,11 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  const game: Game = await fetchGameById(params.gameId);
+  const game: Game | null = await fetchGameById(params.gameId);
+
+  if (!game) {
+    notFound();
+  }
 
   return (
     <div className="bg-white">
