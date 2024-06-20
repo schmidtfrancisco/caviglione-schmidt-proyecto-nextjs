@@ -1,8 +1,8 @@
 
+import { notFound } from "next/navigation";
 import { formatPrice } from "@/lib/utils";
 import { Category, Game } from "@/lib/definitions/products-definitions";
 import { fetchGameById } from "@/lib/data/products-data";
-import NotFound from "@/app/admin/products/[gameId]/edit/not-found";
 import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import { Input } from "@/components/ui/input";
@@ -20,9 +20,9 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
 	const id = params.gameId;
-  const game: Game = await fetchGameById(id);
+  const game: Game | null = await fetchGameById(id);
   if (!game) {
-    NotFound();
+    notFound();
   }
 	return(
 		<div className="bg-white">
