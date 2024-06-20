@@ -1,6 +1,6 @@
-import { sql } from '@vercel/postgres';
-import { Category, Game } from '@/lib/definitions';
+import { sql } from '@vercel/postgres'
 import { unstable_noStore as noStore } from 'next/cache';
+import { Category, Game } from '@/lib/definitions/products-definitions';
 
 export async function fetchGamesByCategory(category: Category) {
   noStore();

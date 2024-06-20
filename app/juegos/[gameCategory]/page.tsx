@@ -1,12 +1,13 @@
-import { outfit } from "@/app/ui/fonts"
-import GamesList from "@/app/ui/juegos/GamesList"
-import PagePagination from "@/app/ui/PagePagination"
-import Search from "@/app/ui/Search"
-import { fetchGamesByCategoryCount } from "@/lib/data/products-data"
-import { Category } from "@/lib/definitions"
-import { cn, linkToCategory } from "@/lib/utils"
-import { CldImage } from "next-cloudinary"
 
+import { CldImage } from "next-cloudinary"
+import Image from "next/image"
+import { outfit } from "@/components/fonts"
+import { cn, linkToCategory } from "@/lib/utils"
+import { Category } from "@/lib/definitions/products-definitions"
+import { fetchGamesByCategoryCount } from "@/lib/data/products-data" 
+import GamesList from "@/components/juegos/GamesList"
+import Search from "@/components/pagination-search/Search"
+import PagePagination from "@/components/pagination-search/PagePagination"
 
 interface PageProps {
   params: {
@@ -32,8 +33,8 @@ export default async function Page({ params, searchParams }: PageProps) {
           "text-5xl md:text-7xl font-bold md:text-left text-gray-700 flex items-center")}
         >
           {category}
-          <CldImage
-            src="GameStore/oso"
+          <Image
+            src="/oso.webp"
             alt={category}
             width={80}
             height={80}

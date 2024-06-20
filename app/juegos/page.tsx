@@ -1,9 +1,10 @@
-import Search from "@/app/ui/Search";
-import GamesList from "@/app/ui/juegos/GamesList";
-import PagePagination from "../ui/PagePagination";
-import { fetchGamesCount } from "@/lib/data/products-data";
-import { outfit } from "../ui/fonts";
+
+import { outfit } from "@/components/fonts";
 import { cn } from "@/lib/utils";
+import { fetchGamesCount } from "@/lib/data/products-data";
+import GamesList from "@/components/juegos/GamesList";
+import Search from "@/components/pagination-search/Search";
+import PagePagination from "@/components/pagination-search/PagePagination";
 
 
 export default async function Page(

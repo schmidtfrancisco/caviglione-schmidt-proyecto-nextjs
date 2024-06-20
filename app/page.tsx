@@ -1,11 +1,11 @@
-import CategoryCard from "./ui/home/CategoryCard";
-import Link from "next/link";
-import HomeImage from '@/app/ui/home/HomeImage'
-import { ArrowRightIcon, ArrowDownIcon } from "@heroicons/react/24/outline";
-import { buttonVariants } from "@/components/ui/button";
-import CategoryGamesSection from "./ui/home/CategoryGamesSection";
-import { Category } from "@/lib/definitions";
 
+import Link from "next/link";
+import { Category } from "@/lib/definitions/products-definitions";
+import HomeImage from '@/components/inicio/HomeImage'
+import CategoryCard from "@/components/inicio/CategoryCard";
+import CategoryGamesSection from "@/components/inicio/CategoryGamesSection";
+import { buttonVariants } from "@/components/ui/button";
+import { ArrowRightIcon, ArrowDownIcon } from "@heroicons/react/24/outline";
 
 export default async function Home() {
 
@@ -59,7 +59,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <CategoryCard category={Category.JUEGOS_DE_MESA} description="Para todas las edades" src="/juegos-de-mesa.png" />
+            <CategoryCard category={Category.JUEGOS_DE_MESA} description="Para todas las edades" src="/juegos-de-mesa.png "/>
             <CategoryCard category={Category.VIDEOJUEGOS} description="Para todas las plataformas" src="/videojuegos.png" />
             <CategoryCard category={Category.JUGUETES} description="Para los más pequeños" src="/juguetes.png" />
           </div>

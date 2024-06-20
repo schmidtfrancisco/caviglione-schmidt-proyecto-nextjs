@@ -1,8 +1,7 @@
 'use client';
 
 import { createContext, useReducer, useContext, useEffect, useState } from "react";
-import { Game } from "@/lib/definitions";
-import { CartItem } from "@/lib/definitions";
+import { Game, CartItem } from "@/lib/definitions/products-definitions";
 
 export type CartAction = AddToCart | RemoveFromCart | ClearCart | UpdateQuantity;
 

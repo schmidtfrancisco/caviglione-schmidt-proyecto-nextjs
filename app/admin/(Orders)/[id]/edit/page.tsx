@@ -1,7 +1,8 @@
-import Form from '@/app/ui/admin/orders/edit-form';
-import Breadcrumbs from '@/app/ui/admin/orders/breadcrumbs';
-import NotFound from '@/app/admin/(Orders)/[id]/edit/not-found';
+
 import { fetchOrderById } from '@/lib/data/orders-data';
+import NotFound from '@/app/admin/(Orders)/[id]/edit/not-found';
+import Form from '@/components/admin/pedidos/edit-form';
+import Breadcrumbs from '@/components/admin/pedidos/breadcrumbs';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);

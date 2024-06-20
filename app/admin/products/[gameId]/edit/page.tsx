@@ -1,15 +1,16 @@
-import NotFound from "@/app/admin/products/[gameId]/edit/not-found";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import GameCategoryBadge from "@/app/ui/home/GameCategoryBadge";
-import { fetchGameById } from "@/lib/data/products-data";
+
 import { formatPrice } from "@/lib/utils";
-import GameCldImage from "@/app/ui/juegos/GameCldImage";
+import { Category, Game } from "@/lib/definitions/products-definitions";
+import { fetchGameById } from "@/lib/data/products-data";
+import NotFound from "@/app/admin/products/[gameId]/edit/not-found";
+import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
+import GameCldImage from "@/components/juegos/GameCldImage";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Category } from "@/lib/definitions";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
 interface PageProps {
   params: {
@@ -19,7 +20,7 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
 	const id = params.gameId;
-  const game = await fetchGameById(id);
+  const game: Game = await fetchGameById(id);
   if (!game) {
     NotFound();
   }

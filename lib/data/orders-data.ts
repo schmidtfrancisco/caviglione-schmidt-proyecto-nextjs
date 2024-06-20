@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres';
-import { OrderItem, OrdersTable } from '@/lib/definitions/orders-definitions';
 import { unstable_noStore as noStore } from 'next/cache';
+import { OrderItem, OrdersTable } from '@/lib/definitions/orders-definitions';
 
 const ITEMS_PER_PAGE = 10;
 export async function fetchOrders() {

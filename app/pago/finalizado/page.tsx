@@ -1,13 +1,12 @@
 
-import SuccessPayment from "@/app/ui/pago/finalizado/SuccessPayment";
-import { createOrder } from "@/lib/actions";
-import { existsOrderWithPaymentId } from "@/lib/data/orders-data";
-import { Order } from "@/lib/definitions/orders-definitions";
-import { mapToOrderItems } from "@/lib/utils";
-import { MercadoPagoConfig, Payment } from "mercadopago";
 import Link from "next/link";
-import PaymentOrderItem from "@/app/ui/pago/finalizado/PaymentOrderItem";
-import { formatPrice } from "@/lib/utils";
+import { MercadoPagoConfig, Payment } from "mercadopago";
+import { mapToOrderItems, formatPrice } from "@/lib/utils";
+import { Order } from "@/lib/definitions/orders-definitions";
+import { existsOrderWithPaymentId } from "@/lib/data/orders-data";
+import { createOrder } from "@/lib/actions";
+import PaymentOrderItem from "@/components/pago/finalizado/PaymentOrderItem";
+import SuccessPayment from "@/components/pago/finalizado/SuccessPayment";
 
 //paymentid 1324031525
 

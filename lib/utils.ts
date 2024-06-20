@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { CartItem, Category } from "@/lib/definitions";
+import { CartItem, Category } from "@/lib/definitions/products-definitions";
 import { OrderItem } from "@/lib/definitions/orders-definitions";
 import { Items } from "mercadopago/dist/clients/commonTypes";
 

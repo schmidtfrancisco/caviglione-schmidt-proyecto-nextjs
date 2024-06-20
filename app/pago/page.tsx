@@ -1,10 +1,9 @@
 'use client'
 
-import PaymentSection from "@/app/ui/pago/PaymentSection";
-import ResumeCart from "@/app/ui/pago/ResumeCart";
 import { useState } from "react";
-import { PaymentContext } from "../ui/pago/PaymentContext";
-
+import { PaymentContext } from "@/components/pago/PaymentContext";
+import PaymentSection from "@/components/pago/PaymentSection";
+import ResumeCart from "@/components/pago/ResumeCart";
 
 export default function Page() {
   const [activeStep, setActiveStep] = useState<number>(1);
