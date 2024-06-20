@@ -1,9 +1,14 @@
 import { formatPrice } from "@/lib/utils";
+import { Game } from "@/lib/definitions/products-definitions";
 import { fetchGameById } from "@/lib/data/products-data";
 import GameCldImage from "@/components/juegos/GameCldImage";
 
 export default async function OrderItem({ gameId, quantity }: { gameId: string, quantity: number }) {
-  const game = await fetchGameById(gameId);
+  const game: Game | null = await fetchGameById(gameId);
+
+  if (!game) {
+    return null;
+  }
 
   return (
     <div className="grid gap-4 md:px-8">
