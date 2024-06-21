@@ -63,8 +63,9 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
 }
 
 export async function fetchGameById(id: string) {
+  noStore();
+  
   try {
-
     const data = await sql`
       SELECT *
       FROM gamestore.games 
@@ -95,9 +96,46 @@ export async function fetchGameById(id: string) {
   }
 } 
 
-export async function fetchGames() { 
-  try { 
+export async function fetchGameByName(name: string) {
+  noStore();
+  
+  try {
+    const data = await sql`
+      SELECT *
+      FROM gamestore.games 
+      WHERE name ILIKE ${`%${name}%`} OR
+      description ILIKE ${`%${name}%`}
+      LIMIT 1;
+    `;
 
+    const dbGame = data.rows[0];
+
+    if (!dbGame) {
+      return null;
+    }
+    
+    const game: Game = {
+      id: dbGame.id,
+      name: dbGame.name,
+      description: dbGame.description,
+      images_url: JSON.parse(dbGame.images_url),
+      category: dbGame.category,
+      price: dbGame.price
+    };
+
+    return game;
+
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch game');
+  }
+}
+
+export async function fetchGames() { 
+  noStore();
+
+  try { 
+    
     const data = await sql`
       SELECT *
       FROM gamestore.games;
