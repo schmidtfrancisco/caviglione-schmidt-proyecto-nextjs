@@ -6,8 +6,37 @@ import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation'
 import { signIn } from '@/auth';
-import { AuthError } from 'next-auth';
+import { AuthError, CredentialsSignin } from 'next-auth';
 import { Order } from '@/lib/definitions/orders-definitions';
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    const formDataObject = Object.fromEntries(formData.entries());
+    await signIn('credentials', {
+      ...formDataObject,
+      redirectTo: '/admin',
+    }
+    );
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CallbackRouteError':
+          if (error.cause?.err instanceof CredentialsSignin) {
+            return 'El email y/o la contraseña ingresados no son correctos.';
+          }
+          return 'Ocurrio un error inesperado.';
+        case 'CredentialsSignin':
+          return 'El email y/o la contraseña ingresados no son correctos.';
+        default:
+          return 'Ocurrio un error inesperado.';
+      }
+    }
+    throw error;
+  }
+}
 
 const FormSchema = z.object({
   id: z.string(),
@@ -30,25 +59,6 @@ export type State = {
   message?: string | null;
 };
 
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  try {
-    await signIn('credentials', formData);
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
-    }
-    throw error;
-  }
-}
 
 export type FormState = {
   errors?: {
@@ -223,10 +233,10 @@ export async function deleteOrder(id: number) {
 }
 
 export async function deleteProduct(id: string) {
-	try {
-		await sql`DELETE FROM gamestore.games WHERE id = ${id}`;
-	} catch (error) {
-		return { message: 'Database Error: Failed to Delete Order.' };
-	}
-	revalidatePath('/admin');
+  try {
+    await sql`DELETE FROM gamestore.games WHERE id = ${id}`;
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Order.' };
+  }
+  revalidatePath('/admin');
 }

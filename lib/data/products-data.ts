@@ -6,9 +6,7 @@ export async function fetchGamesByCategory(category: Category) {
   noStore();
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log('Category:', category);
-
+  
     const data = await sql`
       SELECT *
       FROM gamestore.games 
@@ -38,9 +36,6 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
   noStore();
 
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log('Category:', category);
-
     const data = await sql`
       SELECT *
       FROM gamestore.games 
