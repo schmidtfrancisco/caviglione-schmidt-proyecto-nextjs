@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 
-export default function Search({ placeholder, className }: { placeholder?: string, className?: string }) {
+export default function Search({ placeholder, className, inputClassName }: { placeholder?: string, className?: string, inputClassName?: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -27,9 +27,9 @@ export default function Search({ placeholder, className }: { placeholder?: strin
 
   return (
     <div className={`relative ${className ? className : 'ml-auto'}`}>
-      <MagnifyingGlassIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
+      <MagnifyingGlassIcon className="absolute left-2.5 top-3 h-4 w-4 text-gray-500 dark:text-gray-400" />
       <Input
-        className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px] bg-gray-50"
+        className={`pl-8 ${inputClassName}`}
         placeholder={`${placeholder || 'Buscar...'}`} 
         type="search"
         onChange={(ev) => {
