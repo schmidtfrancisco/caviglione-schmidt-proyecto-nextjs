@@ -63,6 +63,9 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
 }
 
 export async function fetchGameById(id: string) {
+
+  //timeout to simulate slow network
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   noStore();
   
   try {
@@ -169,6 +172,11 @@ export async function fetchFilteredGames(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   noStore();
+
+  
+  //timeout to simulate slow network
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   try {
     const data = await sql`
       SELECT *
@@ -204,6 +212,11 @@ export async function fetchFilteredGamesByCategory(
 ) { 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   noStore();
+
+  
+  //timeout to simulate slow network
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
 
   try {
     const data = await sql`

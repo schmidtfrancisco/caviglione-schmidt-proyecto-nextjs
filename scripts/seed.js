@@ -148,6 +148,3 @@ main().catch((err) => {
   );
 });
 
-function toJSON(arr) {
-  return JSON.stringify(arr);
-}

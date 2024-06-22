@@ -8,7 +8,7 @@ import GameCldImage from "@/components/juegos/GameCldImage";
 export default function GameCard({ game }: { game: Game }) {
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-gray-950">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-gray-100">
       <div className="flex items-center gap-2">
         <Link href={`${getCategoryLink(game.category)}/${game.id}`}>
           <GameCldImage

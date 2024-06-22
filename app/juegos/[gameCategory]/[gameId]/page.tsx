@@ -1,12 +1,12 @@
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatPrice, getCategoryLink } from "@/lib/utils";
 import { Game } from "@/lib/definitions/products-definitions";
 import { fetchGameById } from "@/lib/data/products-data";
-import AddToCartButton from "@/components/cart/AddToCartButton";
 import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
 import GameCldImage from "@/components/juegos/GameCldImage";
-import { Button } from "@/components/ui/button";
+import GamesButtonsSection from "@/components/juegos/GamesButtonsSection";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import {
   Breadcrumb,
@@ -25,6 +25,8 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
+
+
   const game: Game | null = await fetchGameById(params.gameId);
 
   if (!game) {
@@ -32,8 +34,9 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
+
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         <div className="lg:max-w-lg lg:self-stretch">
           <Breadcrumb>
             <BreadcrumbList>
@@ -44,13 +47,13 @@ export default async function Page({ params }: PageProps) {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-              <BreadcrumbLink asChild>
+                <BreadcrumbLink asChild>
                   <Link href="/juegos">Juegos</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-              <BreadcrumbLink asChild>
+                <BreadcrumbLink asChild>
                   <Link href={getCategoryLink(game.category)}>{game.category}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
@@ -70,7 +73,7 @@ export default async function Page({ params }: PageProps) {
                 {formatPrice(game.price)}
               </p>
               <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
-                <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs"/>
+                <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs" />
               </div>
             </div>
             <div className="mt-4 space-y-6">
@@ -105,8 +108,7 @@ export default async function Page({ params }: PageProps) {
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
           <div>
             <div className="mt-10 flex flex-col gap-5">
-              <AddToCartButton game={game} size={"lg"} quantityOption={true} buttonClassName="min-w-[182px]"/>
-              <Button size="lg" className="lg:max-w-[310px] m-w">Comprar</Button>
+              <GamesButtonsSection game={game}/>
             </div>
           </div>
         </div>

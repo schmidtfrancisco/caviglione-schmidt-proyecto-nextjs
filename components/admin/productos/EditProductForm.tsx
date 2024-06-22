@@ -9,8 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Breadcrumbs from "@/components/admin/pedidos/breadcrumbs";
-import EditProductForm from '@/components/admin/productos/EditProductForm'
-import { updateProduct, updateProductImages } from '@/lib/actions';
+import { updateProduct } from '@/lib/actions';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
@@ -27,19 +26,11 @@ export default function EditGameForm({ game }: { game: Game }) {
 	const initialState = { message: "", errors: {} };
   const updateGameWithId = updateProduct.bind(null, game.id);
   const [state, dispatch] = useFormState(updateGameWithId, initialState);
-	const [checkboxStates, setCheckboxStates] = useState<boolean[]>(new Array(game.images_url.length).fill(true));
-
-  const handleCheckboxChange = (index: number) => {
-    setCheckboxStates(prevStates => {
-      const newStates = [...prevStates];
-      newStates[index] = !newStates[index];
-      return newStates;
-    });
-  };
+	
   return (
     <form action={dispatch}>
       <div className="bg-white">
-				<div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+				<div className="mx-auto max-w-2xl px-4 py-10 sm:px-6  lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
 					<div className="lg:col-span-2">
 						<div className="mt-10">
 							<Input
@@ -58,6 +49,7 @@ export default function EditGameForm({ game }: { game: Game }) {
 											className="font-medium text-gray-900 max-w-32 peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
 											id="price"
 											name="price"
+											step="0.01"
 											type="number"
 											defaultValue={game.price/100}
 											placeholder='Precio'
@@ -101,19 +93,23 @@ export default function EditGameForm({ game }: { game: Game }) {
                   <div key={index} className="flex items-center space-x-2">
 										<Checkbox
 											id={`delete-${index}`}
-											checked={checkboxStates[index]}
-											onChange={() => handleCheckboxChange(index)}
+											name="images"
+											value={imgUrl}
+											defaultChecked
 										/>
 											<label
 												htmlFor={`delete-${index}`}
 												className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 											>
-												Eliminar imagen N°{index + 1}?
+												Imagen {index + 1} / {game.images_url.length}
 											</label>
 									</div>
                 ))}
 							</div>
 							<div className="mt-6 flex items-center">
+							<Button className="w-full" type="submit">
+					Confirmar
+				</Button>
 							</div>
 						</section>
 					</div>
@@ -121,9 +117,10 @@ export default function EditGameForm({ game }: { game: Game }) {
 						<div className="aspect-w-3 aspect-h-4 rounded-lg">
 							<Carousel className="rounded-lg overflow-hidden">
 								<CarouselContent>
-									{game.images_url.map((image) => (
-										<CarouselItem key={image}>
+									{game.images_url.map((image, index) => (
+										<CarouselItem key={image} className='text-center'>
 											<GameCldImage src={image} />
+											<span className='text-sm text-gray-500'>{index + 1} / {game.images_url.length}</span>
 										</CarouselItem>
 									))}
 								</CarouselContent>
@@ -134,21 +131,14 @@ export default function EditGameForm({ game }: { game: Game }) {
 									<ChevronRightIcon className="h-6 w-6" />
 								</CarouselNext>
 							</Carousel>
-							<Button className="mt-5">
-								Eliminar imagen
-							</Button>
-							<Button className="mt-5">
-								Eliminar todas las imágenes
-							</Button>
+							
 							<Button className="mt-5">
 								Añadir nuevas imágenes
 							</Button>
 						</div>
 					</div>
 				</div>
-				<Button className="w-full" type="submit" onClick={() => updateProductImages(game.id, checkboxStates)}>
-					Confirmar
-				</Button>
+				
 			</div>
     </form>
   );

@@ -239,7 +239,6 @@ export async function updateOrder(id: number, prevState: State, formData: FormDa
 }
 
 export async function deleteOrder(id: number) {
-  console.log(id, 'borrando');
   try {
     await sql`
       DELETE FROM gamestore.games_orders
@@ -279,8 +278,35 @@ export async function updateProduct(id: string, prevState: ProductState, formDat
       message: 'Campos inválidos. Error al actualizar el producto.',
     };
   }
+  const images_url = formData.getAll('images');
+
+  console.log(images_url);
+
   const { name, description, category, price } = validatedFields.data;
   const totalInCents = price * 100;
+  try {
+    await sql`
+			UPDATE gamestore.games
+			SET name = ${name}, description = ${description}, category = ${category}, price = ${totalInCents}, images_url = ARRAY[${toJSON(images_url)}]
+			WHERE id = ${id}
+		`;
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Product.' };
+  }
+
+
+  revalidatePath('/admin/products');
+  redirect('/admin/products');
+}
+
+
+function toJSON(arr: any[]) {
+  return JSON.stringify(arr);
+}
+
+/*
+export async function updateProductImages(id: string, arr: any[]) {
+  
   try {
     await sql`
 			UPDATE gamestore.games
@@ -290,11 +316,6 @@ export async function updateProduct(id: string, prevState: ProductState, formDat
   } catch (error) {
     return { message: 'Database Error: Failed to Update Product.' };
   }
-  revalidatePath('/admin/products');
-  redirect('/admin/products');
-}
-
-export async function updateProductImages(id: string, arr: any[]) {
 	for(let i = 0; i < arr.length; i++) {
 		if(arr[i]) {
 			await sql`
@@ -305,3 +326,4 @@ export async function updateProductImages(id: string, arr: any[]) {
 		}
 	}
 }
+*/

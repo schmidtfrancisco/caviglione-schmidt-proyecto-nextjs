@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { notFound } from "next/navigation"
 import { outfit } from "@/components/fonts"
 import { cn, linkToCategory } from "@/lib/utils"
@@ -7,6 +8,7 @@ import GamesList from "@/components/juegos/GamesList"
 import Search from "@/components/pagination-search/Search"
 import PagePagination from "@/components/pagination-search/PagePagination"
 import GameCldImage from "@/components/juegos/GameCldImage"
+import { GameListSkeleton } from "@/components/skeletons"
 
 interface PageProps {
   params: {
@@ -58,7 +60,9 @@ export default async function Page({ params, searchParams }: PageProps) {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-2 md:gap-4 md:p-6 lg:w-3/5">
-          <GamesList query={query} currentPage={currentPage} category={category} />
+          <Suspense fallback={<GameListSkeleton />}>
+            <GamesList query={query} currentPage={currentPage} category={category} />
+          </Suspense>
         </div>
       </section>
       <PagePagination maxPage={maxPage} />
@@ -102,32 +106,3 @@ function CategoryLogoImage({ category }: { category: Category }) {
       )
   }
 }
-
-/*
-
-  <section className="flex flex-col md:flex-row justify-center">
-        <div className="md:basis-1/3 md:grow-0">
-          <div className="flex items-center mb-6">
-            <h1 className={cn(outfit.className,
-              "text-5xl md:text-7xl font-bold text-center md:text-left text-gray-700 flex items-center mx-auto")}
-            >
-              <span>{category}</span>
-              <CldImage
-              src="GameStore/oso"
-              alt={category}
-              width={80}
-              height={80}
-              className="w-32 h-32"
-            />
-            </h1>
-            
-          </div>
-        </div>
-        <div className="grid grid-cols-1 gap-2 md:p-6 md:w-3/4">
-          <Search placeholder={`Buscar ${category.toLowerCase()} ...`} />
-          <GamesList query={query} currentPage={currentPage} category={category} />
-        </div>
-      </section>
-
-
-*/
