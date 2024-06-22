@@ -1,11 +1,10 @@
-
 import Link from "next/link";
 import { Category } from "@/lib/definitions/products-definitions";
-import HomeImage from '@/components/inicio/HomeImage'
 import CategoryCard from "@/components/inicio/CategoryCard";
 import CategoryGamesSection from "@/components/inicio/CategoryGamesSection";
 import { buttonVariants } from "@/components/ui/button";
 import { ArrowRightIcon, ArrowDownIcon } from "@heroicons/react/24/outline";
+import GameCldImage from "@/components/juegos/GameCldImage";
 
 export default async function Home() {
 
@@ -41,7 +40,7 @@ export default async function Home() {
               </Link>
             </div>
           </div>
-          <HomeImage/>
+          <GameCldImage src="GameStore/home" alt="Home Image" width={600} height={600}/>
         </div>
       </section>
 
@@ -59,9 +58,9 @@ export default async function Home() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <CategoryCard category={Category.JUEGOS_DE_MESA} description="Para todas las edades" src="/juegos-de-mesa.png "/>
-            <CategoryCard category={Category.VIDEOJUEGOS} description="Para todas las plataformas" src="/videojuegos.png" />
-            <CategoryCard category={Category.JUGUETES} description="Para los más pequeños" src="/juguetes.png" />
+            <CategoryCard category={Category.JUEGOS_DE_MESA} description="Para todas las edades" src="GameStore/juegosdemesa"/>
+            <CategoryCard category={Category.VIDEOJUEGOS} description="Para todas las plataformas" src="GameStore/videojuegos" />
+            <CategoryCard category={Category.JUGUETES} description="Para los más pequeños" src="GameStore/juguetes" />
           </div>
         </div>
       </section>

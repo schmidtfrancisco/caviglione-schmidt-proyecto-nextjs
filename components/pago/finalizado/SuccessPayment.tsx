@@ -7,7 +7,7 @@ import { formatPrice } from "@/lib/utils";
 import { OrderItem } from "@/lib/definitions/orders-definitions";
 import { useCart } from "@/lib/hooks/useCart";
 import { useEffect } from "react";
-import { CldImage } from "next-cloudinary";
+import GameCldImage from "@/components/juegos/GameCldImage";
 
 export default function SuccessPayment() {
 
@@ -25,14 +25,14 @@ export default function SuccessPayment() {
 
     <div className="flex flex-col items-center">
       <div className="flex items-center justify-between w-full bg-sky-700 pl-2 pr-6">
-        <CldImage
+        <GameCldImage
           src="GameStore/oso"
           alt="oso"
           width={100}
           height={100}
         />
         <h1 className="text-3xl font-bold mb-2 text-white">¡Gracias por tu compra!</h1>
-        <CldImage
+        <GameCldImage
           src="GameStore/auto"
           alt="auto"
           width={100}

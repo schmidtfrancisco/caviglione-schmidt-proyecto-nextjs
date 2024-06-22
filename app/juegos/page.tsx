@@ -1,4 +1,3 @@
-
 import { outfit } from "@/components/fonts";
 import { cn } from "@/lib/utils";
 import { fetchGamesCount } from "@/lib/data/products-data";

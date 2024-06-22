@@ -138,7 +138,7 @@ export default function PaymentDataForm() {
         <Button variant="outline" onClick={() => setActiveStep(1)}>
           Volver
         </Button>
-        <Button type="submit" className="md:min-w-[200px]" disabled={isLoading}>
+        <Button type="submit" disabled={isLoading}>
           {isLoading ? <span className="loading loading-dots loading-sm"></span> : "Continuar"}
         </Button>
       </div>

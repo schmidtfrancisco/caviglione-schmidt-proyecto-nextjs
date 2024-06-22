@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import GameCldImage from '@/components/juegos/GameCldImage';
  
 export default function NotFound() {
   return (
     <div className="flex h-[85dvh] w-full flex-col items-center justify-center gap-8 px-4 md:px-6">
       <div className="flex max-w-[400px] flex-col items-center justify-center">
-        <Image 
-          src="/404-image.avif"
+        <GameCldImage
+          src="GameStore/404"
           alt="404 image"
           width={250}
           height={250}

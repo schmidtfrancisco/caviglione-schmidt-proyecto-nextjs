@@ -12,7 +12,7 @@ import {
   ArrowRightCircleIcon, CreditCardIcon, XMarkIcon
 } from '@heroicons/react/24/outline';
 
-export default function EditInvoiceForm({ order }: { order: OrdersTable }) {
+export default function EditOrderForm({ order }: { order: OrdersTable }) {
 	const initialState = { message: "", errors: {} };
   const updateOrderWithId = updateOrder.bind(null, order.id);
   const [state, dispatch] = useFormState(updateOrderWithId, initialState);

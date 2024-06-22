@@ -1,6 +1,3 @@
-
-import { CldImage } from "next-cloudinary"
-import Image from "next/image"
 import { notFound } from "next/navigation"
 import { outfit } from "@/components/fonts"
 import { cn, linkToCategory } from "@/lib/utils"
@@ -9,6 +6,7 @@ import { fetchGamesByCategoryCount } from "@/lib/data/products-data"
 import GamesList from "@/components/juegos/GamesList"
 import Search from "@/components/pagination-search/Search"
 import PagePagination from "@/components/pagination-search/PagePagination"
+import GameCldImage from "@/components/juegos/GameCldImage"
 
 interface PageProps {
   params: {
@@ -74,8 +72,8 @@ function CategoryLogoImage({ category }: { category: Category }) {
   switch (category) {
     case Category.JUEGOS_DE_MESA:
       return (
-        <Image
-          src="/dados.webp"
+        <GameCldImage
+          src="GameStore/dados"
           alt={category}
           width={450}
           height={450}
@@ -84,8 +82,8 @@ function CategoryLogoImage({ category }: { category: Category }) {
       )
     case Category.JUGUETES:
       return (
-        <Image
-          src="/oso.webp"
+        <GameCldImage
+          src="GameStore/oso"
           alt={category}
           width={480}
           height={480}
@@ -94,8 +92,8 @@ function CategoryLogoImage({ category }: { category: Category }) {
       )
     case Category.VIDEOJUEGOS:
       return (
-        <Image
-          src="/joystick.png"
+        <GameCldImage
+          src="GameStore/joystick"
           alt={category}
           width={512}
           height={512}

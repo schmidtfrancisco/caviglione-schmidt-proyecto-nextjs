@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CldImage } from "next-cloudinary";
 import { cn, formatPrice } from "@/lib/utils";
 import { useCart } from "@/lib/hooks/useCart";
 import CartItem from "@/components/cart/CartItem"
@@ -11,6 +10,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem,
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/outline"
+import GameCldImage from "@/components/juegos/GameCldImage";
 
 export default function Cart() {
   const [isClient, setIsClient] = useState(false)
@@ -54,7 +54,7 @@ export default function Cart() {
         <DropdownMenuSeparator />
         {(cartCount === 0) ? (
           <div className="flex flex-col items-center justify-between w-full gap-2">
-            <CldImage
+            <GameCldImage
               src="GameStore/emptycart"
               alt="No hay items en el carrito"
               width={200}

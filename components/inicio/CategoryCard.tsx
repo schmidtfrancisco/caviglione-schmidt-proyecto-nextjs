@@ -1,10 +1,7 @@
-'use client'
-
 import Link from "next/link";
-import Image from "next/image";
-import { CldImage } from "next-cloudinary";
 import { Category } from "@/lib/definitions/products-definitions";
 import { getCategoryLink } from "@/lib/utils";
+import GameCldImage from "@/components/juegos/GameCldImage";
 
 export default function CategoryCard({ category, description, src }: { category: Category, description: string, src: string }) {
   return (
@@ -13,11 +10,9 @@ export default function CategoryCard({ category, description, src }: { category:
         <span className="sr-only">Explorar</span>
       </Link>
       <div className="h-[200px] relative w-full">
-      <Image
+      <GameCldImage
         src={src}
         alt={category}
-        fill
-        objectFit="cover"
         className="group-hover:scale-105 transition-transform duration-300 ease-in-out object-cover"
       />
       </div>

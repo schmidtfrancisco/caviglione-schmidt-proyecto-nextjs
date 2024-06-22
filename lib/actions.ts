@@ -8,6 +8,7 @@ import { redirect } from 'next/navigation'
 import { signIn } from '@/auth';
 import { AuthError, CredentialsSignin } from 'next-auth';
 import { Order } from '@/lib/definitions/orders-definitions';
+import { Category } from '@/lib/definitions/products-definitions';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -38,7 +39,7 @@ export async function authenticate(
   }
 }
 
-const FormSchema = z.object({
+const OrderFormSchema = z.object({
   id: z.string(),
   total: z.coerce
     .number()
@@ -49,12 +50,35 @@ const FormSchema = z.object({
   date: z.string(),
 });
 
-const UpdateOrder = FormSchema.omit({ id: true, date: true });
+const ProductFormSchema = z.object({
+  id: z.string(),
+	name: z.string(),
+	description: z.string(),
+  category: z.enum([Category.JUEGOS_DE_MESA, Category.VIDEOJUEGOS, Category.JUGUETES], {
+    invalid_type_error: 'Por favor seleccione una categoría',
+  }),
+	price: z.coerce
+    .number()
+    .gt(0, { message: 'Ingrese un monto mayor a $0.' }),
+});
+
+const UpdateOrder = OrderFormSchema.omit({ id: true, date: true });
+const UpdateProduct = ProductFormSchema.omit({ id: true });
 
 export type State = {
   errors?: {
     total?: string[];
     status?: string[];
+  };
+  message?: string | null;
+};
+
+export type ProductState = {
+  errors?: {
+		name?: string[];
+		description?: string[];
+		category?: string[];
+		price?: string[];
   };
   message?: string | null;
 };
@@ -239,4 +263,45 @@ export async function deleteProduct(id: string) {
     return { message: 'Database Error: Failed to Delete Order.' };
   }
   revalidatePath('/admin');
+}
+
+export async function updateProduct(id: string, prevState: ProductState, formData: FormData) {
+  const validatedFields = UpdateProduct.safeParse({
+		name: formData.get('name'),
+		description: formData.get('description'),
+		category: formData.get('category'),
+    price: formData.get('price'),
+  });
+	console.log(validatedFields.data?.price)
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Campos inválidos. Error al actualizar el producto.',
+    };
+  }
+  const { name, description, category, price } = validatedFields.data;
+  const totalInCents = price * 100;
+  try {
+    await sql`
+			UPDATE gamestore.games
+			SET name = ${name}, description = ${description}, category = ${category}, price = ${totalInCents}
+			WHERE id = ${id}
+		`;
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Product.' };
+  }
+  revalidatePath('/admin/products');
+  redirect('/admin/products');
+}
+
+export async function updateProductImages(id: string, arr: any[]) {
+	for(let i = 0; i < arr.length; i++) {
+		if(arr[i]) {
+			await sql`
+				UPDATE gamestore.games
+				SET images_url[${i}] = NULL
+				WHERE id = ${id}
+			`;
+		}
+	}
 }

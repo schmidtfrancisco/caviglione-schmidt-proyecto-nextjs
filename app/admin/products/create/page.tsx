@@ -1,14 +1,35 @@
-
+"use client"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { FileUpload } from "@/components/admin/productos/DragAndDrop"
+import { CldUploadButton, CldUploadWidgetProps, CloudinaryUploadWidgetInfo, CloudinaryUploadWidgetResults } from 'next-cloudinary';
+import Breadcrumbs from '@/components/admin/pedidos/breadcrumbs'
 
 export default function Component() {
+	const handleSuccess = (results: CloudinaryUploadWidgetResults) => {
+		console.log("HOLA HANDLESUCCES" + results);
+		if(results.info && typeof results.info !== 'string') {
+			console.log('Public ID', results.info.public_id);
+		}
+  };
+
   return (
-    <Card className="w-full max-w-2xl">
+		<div className="p-4">
+      <Breadcrumbs
+        breadcrumbs={[
+          { label: 'Productos', href: '/admin/products' },
+          {
+            label: 'Añadir producto',
+            href: `/admin/products/create`,
+            active: true,
+          },
+        ]}
+      />
+      <Card className="w-full max-w-2xl">
       <CardHeader>
         <CardTitle>Añadir producto</CardTitle>
         <CardDescription>Completa el formulario para añadir un nuevo producto.</CardDescription>
@@ -46,12 +67,24 @@ export default function Component() {
           </div>
           <div className="grid gap-2">
             <Label>Product Images</Label>
-            <div className="flex h-40 items-center justify-center rounded-lg border-2 border-dashed border-muted bg-muted/40 transition-colors hover:border-primary hover:bg-muted">
-              <div className="grid gap-2 text-center">
-                <UploadIcon className="mx-auto h-8 w-8 text-muted-foreground" />
-                <p className="text-sm text-muted-foreground">Drag and drop or click to upload up to 5 images</p>
-              </div>
-            </div>
+						<CldUploadButton
+							uploadPreset="GameStore"
+							options={{
+								multiple: true,
+								maxFiles: 5
+							}}
+							onSuccess={(results) => {
+								console.log("SUCCESS " + results);
+								const info = results.info as CloudinaryUploadWidgetInfo;
+								console.log('Public ID', info.public_id);
+							}}
+						/>
+						{/**
+						<FileUpload/>
+						 */}
+						<button type="submit">
+							AAAAAAAAAAA
+						</button>
           </div>
         </form>
       </CardContent>
@@ -61,26 +94,6 @@ export default function Component() {
         </Button>
       </CardFooter>
     </Card>
-  )
-}
-
-function UploadIcon({...props}) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="17 8 12 3 7 8" />
-      <line x1="12" x2="12" y1="3" y2="15" />
-    </svg>
+    </div>
   )
 }

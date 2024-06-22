@@ -1,8 +1,7 @@
-
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatPrice, getCategoryLink } from "@/lib/utils";
-import { Category, Game } from "@/lib/definitions/products-definitions";
+import { Game } from "@/lib/definitions/products-definitions";
 import { fetchGameById } from "@/lib/data/products-data";
 import AddToCartButton from "@/components/cart/AddToCartButton";
 import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
