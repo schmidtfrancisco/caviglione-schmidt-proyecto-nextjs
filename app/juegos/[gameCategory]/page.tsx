@@ -1,10 +1,11 @@
 import { outfit } from "@/components/fonts";
+import FiltersSection from "@/components/juegos/FiltersSection";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import GamesList from "@/components/juegos/GamesList";
 import PagePagination from "@/components/pagination-search/PagePagination";
 import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
-import { fetchGamesByCategoryCount } from "@/lib/data/products-data";
+import { fetchGamesByCategoryCount } from "@/lib/data/products-category-data";
 import { Category } from "@/lib/definitions/products-definitions";
 import { cn, linkToCategory } from "@/lib/utils";
 import { notFound } from "next/navigation";
@@ -17,6 +18,7 @@ interface PageProps {
   searchParams: {
     query?: string
     pag?: string
+    sort?: string
   }
 }
 
@@ -27,6 +29,7 @@ export default async function Page({ params, searchParams }: PageProps) {
   }
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.pag) || 1;
+  const sort = searchParams?.sort || 'none';
   const maxPage = await fetchGamesByCategoryCount(category, query);
   return (
     <div className="flex flex-col p-1 md:px-6">
@@ -53,12 +56,12 @@ export default async function Page({ params, searchParams }: PageProps) {
               className="xl:hidden"
               inputClassName="bg-gray-100"
             />
-            FILTROS
+            <FiltersSection maxPrice={50000}/>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-2 md:gap-4 md:p-6 lg:w-3/5">
           <Suspense fallback={<GameListSkeleton />}>
-            <GamesList query={query} currentPage={currentPage} category={category} sort="none"/>
+            <GamesList query={query} currentPage={currentPage} category={category} sort={sort} min={0} max={50000}/>
           </Suspense>
         </div>
       </section>

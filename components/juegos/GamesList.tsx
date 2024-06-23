@@ -1,16 +1,26 @@
 import GameCard from "@/components/juegos/GameCard";
-import { fetchFilteredGamesByCategory, fetchFilteredGamesSort } from "@/lib/data/products-data";
+import { fetchFilteredGamesSorted} from "@/lib/data/products-data";
+import { fetchFilteredGamesByCategorySorted } from "@/lib/data/products-category-data";
 import { Category, Game } from "@/lib/definitions/products-definitions";
+import { notFound } from "next/navigation";
 
 export default async function GamesList(
-  { query, currentPage, category, sort }: { query: string, currentPage: number, category?: Category, sort: string },
+  { query, currentPage, category, sort, min, max }: 
+  { query: string, currentPage: number, category?: Category, sort: string, min: number, max: number },
 ) {
-  let games: Game[];
+
+  let games: Game[] | undefined = [];
+
   if (category) {
-    games = await fetchFilteredGamesByCategory(category, query, currentPage);
+    games = await fetchFilteredGamesByCategorySorted(category, query, currentPage, sort);
   } else {
-    games = await fetchFilteredGamesSort(query, sort, currentPage);
+    games = await fetchFilteredGamesSorted(query, currentPage, sort, min, max);
   }
+ 
+  if (games === undefined) {
+    notFound();
+  }
+
   return (
     <>
       {games.map((game) => (

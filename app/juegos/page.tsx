@@ -4,11 +4,9 @@ import GamesList from "@/components/juegos/GamesList";
 import PagePagination from "@/components/pagination-search/PagePagination";
 import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
-import { fetchGamesCount } from "@/lib/data/products-data";
+import { fetchGamesCount, fetchGamesMaxPrice } from "@/lib/data/products-data";
 import { cn } from "@/lib/utils";
 import { Suspense } from "react";
-
-import Image from "next/image";
 import FiltersSection from "@/components/juegos/FiltersSection";
 export default async function Page(
   { searchParams }: {
@@ -16,13 +14,18 @@ export default async function Page(
       query?: string;
       pag?: string;
       sort?: string;
+      min?: string;
+      max?: string;
     }
   }
 ) {
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.pag) || 1;
   const sort = searchParams?.sort || 'none';
-  const maxPage = await fetchGamesCount(query);
+  const min = Number(searchParams?.min) || 0;
+  const max = Number(searchParams?.max) || 50000;
+  const maxPage = await fetchGamesCount(query, min, max);
+  const maxPrice = await fetchGamesMaxPrice(query);
   return (
     <div className="p-1 md:p-6">
       <section className="flex flex-col md:flex-row justify-center">
@@ -38,7 +41,7 @@ export default async function Page(
               height={100}
             />
           </h1>
-          <FiltersSection />
+          <FiltersSection maxPrice={maxPrice}/>
         </div>
         <div className="grid grid-cols-1 gap-2 md:p-6 md:w-3/4">
           <Search
@@ -47,7 +50,7 @@ export default async function Page(
             className="flex ml-auto min-w-[300px]"
           />
           <Suspense fallback={<GameListSkeleton />}>
-            <GamesList query={query} currentPage={currentPage} sort={sort} />
+            <GamesList query={query} currentPage={currentPage} sort={sort} min={min} max={max}/>
           </Suspense>
         </div>
       </section>
