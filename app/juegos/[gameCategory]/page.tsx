@@ -61,7 +61,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         </div>
         <div className="grid grid-cols-1 gap-2 md:gap-4 md:p-6 lg:w-3/5">
           <Suspense fallback={<GameListSkeleton />}>
-            <GamesList query={query} currentPage={currentPage} category={category} />
+            <GamesList query={query} currentPage={currentPage} category={category} sort="none"/>
           </Suspense>
         </div>
       </section>

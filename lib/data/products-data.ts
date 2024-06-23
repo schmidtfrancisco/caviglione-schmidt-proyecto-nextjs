@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres'
+import { QueryResult, QueryResultRow, sql } from '@vercel/postgres'
 import { unstable_noStore as noStore } from 'next/cache';
 import { Category, Game } from '@/lib/definitions/products-definitions';
 
@@ -144,16 +144,7 @@ export async function fetchGames() {
       FROM gamestore.games;
     `;
 
-    const games: Game[] = data.rows.map((dbGame) => {
-      return {
-        id: dbGame.id,
-        name: dbGame.name,
-        description: dbGame.description,
-        images_url: JSON.parse(dbGame.images_url),
-        category: dbGame.category,
-        price: dbGame.price
-      };
-    });
+    const games: Game[] = mapToGameArray(data.rows);
 
     return games;
 
@@ -167,15 +158,33 @@ export async function fetchGames() {
 const ITEMS_PER_PAGE = 10;
 export async function fetchFilteredGames(
   query: string,
+  sort: string,
+  currentPage: number
+) {
+  console.log("Hola, sort es: ", sort);
+  noStore();
+
+  switch (sort) {
+    case 'name_asc':
+      return fetchFilteredGamesAsc(query, "name", currentPage);
+    case 'name_desc':
+      return fetchFilteredGamesDesc(query, "name", currentPage);
+    case 'price_asc':
+      return fetchFilteredGamesAsc(query, "price", currentPage);
+    case 'price_desc':
+      return fetchFilteredGamesDesc(query, "price", currentPage);
+    default:
+      return fetchFilteredGamesNone(query, currentPage);
+  }
+} 
+
+export async function fetchFilteredGamesNone(
+  query: string,
   currentPage: number
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   noStore();
-
-  
-  //timeout to simulate slow network
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const data = await sql`
@@ -186,16 +195,66 @@ export async function fetchFilteredGames(
       OFFSET ${offset};
     `;
 
-    const games: Game[] = data.rows.map((dbGame) => {
-      return {
-        id: dbGame.id,
-        name: dbGame.name,
-        description: dbGame.description,
-        images_url: JSON.parse(dbGame.images_url),
-        category: dbGame.category,
-        price: dbGame.price
-      };
-    });
+    const games: Game[] = mapToGameArray(data.rows);
+    return games;
+
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch games');
+  }
+} 
+
+export async function fetchFilteredGamesAsc(
+  query: string,
+  sort: string,
+  currentPage: number
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  noStore();
+
+  console.log("Ascending: ", sort);
+
+  try {
+    const data = await sql`
+      SELECT *
+      FROM gamestore.games
+      WHERE name ILIKE ${`%${query}%`}
+      ORDER BY ${sort} ASC
+      LIMIT ${ITEMS_PER_PAGE}
+      OFFSET ${offset};
+    `;
+
+    const games: Game[] = mapToGameArray(data.rows);
+    return games;
+
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch games');
+  }
+} 
+
+export async function fetchFilteredGamesDesc(
+  query: string,
+  sort: string,
+  currentPage: number
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  noStore();
+  console.log("Descending: ", sort);
+
+  try {
+    const data = await sql`
+      SELECT *
+      FROM gamestore.games
+      WHERE name ILIKE ${`%${query}%`}
+      ORDER BY ${sort} DESC
+      LIMIT ${ITEMS_PER_PAGE}
+      OFFSET ${offset};
+    `;
+
+    const games: Game[] = mapToGameArray(data.rows);
 
     return games;
 
@@ -204,6 +263,7 @@ export async function fetchFilteredGames(
     throw new Error('Failed to fetch games');
   }
 } 
+
 
 export async function fetchFilteredGamesByCategory(
   category: Category,
@@ -228,16 +288,7 @@ export async function fetchFilteredGamesByCategory(
       OFFSET ${offset};
     `;
 
-    const games: Game[] = data.rows.map((dbGame) => {
-      return {
-        id: dbGame.id,
-        name: dbGame.name,
-        description: dbGame.description,
-        images_url: JSON.parse(dbGame.images_url),
-        category: dbGame.category,
-        price: dbGame.price
-      };
-    });
+    const games: Game[] = mapToGameArray(data.rows);
 
     return games;
 
@@ -285,3 +336,15 @@ export async function fetchGamesByCategoryCount(category: Category, query: strin
   }
 }
 
+function mapToGameArray(data: QueryResultRow[]): Game[] {
+  return data.map((dbGame: any) => {
+    return {
+      id: dbGame.id,
+      name: dbGame.name,
+      description: dbGame.description,
+      images_url: JSON.parse(dbGame.images_url),
+      category: dbGame.category,
+      price: dbGame.price
+    };
+  });
+}
