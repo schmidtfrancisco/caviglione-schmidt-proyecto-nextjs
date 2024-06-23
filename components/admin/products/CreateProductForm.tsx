@@ -1,16 +1,18 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Textarea } from "@/components/ui/textarea"
-import { createProduct } from "@/lib/actions"
-import { Category } from "@/lib/definitions/products-definitions"
-import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary"
-import { useState } from "react"
-import { useFormState } from "react-dom"
+import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import { createProduct } from "@/lib/actions";
+import { Category } from "@/lib/definitions/products-definitions";
+import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
+import { useState } from "react";
+import { useFormState } from "react-dom";
 
 export default function CreateProductForm() {
 	const initialState = { message: "", errors: {} };
@@ -42,28 +44,41 @@ export default function CreateProductForm() {
 							<RadioGroup defaultValue={Category.JUEGOS_DE_MESA} name="category" id="category">
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value={Category.JUEGOS_DE_MESA} id="opt1"/>
-									<Label htmlFor="opt1">Juego de mesa</Label>
+									<GameCategoryBadge
+										category={Category.JUEGOS_DE_MESA}
+										className="text-white px-2 py-1 rounded-full text-xs"
+									/>
 								</div>
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value={Category.VIDEOJUEGOS} id="opt2"/>
-									<Label htmlFor="opt2">Videojuego</Label>
+									<GameCategoryBadge
+										category={Category.VIDEOJUEGOS}
+										className="text-white px-2 py-1 rounded-full text-xs"
+									/>
 								</div>
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value={Category.JUGUETES} id="opt3"/>
-									<Label htmlFor="opt3">Juguete</Label>
+									<GameCategoryBadge
+										category={Category.JUGUETES}
+										className="text-white px-2 py-1 rounded-full text-xs"
+									/>
 								</div>
 							</RadioGroup>
 						</div>
 						<div className="flex flex-col">
 							<div className="grid gap-2">
 								<Label htmlFor="price">Precio</Label>
-								<Input
-									id="price"
-									name="price"
-									type="number"
-									placeholder="Ingrese el valor del productor"
-									aria-describedby="amount-error"
-								/>
+								<div className="relative">
+									<Input
+										id="price"
+										name="price"
+										type="number"
+										placeholder="Ingrese el valor del productor"
+										aria-describedby="amount-error"
+										className="peer block py-2 pl-10"
+									/>
+									<CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
+								</div>
 							</div>
 							<div id="amount-error" aria-live="polite" aria-atomic="true">
 								{state.errors?.price &&
