@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { ChevronDownIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 
 const SORT_OPTIONS = [
@@ -25,23 +25,23 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
   const { replace } = useRouter();
 
   const [priceFilter, setPriceFilter] = useState({
-    min: searchParams.get('min') ? Number(searchParams.get('min')) : 0,
-    max: searchParams.get('max') ? Number(searchParams.get('max')) : maxPrice
+    min: searchParams.get("min") ? Number(searchParams.get("min")) : 0,
+    max: searchParams.get("max") ? Number(searchParams.get("max")) : maxPrice
   });
 
   const handleFilter = useDebouncedCallback((min: number, max: number) => {
     const params = new URLSearchParams(searchParams);
-    params.set('pag', '1');
+    params.set("pag", "1");
 
     if (min !== 0) {
-      params.set('min', min.toString());
+      params.set("min", min.toString());
     } else {
-      params.delete('min');
+      params.delete("min");
     }
     if (max !== 0) {
-      params.set('max', max.toString());
+      params.set("max", max.toString());
     } else {
-      params.delete('max');
+      params.delete("max");
     }
 
     replace(`${pathname}?${params.toString()}`);
@@ -53,11 +53,11 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
   }
   const handleSort = (sort: string) => {
     const params = new URLSearchParams(searchParams);
-    params.set('pag', '1');
-    if (sort !== 'none') {
-      params.set('sort', sort);
+    params.set("pag", "1");
+    if (sort !== "none") {
+      params.set("sort", sort);
     } else {
-      params.delete('sort');
+      params.delete("sort");
     }
 
     replace(`${pathname}?${params.toString()}`);
@@ -116,7 +116,7 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
                       onChange={(e) => handleChange(Number(e.target.value), priceFilter.max)}
                       className="pl-8 pr-3 py-2 rounded-md border border-gray-300 "
                     />
-                    <CurrencyDollarIcon className="absolute top-1/2 left-1 w-5 h-5 -translate-y-1/2 text-gray-400" />
+                    <CurrencyDollarIcon className="absolute top-1/2 left-1 w-5 h-5 -translate-y-1/2 text-gray-400"/>
                   </div>
                   <div className="relative">
                     <Input
@@ -126,7 +126,7 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
                       onChange={(e) => handleChange(priceFilter.min, Number(e.target.value))}
                       className="pl-8 pr-3 py-2 rounded-md border border-gray-300 "
                     />
-                    <CurrencyDollarIcon className="absolute top-1/2 left-1 w-5 h-5 -translate-y-1/2 text-gray-400" />
+                    <CurrencyDollarIcon className="absolute top-1/2 left-1 w-5 h-5 -translate-y-1/2 text-gray-400"/>
                   </div>
                 </div>
                 <Slider
@@ -139,10 +139,8 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
               </div>
             </CollapsibleContent>
           </Collapsible>
-
         </div>
       </div>
     </div>
-
   )
 }

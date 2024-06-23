@@ -22,7 +22,7 @@ export function EditProduct({ id }: { id: string }) {
 			className="rounded-md border p-2 hover:bg-gray-100 flex items-center w-full"
 		>
 			<PencilIcon className="w-5 md:mr-2" />
-			<span className="hidden md:block ml-1 text-sm">Editar</span>
+			<span className="md:block ml-1 text-sm">Editar</span>
 		</Link>
 	);
 }
@@ -33,9 +33,9 @@ export function DeleteProduct({ id }: { id: string }) {
 	};
 	return (
 		<AlertDialog>
-			<AlertDialogTrigger className='rounded-md border p-2 hover:bg-gray-100 flex items-center w-full'>
+			<AlertDialogTrigger className="rounded-md border p-2 hover:bg-gray-100 flex items-center w-full">
 				<TrashIcon className="w-5 md:mr-2"/>
-				<span className="hidden md:block ml-1 text-sm">Eliminar</span>
+				<span className="md:block ml-1 text-sm">Eliminar</span>
 			</AlertDialogTrigger>
 			<AlertDialogContent>
 				<AlertDialogHeader>
@@ -65,7 +65,7 @@ export function CreateProduct() {
   return (
     <Link href="/admin/products/create" className="flex items-center justify-center w-full">
 			<PlusIcon className="w-5 md:mr-2"/>
-			<span className="hidden md:block ml-1 text-sm">Crear</span>
+			<span className="md:block ml-1 text-sm">Crear</span>
 		</Link>
   )
 }

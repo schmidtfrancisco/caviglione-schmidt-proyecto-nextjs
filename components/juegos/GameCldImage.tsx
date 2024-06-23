@@ -18,3 +18,18 @@ export default function GameCldImage(
 		/>
 	)
 }
+
+export function CategoryCldImage({src, alt = "", style, className}:
+{src: string, alt?: string, style?: any, className?: string}
+) {
+	return (
+		<CldImage
+			width={600}
+			height={600}
+			src={src}
+			alt={alt}
+			className={className}
+			style={style}
+		/>
+	)
+}
