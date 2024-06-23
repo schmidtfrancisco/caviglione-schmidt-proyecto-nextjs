@@ -78,30 +78,6 @@ export async function fetchGames() {
 
 const ITEMS_PER_PAGE = 10;
 
-export async function fetchFilteredGamesSorted(
-  query: string,
-  currentPage: number,
-  sort: string,
-  min: number,
-  max: number
-) {
-  const minInCents = min * 100;
-  const maxInCents = max * 100;
-  if (sort == "none") {
-    return fetchFilteredGames(query, currentPage);
-  } else if (sort == "name_asc") {
-    return fetchFilteredGamesNameAsc(query, currentPage, minInCents, maxInCents);
-  } else if (sort == "name_desc") {
-    return fetchFilteredGamesNameDesc(query, currentPage, minInCents, maxInCents);
-  } else if (sort == "price_asc") {
-    return fetchFilteredGamesPriceAsc(query, currentPage, minInCents, maxInCents);
-  } else if (sort == "price_desc") {
-    return fetchFilteredGamesPriceDesc(query, currentPage, minInCents, maxInCents);
-  }
-}
-
-
-
 export async function fetchFilteredGames(
   query: string,
   currentPage: number
@@ -125,7 +101,54 @@ export async function fetchFilteredGames(
     throw new Error('Failed to fetch games');
   }
 } 
+export async function fetchFilteredGamesSorted(
+  query: string,
+  currentPage: number,
+  sort: string,
+  min: number,
+  max: number
+) {
+  const minInCents = min * 100;
+  const maxInCents = max * 100;
+  if (sort == "none") {
+    return fetchFilteredGamesPrice(query, currentPage, minInCents, maxInCents);
+  } else if (sort == "name_asc") {
+    return fetchFilteredGamesNameAsc(query, currentPage, minInCents, maxInCents);
+  } else if (sort == "name_desc") {
+    return fetchFilteredGamesNameDesc(query, currentPage, minInCents, maxInCents);
+  } else if (sort == "price_asc") {
+    return fetchFilteredGamesPriceAsc(query, currentPage, minInCents, maxInCents);
+  } else if (sort == "price_desc") {
+    return fetchFilteredGamesPriceDesc(query, currentPage, minInCents, maxInCents);
+  }
+}
 
+export async function fetchFilteredGamesPrice(
+  query: string,
+  currentPage: number,
+  min: number,
+  max: number
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  noStore();
+  try {
+    const data = await sql`
+      SELECT *
+      FROM gamestore.games
+      WHERE name ILIKE ${`%${query}%`}
+      AND price BETWEEN ${min} AND ${max}
+      LIMIT ${ITEMS_PER_PAGE}
+      OFFSET ${offset};
+    `;
+
+    const games: Game[] = mapToGameArray(data.rows);
+    return games;
+
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch games');
+  }
+} 
 export async function fetchFilteredGamesNameAsc(
   query: string,
   currentPage: number,
@@ -259,12 +282,14 @@ export async function fetchGamesCount(query: string) {
 
 export async function fetchGamesCountPrice(query: string, min: number, max: number) {
   noStore();
+  const minInCents = min * 100;
+  const maxInCents = max * 100;
   try {
     const data = await sql` 
       SELECT COUNT(*)
       FROM gamestore.games
       WHERE name ILIKE ${`%${query}%`}
-      AND price BETWEEN ${min} AND ${max};
+      AND price BETWEEN ${minInCents} AND ${maxInCents};
     `;
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;

@@ -12,7 +12,7 @@ export default async function GamesList(
   let games: Game[] | undefined = [];
 
   if (category) {
-    games = await fetchFilteredGamesByCategorySorted(category, query, currentPage, sort);
+    games = await fetchFilteredGamesByCategorySorted(category, query, currentPage, sort, min, max);
   } else {
     games = await fetchFilteredGamesSorted(query, currentPage, sort, min, max);
   }

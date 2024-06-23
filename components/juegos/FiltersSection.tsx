@@ -70,12 +70,12 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
 
   return (
 
-    <div className="container grid gap-8 items-start px-4 md:px-0">
-      <div className="bg-white rounded-lg shadow-sm">
-        <div className="p-6 border-b">
+    <div className="container grid gap-8 items-start px-4 sm:p-0 lg:px-6">
+      <div className="bg-white rounded-lg md:shadow-sm">
+        <div className="p-2 md:p-6 border-b">
           <h3 className="text-lg font-semibold">Filtros</h3>
         </div>
-        <div className="space-y-6 p-2">
+        <div className="space-y-6 p-2 lg:p-6">
           <Collapsible defaultOpen>
             <CollapsibleTrigger className="flex items-center justify-between w-full text-base font-medium">
               <span>Ordenar por</span>
