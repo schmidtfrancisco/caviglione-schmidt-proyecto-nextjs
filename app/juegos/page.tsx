@@ -1,15 +1,15 @@
-import { Suspense } from "react";
 import { outfit } from "@/components/fonts";
-import { cn } from "@/lib/utils";
-import { fetchGamesCount } from "@/lib/data/products-data";
+import GameCldImage from "@/components/juegos/GameCldImage";
 import GamesList from "@/components/juegos/GamesList";
-import Search from "@/components/pagination-search/Search";
 import PagePagination from "@/components/pagination-search/PagePagination";
+import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
+import { fetchGamesCount } from "@/lib/data/products-data";
+import { cn } from "@/lib/utils";
+import { Suspense } from "react";
+
 import Image from "next/image";
 import FiltersSection from "@/components/juegos/FiltersSection";
-
-
 export default async function Page(
   { searchParams }: {
     searchParams: {
@@ -23,7 +23,6 @@ export default async function Page(
   const currentPage = Number(searchParams?.pag) || 1;
   const sort = searchParams?.sort || 'none';
   const maxPage = await fetchGamesCount(query);
-
   return (
     <div className="p-1 md:p-6">
       <section className="flex flex-col md:flex-row justify-center">
@@ -32,8 +31,8 @@ export default async function Page(
             "text-5xl lg:text-7xl font-bold text-center md:text-left text-gray-700 flex items-center justify-center")}
           >
             Juegos
-            <Image
-              src="/juegos.png"
+            <GameCldImage
+              src="GameStore/juegos"
               alt="Juegos"
               width={100}
               height={100}

@@ -1,6 +1,6 @@
-import { sql } from '@vercel/postgres';
-import { unstable_noStore as noStore } from 'next/cache';
-import { OrderItem, OrdersTable } from '@/lib/definitions/orders-definitions';
+import { OrderItem, OrdersTable } from "@/lib/definitions/orders-definitions";
+import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
 
 const ITEMS_PER_PAGE = 10;
 export async function fetchOrders() {
@@ -10,11 +10,10 @@ export async function fetchOrders() {
       SELECT *
       FROM gamestore.orders;
     `;
-    
     return data.rows;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch orders');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch orders");
   }
 }
 
@@ -32,11 +31,10 @@ export async function fetchFilteredOrders(query: string, currentPage: number) {
       OFFSET ${offset}
       ;
     `;
-    
     return data.rows;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch orders');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch orders");
   }
 }
 
@@ -55,11 +53,10 @@ export async function fetchFilteredOrdersByState(query: string, state: string, c
       OFFSET ${offset}
       ;
     `;
-    
     return data.rows;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch orders');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch orders");
   }
 }
 
@@ -72,11 +69,10 @@ export async function fetchOrderById(id: number) {
       WHERE id = ${id}
       LIMIT 1;
     `;
-    
     return data.rows[0];
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch order');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch order");
   }
 }
 
@@ -89,12 +85,11 @@ export async function fetchOrdersCount(query: string) {
       WHERE (client ILIKE ${`%${query}%`}
       OR email ILIKE ${`%${query}%`});
     `;
-    
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch orders count');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch orders count");
   }
 }
 
@@ -108,12 +103,11 @@ export async function fetchOrdersCountByState(query: string, state: string) {
       OR email ILIKE ${`%${query}%`})
       AND status = ${state};
     `;
-    
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch orders count');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch orders count");
   }
 }
 
@@ -125,11 +119,10 @@ export async function fetchOrderItems(orderId: number) {
       FROM gamestore.games_orders
       WHERE order_id = ${orderId};
     `;
-    
     return data.rows;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch order items');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch order items");
   }
 }
 
@@ -141,10 +134,9 @@ export async function existsOrderWithPaymentId(paymentId: string) {
       WHERE payment_id = ${paymentId}
       LIMIT 1;
     `;
-    
     return data.rows.length > 0;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch order');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch order");
   }
 }

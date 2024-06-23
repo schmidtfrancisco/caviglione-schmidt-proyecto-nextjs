@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { formatPrice } from "@/lib/utils";
-import { Game } from "@/lib/definitions/products-definitions";
-import { useCart } from "@/lib/hooks/useCart";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Game } from "@/lib/definitions/products-definitions";
+import { useCart } from "@/lib/hooks/useCart";
+import { formatPrice } from "@/lib/utils";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { MinusIcon, PlusIcon } from "lucide-react";
 

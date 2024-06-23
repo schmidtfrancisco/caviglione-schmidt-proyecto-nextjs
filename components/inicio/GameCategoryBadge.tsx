@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
-import { Category } from "@/lib/definitions/products-definitions";
 import { Badge } from "@/components/ui/badge";
+import { Category } from "@/lib/definitions/products-definitions";
+import { cn } from "@/lib/utils";
 
 export default function GameCategoryBadge(
   { category, className = '' }: 

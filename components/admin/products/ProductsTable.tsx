@@ -1,17 +1,14 @@
-
-import { formatPrice } from "@/lib/utils";
-import { fetchFilteredGames } from "@/lib/data/products-data";
+import { CreateProduct } from "@/components/admin/products/ProductOptions";
+import ProductsTableMenu from "@/components/admin/products/ProductsTableMenu";
 import GameCldImage from "@/components/juegos/GameCldImage";
-import ProductsTableMenu from "@/components/admin/productos/ProductsTableMenu";
-import { CreateProduct } from "@/components/admin/productos/ProductOptions";
-import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table, TableFooter } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { fetchFilteredGames } from "@/lib/data/products-data";
+import { formatPrice } from "@/lib/utils";
 
 export default async function ProductsTable(
 	{ query, currentPage }: { query: string, currentPage: number },
 ) {
-
 	const games = await fetchFilteredGames(query, currentPage);
-
 	return (
 		<div className="border shadow-sm rounded-lg p-2">
 			<Table>

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from 'use-debounce';
@@ -10,21 +10,16 @@ export default function Search({ placeholder, className, inputClassName }: { pla
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-
-
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
-    params.set('pag', '1');
+    params.set("pag", "1");
     if (term) {
-      params.set('query', term);
+      params.set("query", term);
     } else {
-      params.delete('query');
+      params.delete("query");
     }
-
     replace(`${pathname}?${params.toString()}`);
-
   }, 500);
-
   return (
     <div className={`relative ${className ? className : 'ml-auto'}`}>
       <MagnifyingGlassIcon className="absolute left-2.5 top-3 h-4 w-4 text-gray-500 dark:text-gray-400" />
@@ -35,9 +30,8 @@ export default function Search({ placeholder, className, inputClassName }: { pla
         onChange={(ev) => {
           handleSearch(ev.target.value)
         }}
-        defaultValue={searchParams.get('query')?.toString()}
+        defaultValue={searchParams.get("query")?.toString()}
       />
     </div>
   )
 }
-

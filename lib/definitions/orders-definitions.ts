@@ -4,7 +4,7 @@ export type OrderItem = {
 	quantity: number;
 };
 
-export type OrderStatus = 'Aprobado' | 'Enviado' | 'Entregado' | 'Cancelado';
+export type OrderStatus = "Aprobado" | "Enviado" | "Entregado" | "Cancelado";
 
 export type Order = {
 	payment_id: string;

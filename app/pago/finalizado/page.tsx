@@ -1,12 +1,11 @@
-
-import Link from "next/link";
-import { MercadoPagoConfig, Payment } from "mercadopago";
-import { mapToOrderItems, formatPrice } from "@/lib/utils";
-import { Order } from "@/lib/definitions/orders-definitions";
-import { existsOrderWithPaymentId } from "@/lib/data/orders-data";
-import { createOrder } from "@/lib/actions";
 import PaymentOrderItem from "@/components/pago/finalizado/PaymentOrderItem";
 import SuccessPayment from "@/components/pago/finalizado/SuccessPayment";
+import { createOrder } from "@/lib/actions";
+import { existsOrderWithPaymentId } from "@/lib/data/orders-data";
+import { Order } from "@/lib/definitions/orders-definitions";
+import { formatPrice, mapToOrderItems } from "@/lib/utils";
+import { MercadoPagoConfig, Payment } from "mercadopago";
+import Link from "next/link";
 
 //paymentid 1324031525
 
@@ -19,32 +18,27 @@ interface SearchParams {
   payment_type: string;
   merchant_order_id: string;
   preference_id: string;
-
 }
 
 export default async function Page({ searchParams }: { searchParams: SearchParams }) {
   const paymentId = searchParams.payment_id;
-
   const existPayment = await existsOrderWithPaymentId(paymentId);
   if (existPayment) {
     return (
       <h1> EXISTEEE</h1>
     )
   }
-
-  const client = new MercadoPagoConfig({ accessToken: "TEST-8968989067718937-060722-adfaca3b8c9a39eda01ba86f17a1c264-686744806" });
-
+  const client = new MercadoPagoConfig({
+		accessToken: "TEST-8968989067718937-060722-adfaca3b8c9a39eda01ba86f17a1c264-686744806"
+	});
   try {
     const payment = await new Payment(client).get({ id: paymentId });
-
     const amount = payment.transaction_amount!!;
     const payerMp = payment.payer!!;
     const addittionalInfo = payment.additional_info!!;
     const payer = addittionalInfo.payer!!;
     const address = payer.address!!;
-
     const orderItems = mapToOrderItems(addittionalInfo.items!!);
-
     const order: Order = {
       payment_id: paymentId,
       name: payer.first_name!!,
@@ -57,9 +51,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
       status: "Aprobado",
       total: amount,
     };
-
     const orderId = await createOrder(order);
-
     return (
       <div className="flex flex-col items-center justify-center p-4">
         <div className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
@@ -103,7 +95,6 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
         </div>
       </div>
     )
-
   } catch (error) {
     return (
       <h1> ERROR</h1>

@@ -1,16 +1,8 @@
-
-import { notFound } from "next/navigation";
-import { Category, Game } from "@/lib/definitions/products-definitions";
+import Breadcrumbs from "@/components/admin/orders/Breadcrumbs";
+import EditProductForm from '@/components/admin/products/EditProductForm';
 import { fetchGameById } from "@/lib/data/products-data";
-import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
-import GameCldImage from "@/components/juegos/GameCldImage";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import Breadcrumbs from "@/components/admin/pedidos/breadcrumbs";
-import EditProductForm from '@/components/admin/productos/EditProductForm'
+import { Game } from "@/lib/definitions/products-definitions";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -28,9 +20,12 @@ export default async function Page({ params }: PageProps) {
 		<div className="p-4">
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Productos', href: '/admin/products' },
           {
-            label: 'Editar producto',
+						label: "Productos",
+						href: "/admin/products"
+					},
+          {
+            label: "Editar producto",
             href: `/admin/products/${id}/edit`,
             active: true,
           },

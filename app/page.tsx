@@ -1,16 +1,14 @@
-import Link from "next/link";
-import { Category } from "@/lib/definitions/products-definitions";
 import CategoryCard from "@/components/inicio/CategoryCard";
 import CategoryGamesSection from "@/components/inicio/CategoryGamesSection";
-import { buttonVariants } from "@/components/ui/button";
-import { ArrowRightIcon, ArrowDownIcon } from "@heroicons/react/24/outline";
 import GameCldImage from "@/components/juegos/GameCldImage";
+import { buttonVariants } from "@/components/ui/button";
+import { Category } from "@/lib/definitions/products-definitions";
+import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default async function Home() {
-
   return (
-    <div className="">
-
+    <div>
       <section className="w-full">
         <div className="container grid items-center justify-center px-4 md:px-6 md:grid-cols-2 lg:gap-2">
           <div className="flex flex-col items-center text-center gap-4 p-4 md:pl-6 md:items-start md:text-start">
@@ -43,7 +41,6 @@ export default async function Home() {
           <GameCldImage src="GameStore/home" alt="Home Image" width={600} height={600}/>
         </div>
       </section>
-
       <section id="categorias" className="w-full py-10 md:py-14 lg:py-18 bg-gray-100 dark:bg-gray-800">
         <div className="container space-y-12 px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -64,20 +61,17 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
       <CategoryGamesSection
         category={Category.JUEGOS_DE_MESA}
         title="Sumérgete en Nuestra Colección Exclusiva"
         subtitle="Descubre una amplia variedad de juegos de mesa"
         isFirst
       />
-
       <CategoryGamesSection
         category={Category.VIDEOJUEGOS}
         title="Adéntrate en el Mundo de los Videojuegos"
         subtitle="Explora nuestra colección de videojuegos para todas las plataformas"
       />
-
       <CategoryGamesSection
         category={Category.JUGUETES}
         title="Descubre Nuestros Juguetes Únicos"

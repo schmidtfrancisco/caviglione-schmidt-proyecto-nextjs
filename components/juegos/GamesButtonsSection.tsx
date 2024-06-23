@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Game } from "@/lib/definitions/products-definitions";
 import { useCart } from "@/lib/hooks/useCart";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { CheckIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function GamesButtonsSection({ game }: { game: Game }) {
   const [quantity, setQuantity] = useState<number>(1);

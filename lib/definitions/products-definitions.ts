@@ -1,7 +1,7 @@
 export enum Category{
-	JUEGOS_DE_MESA = 'Juegos de mesa',
-	VIDEOJUEGOS = 'Videojuegos',
-	JUGUETES = 'Juguetes'
+	JUEGOS_DE_MESA = "Juegos de mesa",
+	VIDEOJUEGOS = "Videojuegos",
+	JUGUETES = "Juguetes"
 }
 
 export type Game = {
@@ -34,4 +34,3 @@ export type MPItem = {
 	description: string;
 	currency_id: string;
 };
-

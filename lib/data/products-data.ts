@@ -1,18 +1,15 @@
-import { QueryResult, QueryResultRow, sql } from '@vercel/postgres'
-import { unstable_noStore as noStore } from 'next/cache';
-import { Category, Game } from '@/lib/definitions/products-definitions';
+import { sql, QueryResultRow } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
+import { Category, Game } from "@/lib/definitions/products-definitions";
 
 export async function fetchGamesByCategory(category: Category) {
   noStore();
-
   try {
-  
     const data = await sql`
       SELECT *
       FROM gamestore.games 
       WHERE category = ${category};
     `;
-
     const games: Game[] = data.rows.map((dbGame) => {
       return {
         id: dbGame.id,
@@ -23,9 +20,7 @@ export async function fetchGamesByCategory(category: Category) {
         price: dbGame.price
       };
     });
-
     return games;
-
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch games');
@@ -34,7 +29,6 @@ export async function fetchGamesByCategory(category: Category) {
 
 export async function fetchGamesByCategoryWithLimit(category: Category, limit: number) {
   noStore();
-
   try {
     const data = await sql`
       SELECT *
@@ -42,7 +36,6 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
       WHERE category = ${category}
       LIMIT ${limit};
     `;
-
     const games: Game[] = data.rows.map((dbGame) => {
       return {
         id: dbGame.id,
@@ -53,9 +46,7 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
         price: dbGame.price
       };
     });
-
     return games;
-
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch games');
@@ -63,11 +54,7 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
 }
 
 export async function fetchGameById(id: string) {
-
-  //timeout to simulate slow network
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   noStore();
-  
   try {
     const data = await sql`
       SELECT *
@@ -75,13 +62,10 @@ export async function fetchGameById(id: string) {
       WHERE id = ${id}
       LIMIT 1;
     `;
-
     const dbGame = data.rows[0];
-
     if (!dbGame) {
       return null;
     }
-    
     const game: Game = {
       id: dbGame.id,
       name: dbGame.name,
@@ -90,9 +74,7 @@ export async function fetchGameById(id: string) {
       category: dbGame.category,
       price: dbGame.price
     };
-
     return game;
-
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch game');
@@ -101,7 +83,6 @@ export async function fetchGameById(id: string) {
 
 export async function fetchGameByName(name: string) {
   noStore();
-  
   try {
     const data = await sql`
       SELECT *
@@ -110,13 +91,10 @@ export async function fetchGameByName(name: string) {
       description ILIKE ${`%${name}%`}
       LIMIT 1;
     `;
-
     const dbGame = data.rows[0];
-
     if (!dbGame) {
       return null;
     }
-    
     const game: Game = {
       id: dbGame.id,
       name: dbGame.name,
@@ -125,9 +103,7 @@ export async function fetchGameByName(name: string) {
       category: dbGame.category,
       price: dbGame.price
     };
-
     return game;
-
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch game');
@@ -136,9 +112,7 @@ export async function fetchGameByName(name: string) {
 
 export async function fetchGames() { 
   noStore();
-
   try { 
-    
     const data = await sql`
       SELECT *
       FROM gamestore.games;
@@ -147,15 +121,14 @@ export async function fetchGames() {
     const games: Game[] = mapToGameArray(data.rows);
 
     return games;
-
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch games');
   }
 } 
 
-
 const ITEMS_PER_PAGE = 10;
+
 export async function fetchFilteredGames(
   query: string,
   sort: string,
@@ -183,9 +156,7 @@ export async function fetchFilteredGamesNone(
   currentPage: number
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-
   noStore();
-
   try {
     const data = await sql`
       SELECT *
@@ -257,7 +228,6 @@ export async function fetchFilteredGamesDesc(
     const games: Game[] = mapToGameArray(data.rows);
 
     return games;
-
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch games');
@@ -272,12 +242,6 @@ export async function fetchFilteredGamesByCategory(
 ) { 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   noStore();
-
-  
-  //timeout to simulate slow network
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-
   try {
     const data = await sql`
       SELECT *
@@ -291,7 +255,6 @@ export async function fetchFilteredGamesByCategory(
     const games: Game[] = mapToGameArray(data.rows);
 
     return games;
-
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch games');
@@ -301,14 +264,12 @@ export async function fetchFilteredGamesByCategory(
 
 export async function fetchGamesCount(query: string) {
   noStore();
-
   try {
     const data = await sql` 
       SELECT COUNT(*)
       FROM gamestore.games
       WHERE name ILIKE ${`%${query}%`};
     `;
-    
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
@@ -319,7 +280,6 @@ export async function fetchGamesCount(query: string) {
 
 export async function fetchGamesByCategoryCount(category: Category, query: string) {
   noStore();
-
   try {
     const data = await sql` 
       SELECT COUNT(*)
@@ -327,7 +287,6 @@ export async function fetchGamesByCategoryCount(category: Category, query: strin
       WHERE category = ${category}
       AND name ILIKE ${`%${query}%`};
     `;
-    
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {

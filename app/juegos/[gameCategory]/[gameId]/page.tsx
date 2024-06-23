@@ -1,22 +1,13 @@
-
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { formatPrice, getCategoryLink } from "@/lib/utils";
-import { Game } from "@/lib/definitions/products-definitions";
-import { fetchGameById } from "@/lib/data/products-data";
 import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
+import GameBreadcrumb from "@/components/juegos/GameBreadcrumb";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import GamesButtonsSection from "@/components/juegos/GamesButtonsSection";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+import { fetchGameById } from "@/lib/data/products-data";
+import { Game } from "@/lib/definitions/products-definitions";
+import { formatPrice } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -25,45 +16,15 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-
-
   const game: Game | null = await fetchGameById(params.gameId);
-
   if (!game) {
     notFound();
   }
-
   return (
-
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         <div className="lg:max-w-lg lg:self-stretch">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">Inicio</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/juegos">Juegos</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href={getCategoryLink(game.category)}>{game.category}</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{game.name}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-
+          <GameBreadcrumb name={game.name} category={game.category}/>
           <div className="mt-10">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{game.name}</h1>
           </div>
@@ -79,13 +40,10 @@ export default async function Page({ params }: PageProps) {
             <div className="mt-4 space-y-6">
               <p className="text-base text-muted-foreground">{game.description}</p>
             </div>
-
             <div className="mt-6 flex items-center">
-
             </div>
           </section>
         </div>
-
         <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
           <div className="aspect-square rounded-lg">
             <Carousel className="rounded-lg overflow-hidden">

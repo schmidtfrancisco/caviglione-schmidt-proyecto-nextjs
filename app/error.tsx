@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import Link from 'next/link';
-import { Button, buttonVariants } from '@/components/ui/button';
-import GameCldImage from '@/components/juegos/GameCldImage';
+import GameCldImage from "@/components/juegos/GameCldImage";
+import { Button, buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Error({
   error,

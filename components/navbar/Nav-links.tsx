@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState } from "react";
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SheetClose } from "@/components/ui/sheet";
-import { TbHorseToy } from "react-icons/tb";
+import { cn } from "@/lib/utils";
+import { ChevronDownIcon, HomeIcon, PuzzlePieceIcon, TagIcon } from "@heroicons/react/24/outline";
 import { Gamepad2Icon, Joystick } from "lucide-react";
-import { HomeIcon, PuzzlePieceIcon, ChevronDownIcon, TagIcon } from "@heroicons/react/24/outline"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { TbHorseToy } from "react-icons/tb";
 
 const links = [
   {
@@ -44,8 +44,6 @@ const subLinks = [
 export default function NavLinks({ isForSidebar = false }: { isForSidebar?: boolean }) {
   const pathname = usePathname()
   const [dropdownOpen, setDropdownOpen] = useState(false)
-
-
   if (!isForSidebar) {
     return (
       <>
@@ -89,7 +87,7 @@ export function SheetLinks({ pathname }: { pathname: string }) {
           <SheetClose asChild key={link.name}>
             <Link
               href={link.href}
-              className={cn('text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+              className={cn("text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
                 {
                   'bg-gray-700 text-sky-400 hover:text-gray-300': pathname === link.href,
                 }
@@ -113,7 +111,7 @@ export function CommonLinks({ pathname }: { pathname: string }) {
           <Link
             key={link.name}
             href={link.href}
-            className={cn('text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+            className={cn("text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
               {
                 'bg-gray-700 text-sky-400 hover:text-gray-300': pathname === link.href,
               }
@@ -122,7 +120,6 @@ export function CommonLinks({ pathname }: { pathname: string }) {
             <p className="md:block">{link.name}</p>
           </Link>
         );
-
       })}
     </>
   )
@@ -138,7 +135,7 @@ export function SheetSubLinks({ pathname }: { pathname: string }) {
             <Link
               href={link.href}
               className={
-                cn('text-sm flex align-middle items-center gap-2 w-full my-1 rounded-lg py-2 px-10 cursor-pointer hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+                cn("text-sm flex align-middle items-center gap-2 w-full my-1 rounded-lg py-2 px-10 cursor-pointer hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
                   {
                     'bg-gray-700 text-sky-400 hover:text-gray-300': pathname === link.href,
                   }
@@ -163,7 +160,7 @@ export function CommonSubLinks({ pathname }: { pathname: string }) {
             <Link
               href={link.href}
               className={
-                cn('text-sm flex align-middle items-center gap-2 w-full my-1 rounded-lg p-2 cursor-pointer hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+                cn("text-sm flex align-middle items-center gap-2 w-full my-1 rounded-lg p-2 cursor-pointer hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
                   {
                     'bg-gray-700 text-sky-400 hover:text-gray-300': pathname === link.href,
                   }

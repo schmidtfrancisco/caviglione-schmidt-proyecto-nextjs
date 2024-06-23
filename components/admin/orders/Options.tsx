@@ -1,7 +1,5 @@
-'use client';	
+"use client";	
 
-import Link from 'next/link';
-import { deleteOrder } from '@/lib/actions';
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -12,8 +10,10 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { PencilIcon, ExclamationCircleIcon, TrashIcon } from '@heroicons/react/24/outline';
+} from "@/components/ui/alert-dialog";
+import { deleteOrder } from "@/lib/actions";
+import { ExclamationCircleIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export function UpdateOrder({ id }: { id: number }) {
 	return (
@@ -31,18 +31,16 @@ export function DeleteOrder({ id }: { id: number }) {
 	const deleteOrderWithId = () => {
 		deleteOrder(id);
 	};
-
 	return (
-		<AlertDialog >
+		<AlertDialog>
 			<AlertDialogTrigger className='rounded-md border p-2 hover:bg-gray-100 flex items-center w-full'>
-				<TrashIcon className="w-5 md:mr-2" />
+				<TrashIcon className="w-5 md:mr-2"/>
 				<span className="hidden md:block ml-1 text-sm">Eliminar</span>
 			</AlertDialogTrigger>
-
 			<AlertDialogContent>
 				<AlertDialogHeader>
 					<AlertDialogTitle className='flex items-center'>
-						<ExclamationCircleIcon className="w-8 h-8 mr-2 text-red-600" />
+						<ExclamationCircleIcon className="w-8 h-8 mr-2 text-red-600"/>
 						Eliminar pedido
 					</AlertDialogTitle>
 					<AlertDialogDescription>
@@ -50,7 +48,7 @@ export function DeleteOrder({ id }: { id: number }) {
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogCancel >Cancelar</AlertDialogCancel>
+					<AlertDialogCancel>Cancelar</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={deleteOrderWithId}
 						className="bg-red-500 hover:bg-red-600 text-white"
@@ -62,4 +60,3 @@ export function DeleteOrder({ id }: { id: number }) {
 		</AlertDialog>
 	);
 }
-

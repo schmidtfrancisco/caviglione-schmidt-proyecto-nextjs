@@ -1,13 +1,12 @@
-
-import { useContext, useState } from "react";
-import { mapToMPItems } from "@/lib/utils";
-import { FormState, generatePreference } from "@/lib/actions";
-import { useCart } from "@/lib/hooks/useCart";
 import { PaymentContext } from "@/components/pago/PaymentContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { FormState, generatePreference } from "@/lib/actions";
+import { useCart } from "@/lib/hooks/useCart";
+import { mapToMPItems } from "@/lib/utils";
+import { useContext, useState } from "react";
 
 export default function PaymentDataForm() {
   const { cart } = useCart();

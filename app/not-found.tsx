@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { buttonVariants } from '@/components/ui/button';
-import GameCldImage from '@/components/juegos/GameCldImage';
- 
+import GameCldImage from "@/components/juegos/GameCldImage";
+import { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <div className="flex h-[85dvh] w-full flex-col items-center justify-center gap-8 px-4 md:px-6">

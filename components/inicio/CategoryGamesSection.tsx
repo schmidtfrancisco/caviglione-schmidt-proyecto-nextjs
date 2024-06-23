@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { Category } from "@/lib/definitions/products-definitions";
@@ -11,7 +10,6 @@ export default function CategoryGamesSection(
   { category, title, subtitle, isFirst = false }:
     { category: Category, title: string, subtitle: string, isFirst?: boolean }
 ) {
-
   return (
     <section
       className={cn("mx-12 py-10 border-t border-gray-100 md:py-14 lg:py-18 dark:bg-gray-800",
@@ -43,6 +41,5 @@ export default function CategoryGamesSection(
         </Carousel>
       </div>
     </section>
-
   )
 }

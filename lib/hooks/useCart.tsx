@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useReducer, useContext, useEffect, useState } from "react";
-import { Game, CartItem } from "@/lib/definitions/products-definitions";
+import { CartItem, Game } from "@/lib/definitions/products-definitions";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 
 export type CartAction = AddToCart | RemoveFromCart | ClearCart | UpdateQuantity;
 
@@ -38,12 +38,10 @@ const cartReducer = (state: CartState, action: CartAction) => {
           updatedexistingItem,
           ...state.items.slice(existingItemIndex + 1),
         ];
-
         return {
           ...state,
           items: updatedItems,
         };
-
       }else{
         return {
           ...state,
@@ -51,7 +49,6 @@ const cartReducer = (state: CartState, action: CartAction) => {
         };
       }
     }
-
     case "UPDATE_QUANTITY": {
       const existingItemIndex = state.items.findIndex((item) => item.game.id === action.id);
       if (existingItemIndex !== -1) {
@@ -72,14 +69,12 @@ const cartReducer = (state: CartState, action: CartAction) => {
       }
       return state;
     }
-
     case "REMOVE_FROM_CART": {
       return {
         ...state,
         items: state.items.filter((item) => item.game.id !== action.id),
       };
     }
-
     case "CLEAR_CART": {
       return {
         ...state,
@@ -92,14 +87,13 @@ const cartReducer = (state: CartState, action: CartAction) => {
 };
 
 function createInitialState(emptyCart: CartState) {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       return JSON.parse(storedCart);
     }
   }
   return emptyCart
- 
 }
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
@@ -125,10 +119,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 };
-
-
-

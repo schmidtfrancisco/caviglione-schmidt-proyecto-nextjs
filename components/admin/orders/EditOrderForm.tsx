@@ -1,16 +1,18 @@
-'use client';
+"use client";
 
-import { useFormState } from 'react-dom';
-import Link from 'next/link';
-import { OrdersTable } from '@/lib/definitions/orders-definitions';
-import { updateOrder } from '@/lib/actions';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { updateOrder } from "@/lib/actions";
+import { OrdersTable } from "@/lib/definitions/orders-definitions";
 import {
-  CheckIcon,
-  CurrencyDollarIcon,
-  ArrowRightCircleIcon, CreditCardIcon, XMarkIcon
-} from '@heroicons/react/24/outline';
+	ArrowRightCircleIcon,
+	CheckIcon,
+	CreditCardIcon,
+	CurrencyDollarIcon,
+	XMarkIcon
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useFormState } from "react-dom";
 
 export default function EditOrderForm({ order }: { order: OrdersTable }) {
 	const initialState = { message: "", errors: {} };
@@ -47,7 +49,6 @@ export default function EditOrderForm({ order }: { order: OrdersTable }) {
 						</div>
           </div>
         </div>
-
         <fieldset>
           <legend className="mb-2 block text-sm font-medium">
             Estado del pedido
@@ -60,14 +61,14 @@ export default function EditOrderForm({ order }: { order: OrdersTable }) {
                   name="status"
                   type="radio"
                   value='Aprobado'
-                  defaultChecked={order.status === 'Aprobado'}
+                  defaultChecked={order.status === "Aprobado"}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
                   htmlFor="approved"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
                 >
-                  Aprobado <CreditCardIcon className="h-4 w-4" />
+                  Aprobado <CreditCardIcon className="h-4 w-4"/>
                 </label>
               </div>
               <div className="flex items-center">
@@ -76,14 +77,14 @@ export default function EditOrderForm({ order }: { order: OrdersTable }) {
                   name="status"
                   type="radio"
                   value="Enviado"
-                  defaultChecked={order.status === 'Enviado'}
+                  defaultChecked={order.status === "Enviado"}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
                   htmlFor="sent"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-orange-500 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Enviado <ArrowRightCircleIcon className="h-4 w-4" />
+                  Enviado <ArrowRightCircleIcon className="h-4 w-4"/>
                 </label>
               </div>
               <div className="flex items-center">
@@ -92,14 +93,14 @@ export default function EditOrderForm({ order }: { order: OrdersTable }) {
                   name="status"
                   type="radio"
                   value="Entregado"
-                  defaultChecked={order.status === 'Entregado'}
+                  defaultChecked={order.status === "Entregado"}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
                   htmlFor="delivered"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Entregado <CheckIcon className="h-4 w-4" />
+                  Entregado <CheckIcon className="h-4 w-4"/>
                 </label>
               </div>
               <div className="flex items-center">
@@ -108,14 +109,14 @@ export default function EditOrderForm({ order }: { order: OrdersTable }) {
                   name="status"
                   type="radio"
                   value="Cancelado"
-                  defaultChecked={order.status === 'Cancelado'}
+                  defaultChecked={order.status === "Cancelado"}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
                   htmlFor="canceled"
                   className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-500 px-3 py-1.5 text-xs font-medium text-white"
                 >
-                  Cancelado <XMarkIcon className="h-4 w-4" />
+                  Cancelado <XMarkIcon className="h-4 w-4"/>
                 </label>
               </div>
             </div>
@@ -129,7 +130,9 @@ export default function EditOrderForm({ order }: { order: OrdersTable }) {
         >
           Cancelar
         </Link>
-        <Button type="submit">Editar Pedido</Button>
+        <Button type="submit">
+					Editar Pedido
+				</Button>
       </div>
     </form>
   );

@@ -1,14 +1,14 @@
-import { Suspense } from "react"
-import { notFound } from "next/navigation"
-import { outfit } from "@/components/fonts"
-import { cn, linkToCategory } from "@/lib/utils"
-import { Category } from "@/lib/definitions/products-definitions"
-import { fetchGamesByCategoryCount } from "@/lib/data/products-data"
-import GamesList from "@/components/juegos/GamesList"
-import Search from "@/components/pagination-search/Search"
-import PagePagination from "@/components/pagination-search/PagePagination"
-import GameCldImage from "@/components/juegos/GameCldImage"
-import { GameListSkeleton } from "@/components/skeletons"
+import { outfit } from "@/components/fonts";
+import GameCldImage from "@/components/juegos/GameCldImage";
+import GamesList from "@/components/juegos/GamesList";
+import PagePagination from "@/components/pagination-search/PagePagination";
+import Search from "@/components/pagination-search/Search";
+import { GameListSkeleton } from "@/components/skeletons";
+import { fetchGamesByCategoryCount } from "@/lib/data/products-data";
+import { Category } from "@/lib/definitions/products-definitions";
+import { cn, linkToCategory } from "@/lib/utils";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 interface PageProps {
   params: {
@@ -22,15 +22,12 @@ interface PageProps {
 
 export default async function Page({ params, searchParams }: PageProps) {
   const category: Category | null = linkToCategory(params.gameCategory);
-
   if (!category) {
     notFound();
   }
-
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.pag) || 1;
   const maxPage = await fetchGamesByCategoryCount(category, query);
-
   return (
     <div className="flex flex-col p-1 md:px-6">
       <div className="flex flex-col lg:w-5/6 md:flex-row justify-between md:items-end">
@@ -68,9 +65,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       <PagePagination maxPage={maxPage} />
     </div>
   )
-
 }
-
 
 function CategoryLogoImage({ category }: { category: Category }) {
   switch (category) {
