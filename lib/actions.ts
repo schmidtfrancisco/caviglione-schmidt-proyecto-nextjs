@@ -118,7 +118,7 @@ const PaymentFormSchema = z.object({
 });
 
 const client = new MercadoPagoConfig({
-	accessToken: process.env.MP_ACCESS_TOKEN!!
+	accessToken: "APP_USR-5677161765353145-062318-f4b899bd3217451f89ca231d322a75f9-686744806",
 });
 
 export async function generatePreference(
