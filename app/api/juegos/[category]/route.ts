@@ -1,4 +1,4 @@
-import { fetchGamesByCategory } from "@/lib/data/products-data";
+import { fetchGamesByCategory } from "@/lib/data/products-category-data";
 import { linkToCategory } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
