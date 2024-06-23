@@ -40,7 +40,7 @@ export default async function Page({ params }: PageProps) {
                 {formatPrice(game.price)}
               </p>
               <div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
-                <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs" />
+                <GameCategoryBadge category={game.category} className="text-white px-2 py-1 rounded-full text-xs"/>
               </div>
             </div>
             <div className="mt-4 space-y-6">

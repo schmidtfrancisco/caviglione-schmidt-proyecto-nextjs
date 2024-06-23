@@ -11,16 +11,14 @@ import Link from "next/link";
 
 
 export default function ResumeCart() {
-
   const { cart, dispatch, cartTotal, cartCount } = useCart();
-
   if (cartCount === 0) {
     return (
       <Card>
         <CardHeader>
           <CardTitle className="text-center">Resumen del carrito</CardTitle>
         </CardHeader>
-        <Separator className="mb-6" />
+        <Separator className="mb-6"/>
         <CardContent>
           <div className="flex flex-col items-center justify-between w-full gap-2">
             <GameCldImage
@@ -39,7 +37,6 @@ export default function ResumeCart() {
       </Card>
     )
   }
-
   return (
     <div className="flex flex-col gap-6">
       <Card>
@@ -52,11 +49,11 @@ export default function ResumeCart() {
             Vaciar carrito
           </Button>
         </CardHeader>
-        <Separator className="mb-6" />
+        <Separator className="mb-6"/>
         <CardContent>
           <div className="grid gap-4">
             {cart.items.map((item) => (
-              <ResumeCartItem key={item.game.id} game={item.game} quantity={item.quantity} />
+              <ResumeCartItem key={item.game.id} game={item.game} quantity={item.quantity}/>
             ))}
           </div>
         </CardContent>
@@ -66,5 +63,5 @@ export default function ResumeCart() {
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }

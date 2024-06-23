@@ -72,7 +72,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
                   <span>
                     <div className="grid gap-1">
                       {orderItems.map((item) => (
-                        <PaymentOrderItem key={item.game_id} gameId={item.game_id} quantity={item.quantity} />
+                        <PaymentOrderItem key={item.game_id} gameId={item.game_id} quantity={item.quantity}/>
                       ))}
                     </div>
                   </span>

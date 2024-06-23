@@ -29,10 +29,8 @@ export default function PaymentDataForm() {
     }
     setIsLoading(false);
   }
-
   return (
     <form action={continuePayment}>
-
       <fieldset className="flex flex-col gap-1">
         <legend className="mb-2 block text-base text-gray-700 font-medium">
           Datos personales
@@ -58,8 +56,6 @@ export default function PaymentDataForm() {
                 ))}
             </div>
           </div>
-
-
           <div className="mb-4">
             <Label htmlFor="lastname">Apellido</Label>
             <Input
@@ -80,11 +76,9 @@ export default function PaymentDataForm() {
                 ))}
             </div>
           </div>
-
         </div>
         <Separator className="mb-4" />
       </fieldset>
-
       <fieldset className="flex flex-col gap-4">
         <legend className="mb-2 block text-base text-gray-700 font-medium">
           Dirección de envío
@@ -101,7 +95,6 @@ export default function PaymentDataForm() {
               className="mt-1"
             />
           </div>
-
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="adressNumber">Número</Label>
@@ -142,5 +135,5 @@ export default function PaymentDataForm() {
         </Button>
       </div>
     </form>
-  )
+  );
 }

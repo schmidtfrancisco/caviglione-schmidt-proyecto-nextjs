@@ -1,10 +1,10 @@
-import { Suspense } from "react";
-import { cn } from "@/lib/utils";
-import { Category } from "@/lib/definitions/products-definitions";
-import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
 import GameCarouselContent from "@/components/inicio/GameCarouselContent";
+import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
 import { CarouselGameSkeleton } from "@/components/skeletons";
 import { Carousel, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Category } from "@/lib/definitions/products-definitions";
+import { cn } from "@/lib/utils";
+import { Suspense } from "react";
 
 export default function CategoryGamesSection(
   { category, title, subtitle, isFirst = false }:
@@ -32,14 +32,13 @@ export default function CategoryGamesSection(
           }}
           orientation="horizontal"
         >
-          <Suspense fallback={<CarouselGameSkeleton />}>
-            <GameCarouselContent category={category} />
+          <Suspense fallback={<CarouselGameSkeleton/>}>
+            <GameCarouselContent category={category}/>
           </Suspense>
-
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious/>
+          <CarouselNext/>
         </Carousel>
       </div>
     </section>
-  )
+  );
 }

@@ -24,10 +24,10 @@ export default function GameCard({ game }: { game: Game }) {
             <h4 className="font-semibold text-base md:text-lg mt-1 text-gray-700">{formatPrice(game.price)}</h4>
           </Link>
           <div className="flex gap-2 mt-2 justify-end">
-            <AddToCartButton game={game} buttonClassName="min-w-[150px]" />
+            <AddToCartButton game={game} buttonClassName="min-w-[150px]"/>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

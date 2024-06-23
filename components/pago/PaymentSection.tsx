@@ -17,7 +17,6 @@ export default function PaymentSection() {
   const { cartTotal, cartCount, isCartConfirmed, setIsCartConfirmed } = useCart();
   const { activeStep, setActiveStep, setPreferenceId } = useContext(PaymentContext);
 
-
   const handleContinue = () => {
     setIsCartConfirmed(true)
     setActiveStep(2)
@@ -34,8 +33,8 @@ export default function PaymentSection() {
     }
   }, [cartCount, setActiveStep]);
 
-  const ENVIO = 1000;
-  const total = cartTotal + (ENVIO*100);
+  const envio = 1000;
+  const total = cartTotal + (envio*100);
 
   return (
     <div>
@@ -46,7 +45,6 @@ export default function PaymentSection() {
         <Separator />
         <CardContent>
           <Accordion type="single" value={`step-${activeStep}`} collapsible>
-
             <AccordionItem value="step-1" disabled={activeStep !== 1}>
               <AccordionTrigger>
                 <div className="flex items-center justify-between">
@@ -72,7 +70,7 @@ export default function PaymentSection() {
                     </div>
                     <div className="flex flex-row justify-between">
                       <p>Envio</p>
-                      <p>{formatPrice(ENVIO*100)}</p>
+                      <p>{formatPrice(envio*100)}</p>
                     </div>
                     <div className="flex flex-row justify-between">
                       <p className="font-bold">Total</p>
@@ -93,11 +91,9 @@ export default function PaymentSection() {
                       Confirmar selección
                     </Button>
                   )}
-
                 </div>
               </AccordionContent>
             </AccordionItem>
-
             <AccordionItem value="step-2" disabled={activeStep !== 2}>
               <AccordionTrigger>
                 <div className="flex items-center justify-between">
@@ -114,7 +110,6 @@ export default function PaymentSection() {
                   <PaymentDataForm />
                 </div>
               </AccordionContent>
-
             </AccordionItem>
             <AccordionItem value="step-3" disabled={activeStep !== 3}>
               <AccordionTrigger>
@@ -143,5 +138,5 @@ export default function PaymentSection() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 } 

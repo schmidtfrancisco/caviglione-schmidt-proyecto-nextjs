@@ -25,7 +25,7 @@ export default async function Home() {
                 className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
               >
                 Explorar juegos
-                <ArrowRightIcon className="ml-2 h-4 w-4" />
+                <ArrowRightIcon className="ml-2 h-4 w-4"/>
               </Link>
               <Link
                 href="#categorias"
@@ -34,11 +34,11 @@ export default async function Home() {
                 })}
               >
                 Ver categorías
-                <ArrowDownIcon className="ml-2 h-4 w-4" />
+                <ArrowDownIcon className="ml-2 h-4 w-4"/>
               </Link>
             </div>
           </div>
-          <GameCldImage src="GameStore/home" alt="Home Image" width={600} height={600}/>
+          <GameCldImage src="GameStore/home" alt="Home Image" loading="eager"/>
         </div>
       </section>
       <section id="categorias" className="w-full py-10 md:py-14 lg:py-18 bg-gray-100 dark:bg-gray-800">
@@ -56,8 +56,8 @@ export default async function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <CategoryCard category={Category.JUEGOS_DE_MESA} description="Para todas las edades" src="GameStore/juegosdemesa"/>
-            <CategoryCard category={Category.VIDEOJUEGOS} description="Para todas las plataformas" src="GameStore/videojuegos" />
-            <CategoryCard category={Category.JUGUETES} description="Para los más pequeños" src="GameStore/juguetes" />
+            <CategoryCard category={Category.VIDEOJUEGOS} description="Para todas las plataformas" src="GameStore/videojuegos"/>
+            <CategoryCard category={Category.JUGUETES} description="Para los más pequeños" src="GameStore/juguetes"/>
           </div>
         </div>
       </section>

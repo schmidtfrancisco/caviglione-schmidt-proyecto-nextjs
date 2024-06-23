@@ -17,7 +17,7 @@ export default function PagePagination({ maxPage }: { maxPage: number }) {
   const allPages = generatePagination(currentPage, maxPage);
   console.log(allPages);
   return (
-    <div className="flex justify-center my-8 ">
+    <div className="flex justify-center my-8">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
@@ -50,5 +50,5 @@ export default function PagePagination({ maxPage }: { maxPage: number }) {
         </PaginationContent>
       </Pagination>
     </div>
-  )
+  );
 }

@@ -53,7 +53,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         )}
         >
           {category}
-          <CategoryLogoImage category={category} />
+          <CategoryLogoImage category={category}/>
         </h1>
         <Search
           placeholder={`Buscar ${category.toLowerCase()} ...`}
@@ -70,7 +70,7 @@ export default async function Page({ params, searchParams }: PageProps) {
               inputClassName="bg-gray-100"
             />
             <div className="hidden md:block">
-              <FiltersSection maxPrice={maxPrice} />
+              <FiltersSection maxPrice={maxPrice}/>
             </div>
             <div className="md:hidden">
               <DropdownMenu>
@@ -83,7 +83,7 @@ export default async function Page({ params, searchParams }: PageProps) {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="max-h-[65svh] w-[300px]">
-                  <FiltersSection maxPrice={maxPrice} />
+                  <FiltersSection maxPrice={maxPrice}/>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -95,9 +95,9 @@ export default async function Page({ params, searchParams }: PageProps) {
           </Suspense>
         </div>
       </section>
-      <PagePagination maxPage={maxPage} />
+      <PagePagination maxPage={maxPage}/>
     </div>
-  )
+  );
 }
 
 function CategoryLogoImage({ category }: { category: Category }) {

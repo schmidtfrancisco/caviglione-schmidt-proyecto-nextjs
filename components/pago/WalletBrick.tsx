@@ -34,17 +34,17 @@ export default function WalletBrick() {
   const customization: IWalletBrickCustomization = {
     visual: {
       hideValueProp: false,
-      buttonBackground: 'default',
-      valuePropColor: 'grey',
-      buttonHeight: '48px',
-      borderRadius: '20px',
-      verticalPadding: '16px',
-      horizontalPadding: '0px',
+      buttonBackground: "default",
+      valuePropColor: "grey",
+      buttonHeight: "48px",
+      borderRadius: "20px",
+      verticalPadding: "16px",
+      horizontalPadding: "0px",
     },
     checkout: {
       theme: {
-        elementsColor: '#4287F5',
-        headerColor: '#4287F5',
+        elementsColor: "#4287F5",
+        headerColor: "#4287F5",
       },
     },
   }

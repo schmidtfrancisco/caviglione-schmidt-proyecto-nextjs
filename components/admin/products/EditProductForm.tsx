@@ -129,17 +129,17 @@ export default function EditProductForm({ game }: { game: Game }) {
 							<Carousel className="rounded-lg overflow-hidden">
 								<CarouselContent>
 									{game.images_url.map((image, index) => (
-										<CarouselItem key={image} className='text-center'>
+										<CarouselItem key={image} className="text-center">
 											<GameCldImage src={image} />
-											<span className='text-sm text-gray-500'>{index + 1} / {game.images_url.length}</span>
+											<span className="text-sm text-gray-500">{index + 1} / {game.images_url.length}</span>
 										</CarouselItem>
 									))}
 								</CarouselContent>
 								<CarouselPrevious className="absolute top-1/2 -translate-y-1/2 left-4 z-10 bg-white/50 hover:bg-white rounded-xl p-2 cursor-pointer">
-									<ChevronLeftIcon className="h-6 w-6" />
+									<ChevronLeftIcon className="h-6 w-6"/>
 								</CarouselPrevious>
 								<CarouselNext className="absolute top-1/2 -translate-y-1/2 right-4 z-10 bg-white/50 hover:bg-white rounded-xl p-2 cursor-pointer">
-									<ChevronRightIcon className="h-6 w-6" />
+									<ChevronRightIcon className="h-6 w-6"/>
 								</CarouselNext>
 							</Carousel>
 						</div>
@@ -162,7 +162,7 @@ export default function EditProductForm({ game }: { game: Game }) {
 					</div>
 				</div>
 				<div className="mt-6 flex items-center">
-					<Button className="w-full" type="submit" name='added' value={urlStates}>
+					<Button className="w-full" type="submit" name="added" value={urlStates}>
 						Confirmar
 					</Button>
 				</div>

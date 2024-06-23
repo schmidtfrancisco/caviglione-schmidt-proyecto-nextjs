@@ -51,5 +51,5 @@ export default async function ProductsTable(
 				</TableFooter>
 			</Table>
 		</div>
-	)
+	);
 }

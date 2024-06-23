@@ -43,5 +43,5 @@ export default function AddToCartButton(
         "Agregar al carrito"
       }
     </Button>
-  )
+  );
 }

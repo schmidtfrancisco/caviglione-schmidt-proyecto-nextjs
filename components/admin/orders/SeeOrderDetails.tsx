@@ -8,7 +8,7 @@ export function SeeOrderDetails({ id }: { id: number }) {
   return (
     <Dialog>
       <DialogTrigger className='rounded-md border p-2 hover:bg-gray-100 flex items-center w-full'>
-        <DocumentTextIcon className="w-5 mr-2" />
+        <DocumentTextIcon className="w-5 mr-2"/>
         <span className="ml-1 text-sm">Ver</span>
       </DialogTrigger>
       <DialogContent className="w-11/12 rounded-lg sm:max-w-[600px] h-fit max-h-svh pr-0">
@@ -24,5 +24,5 @@ export function SeeOrderDetails({ id }: { id: number }) {
         </ScrollArea>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

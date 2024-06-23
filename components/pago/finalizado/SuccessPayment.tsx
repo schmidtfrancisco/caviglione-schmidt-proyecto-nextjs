@@ -1,28 +1,19 @@
-'use client'
+"use client";
 
-import Link from "next/link";
-import PaymentOrderItem from "@/components/pago/finalizado/PaymentOrderItem";
-import { CircleCheckIcon } from "lucide-react";
-import { formatPrice } from "@/lib/utils";
-import { OrderItem } from "@/lib/definitions/orders-definitions";
-import { useCart } from "@/lib/hooks/useCart";
-import { useEffect } from "react";
 import GameCldImage from "@/components/juegos/GameCldImage";
+import { useCart } from "@/lib/hooks/useCart";
+import { CircleCheckIcon } from "lucide-react";
+import { useEffect } from "react";
 
 export default function SuccessPayment() {
-
   const { dispatch } = useCart();
-
   useEffect(() => {
     const clearCart = async () => {
       dispatch({ type: "CLEAR_CART" });
     };
-
     clearCart();
   }, [dispatch]);
-
   return (
-
     <div className="flex flex-col items-center">
       <div className="flex items-center justify-between w-full bg-sky-700 pl-2 pr-6">
         <GameCldImage
@@ -47,5 +38,5 @@ export default function SuccessPayment() {
         </p>
       </div>
     </div>
-  )
+  );
 }

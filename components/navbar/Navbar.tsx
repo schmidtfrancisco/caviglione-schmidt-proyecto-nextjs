@@ -13,27 +13,27 @@ export default function Navbar() {
       <Sheet>
         <SheetTrigger asChild>
           <Button className="lg:hidden bg-white text-black hover:bg-gray-700 hover:text-gray-300" size="icon">
-            <Bars3BottomLeftIcon strokeWidth={2} className="h-6 w-6" />
+            <Bars3BottomLeftIcon strokeWidth={2} className="h-6 w-6"/>
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col justify-between h-full">
           <div className="flex flex-col gap-2">
             <Link className="flex items-center gap-2" href="/">
-              <FlagIcon className="h-6 w-6" />
+              <FlagIcon className="h-6 w-6"/>
               <span className="text-lg font-semibold">Game Store</span>
             </Link>
             <div className="grid gap-2 py-6">
-              <NavLinks isForSidebar />
+              <NavLinks isForSidebar/>
             </div>
           </div>
           <div className="flex-shrink-0">
-            <SheetLoginOptions />
+            <SheetLoginOptions/>
           </div>
         </SheetContent>
       </Sheet>
       <Link className="mr-6 hidden lg:flex items-center gap-2" href="/">
-        <FlagIcon className="h-6 w-6" />
+        <FlagIcon className="h-6 w-6"/>
         <span className="text-lg font-semibold">Game Store</span>
       </Link>
       <nav className="flex flex-row gap-4 items-center">
@@ -46,5 +46,5 @@ export default function Navbar() {
         </div>
       </nav>
     </header>
-  )
+  );
 }

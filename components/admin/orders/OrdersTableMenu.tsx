@@ -1,9 +1,9 @@
-import { DeleteOrder, UpdateOrder } from "@/components/admin/orders/Options"
-import { SeeOrderDetails } from "@/components/admin/orders/SeeOrderDetails"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { OrdersTable } from "@/lib/definitions/orders-definitions"
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline"
+import { DeleteOrder, UpdateOrder } from "@/components/admin/orders/Options";
+import { SeeOrderDetails } from "@/components/admin/orders/SeeOrderDetails";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { OrdersTable } from "@/lib/definitions/orders-definitions";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 
 export default function OrdersTableMenu({ order }: { order: OrdersTable }) {
 	return (
@@ -20,5 +20,5 @@ export default function OrdersTableMenu({ order }: { order: OrdersTable }) {
 				<DropdownMenuItem asChild><DeleteOrder id={order.id}/></DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
-	)
+	);
 }
