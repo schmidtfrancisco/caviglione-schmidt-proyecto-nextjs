@@ -3,8 +3,8 @@
 import { CldImage } from "next-cloudinary";
 
 export default function GameCldImage(
-	{width = 600, height = 600, src, alt = "", style, className}: 
-	{width?: number, height?: number, src: string, alt?: string, style?: any, className?: string}
+	{width = 600, height = 600, src, alt = "", style, className, loading = "lazy"}: 
+	{width?: number, height?: number, src: string, alt?: string, style?: any, className?: string, loading?: any}
 ) {
 	return (
 		<CldImage
@@ -15,6 +15,7 @@ export default function GameCldImage(
 			className={className}
 			style={style}
 			crop={"pad"}
+			loading={loading}
 		/>
 	)
 }

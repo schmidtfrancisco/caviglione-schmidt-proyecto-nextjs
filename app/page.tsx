@@ -38,7 +38,7 @@ export default async function Home() {
               </Link>
             </div>
           </div>
-          <GameCldImage src="GameStore/home" alt="Home Image" width={600} height={600}/>
+          <GameCldImage src="GameStore/home" alt="Home Image" loading="eager"/>
         </div>
       </section>
       <section id="categorias" className="w-full py-10 md:py-14 lg:py-18 bg-gray-100 dark:bg-gray-800">
