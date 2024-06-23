@@ -19,7 +19,6 @@ export default async function Page({ searchParams } : {
 	}	else {
 		maxPage = await fetchOrdersCountByState(query, state);
 	}
-	
   return (
 		<>
 			<Header/>
@@ -28,5 +27,5 @@ export default async function Page({ searchParams } : {
 				<PagePagination maxPage={maxPage}/>
 			</div>
 		</>
-  )
+  );
 }

@@ -139,5 +139,5 @@ export default function CreateProductForm() {
 				</CardFooter>
 			</Card>
 		</form>
-	)
+	);
 }

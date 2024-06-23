@@ -6,11 +6,12 @@ import PagePagination from "@/components/pagination-search/PagePagination";
 import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
 import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { fetchGamesCountPrice, fetchGamesMaxPrice } from "@/lib/data/products-data";
 import { cn } from "@/lib/utils";
 import { FunnelIcon } from "@heroicons/react/24/outline";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { Suspense } from "react";
+
 export default async function Page(
   { searchParams }: {
     searchParams: {
@@ -29,7 +30,6 @@ export default async function Page(
   const min = Number(searchParams?.min) || 0;
   const max = Number(searchParams?.max) || maxPrice;
   const maxPage = await fetchGamesCountPrice(query, min, max);
-  
   return (
     <div className="p-1 md:p-6">
       <section className="flex flex-col md:flex-row justify-center">
@@ -46,7 +46,7 @@ export default async function Page(
             />
           </h1>
           <div className="hidden md:block">
-          <FiltersSection maxPrice={maxPrice}/>
+						<FiltersSection maxPrice={maxPrice}/>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-2 md:p-6 md:w-3/4">
@@ -55,14 +55,14 @@ export default async function Page(
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
-                    <FunnelIcon className="w-5 md:mr-2" />
+                    <FunnelIcon className="w-5 md:mr-2"/>
                     <span className=" ml-1 text-sm">
                       Filtros
                     </span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="max-h-[65svh] w-[300px]">
-                  <FiltersSection maxPrice={maxPrice} />
+                  <FiltersSection maxPrice={maxPrice}/>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -77,7 +77,7 @@ export default async function Page(
           </Suspense>
         </div>
       </section>
-      <PagePagination maxPage={maxPage} />
+      <PagePagination maxPage={maxPage}/>
     </div>
-  )
+  );
 }

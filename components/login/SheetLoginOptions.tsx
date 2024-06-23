@@ -4,7 +4,7 @@ import { SheetClose } from "@/components/ui/sheet";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 export default async function SheetLoginOptions() {
-  const session = await auth()
+  const session = await auth();
   if (!session?.user) {
     return (
       <SheetLogInLink/>
@@ -27,6 +27,6 @@ export default async function SheetLoginOptions() {
           </form>
         </SheetClose>
       </>
-    )
+    );
   }
 }

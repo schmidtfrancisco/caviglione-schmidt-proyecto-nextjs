@@ -4,10 +4,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 export function CarouselGameSkeleton() {
   return (
     <CarouselContent>
-      <CarouselItemSkeleton />
-      <CarouselItemSkeleton />
-      <CarouselItemSkeleton />
-      <CarouselItemSkeleton />
+      <CarouselItemSkeleton/>
+      <CarouselItemSkeleton/>
+      <CarouselItemSkeleton/>
+      <CarouselItemSkeleton/>
     </CarouselContent>
   );
 }

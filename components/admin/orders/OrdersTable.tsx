@@ -89,5 +89,5 @@ export default async function OrdersTable(
 				</Table>
 			</div>
 		</>
-	)
+	);
 }

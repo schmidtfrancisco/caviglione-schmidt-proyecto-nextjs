@@ -17,7 +17,7 @@ export default function GameCldImage(
 			crop={"pad"}
 			loading={loading}
 		/>
-	)
+	);
 }
 
 export function CategoryCldImage({src, alt = "", style, className}:
@@ -32,5 +32,5 @@ export function CategoryCldImage({src, alt = "", style, className}:
 			className={className}
 			style={style}
 		/>
-	)
+	);
 }

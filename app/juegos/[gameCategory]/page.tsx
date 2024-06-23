@@ -7,7 +7,6 @@ import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { fetchCategoryGamesMaxPrice, fetchGamesByCategoryCountPrice } from "@/lib/data/products-category-data";
 import { Category } from "@/lib/definitions/products-definitions";
 import { cn, linkToCategory } from "@/lib/utils";
@@ -49,7 +48,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         )}
         >
           {category}
-          <CategoryLogoImage category={category} />
+          <CategoryLogoImage category={category}/>
         </h1>
         <Search
           placeholder={`Buscar ${category.toLowerCase()} ...`}
@@ -66,7 +65,7 @@ export default async function Page({ params, searchParams }: PageProps) {
               inputClassName="bg-gray-100"
             />
             <div className="hidden md:block">
-              <FiltersSection maxPrice={maxPrice} />
+              <FiltersSection maxPrice={maxPrice}/>
             </div>
             <div className="md:hidden">
               <DropdownMenu>
@@ -79,21 +78,21 @@ export default async function Page({ params, searchParams }: PageProps) {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="max-h-[65svh] w-[300px]">
-                  <FiltersSection maxPrice={maxPrice} />
+                  <FiltersSection maxPrice={maxPrice}/>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-2 md:gap-4 md:p-6 lg:w-3/5">
-          <Suspense fallback={<GameListSkeleton />}>
-            <GamesList query={query} currentPage={currentPage} category={category} sort={sort} min={min} max={max} />
+          <Suspense fallback={<GameListSkeleton/>}>
+            <GamesList query={query} currentPage={currentPage} category={category} sort={sort} min={min} max={max}/>
           </Suspense>
         </div>
       </section>
-      <PagePagination maxPage={maxPage} />
+      <PagePagination maxPage={maxPage}/>
     </div>
-  )
+  );
 }
 
 function CategoryLogoImage({ category }: { category: Category }) {

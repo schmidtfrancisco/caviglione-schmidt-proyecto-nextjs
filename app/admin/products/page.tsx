@@ -21,5 +21,5 @@ export default async function Page({ searchParams }: {
 				<PagePagination maxPage={maxPage}/>
 			</main>
 		</>
-  )
+  );
 }

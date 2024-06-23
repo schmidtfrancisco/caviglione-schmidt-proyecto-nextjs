@@ -57,5 +57,5 @@ export default function Filter() {
 				</DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

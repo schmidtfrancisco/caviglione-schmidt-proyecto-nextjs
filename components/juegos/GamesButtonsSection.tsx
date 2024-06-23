@@ -16,7 +16,6 @@ export default function GamesButtonsSection({ game }: { game: Game }) {
     const timeout = setTimeout(() => {
       setIsAdded(false)
     }, 2000)
-
     return () => {
       clearTimeout(timeout)
     }
@@ -34,19 +33,18 @@ export default function GamesButtonsSection({ game }: { game: Game }) {
     setIsAdded(true)
     setQuantity(1)
   }
-
   return (
     <>
-      <div className='flex items-center gap-2'>
+      <div className="flex items-center gap-2">
         <Button
           onClick={handleAddToCart}
           size="lg"
           variant="outline"
-          className='min-w-[182px] w-full lg:w-auto'
+          className="min-w-[182px] w-full lg:w-auto"
         >
           {isAdded ? (
-            <div className="flex items-center justify-center gap-2" >
-              <CheckIcon className="h-4 w-4 text-green-700" />
+            <div className="flex items-center justify-center gap-2">
+              <CheckIcon className="h-4 w-4 text-green-700"/>
               Agregado!
             </div>
           ) :
@@ -60,22 +58,25 @@ export default function GamesButtonsSection({ game }: { game: Game }) {
             className='rounded-full px-3'
             disabled={quantity === 1}
           >
-            <MinusIcon className="h-4 w-4" />
+            <MinusIcon className="h-4 w-4"/>
           </Button>
           <span className="text-sm font-semibold text-center w-4">{quantity}</span>
           <Button
             onClick={() => setQuantity(quantity + 1)}
             variant="outline"
-            className='rounded-full px-3'
+            className="rounded-full px-3"
           >
-            <PlusIcon className="h-4 w-4" />
+            <PlusIcon className="h-4 w-4"/>
           </Button>
         </div>
-
       </div>
-      <Link href='/pago' className={buttonVariants({ size: "lg" }) + " lg:max-w-[310px] lg:w-76"} onClick={handleBuy}>Comprar</Link>
+      <Link 
+				href='/pago'
+				className={buttonVariants({ size: "lg" }) + " lg:max-w-[310px] lg:w-76"}
+				onClick={handleBuy}
+			>
+				Comprar
+			</Link>
     </>
-  )
+  );
 }
-
-

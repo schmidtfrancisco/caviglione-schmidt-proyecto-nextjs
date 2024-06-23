@@ -32,7 +32,6 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
   const handleFilter = useDebouncedCallback((min: number, max: number) => {
     const params = new URLSearchParams(searchParams);
     params.set("pag", "1");
-
     if (min !== 0) {
       params.set("min", min.toString());
     } else {
@@ -43,7 +42,6 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
     } else {
       params.delete("max");
     }
-
     replace(`${pathname}?${params.toString()}`);
   }, 500);
 
@@ -51,6 +49,7 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
     setPriceFilter({ min, max });
     handleFilter(min, max);
   }
+
   const handleSort = (sort: string) => {
     const params = new URLSearchParams(searchParams);
     params.set("pag", "1");
@@ -59,9 +58,7 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
     } else {
       params.delete("sort");
     }
-
     replace(`${pathname}?${params.toString()}`);
-
   }
 
   const handleSortChange = (value: string) => {
@@ -69,7 +66,6 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
   }
 
   return (
-
     <div className="container grid gap-8 items-start px-4 sm:p-0 lg:px-6">
       <div className="bg-white rounded-lg md:shadow-sm">
         <div className="p-2 md:p-6 border-b">
@@ -79,7 +75,7 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
           <Collapsible defaultOpen>
             <CollapsibleTrigger className="flex items-center justify-between w-full text-base font-medium">
               <span>Ordenar por</span>
-              <ChevronDownIcon className="w-5 h-5 transition-transform data-[state=open]:rotate-180" />
+              <ChevronDownIcon className="w-5 h-5 transition-transform data-[state=open]:rotate-180"/>
             </CollapsibleTrigger>
             <CollapsibleContent>
               <div className="grid gap-2 mt-4">
@@ -103,7 +99,7 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
           <Collapsible defaultOpen>
             <CollapsibleTrigger className="flex items-center justify-between w-full text-base font-medium">
               <span>Rango de precio</span>
-              <ChevronDownIcon className="w-5 h-5 transition-transform data-[state=open]:rotate-180" />
+              <ChevronDownIcon className="w-5 h-5 transition-transform data-[state=open]:rotate-180"/>
             </CollapsibleTrigger>
             <CollapsibleContent>
               <div className="grid gap-4 mt-4">
@@ -142,5 +138,5 @@ export default function FiltersSection({ maxPrice }: { maxPrice: number }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

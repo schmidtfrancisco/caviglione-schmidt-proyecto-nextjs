@@ -1,5 +1,5 @@
 import Breadcrumbs from "@/components/admin/orders/Breadcrumbs";
-import EditProductForm from '@/components/admin/products/EditProductForm';
+import EditProductForm from "@/components/admin/products/EditProductForm";
 import { fetchGameById } from "@/lib/data/products-data";
 import { Game } from "@/lib/definitions/products-definitions";
 import { notFound } from "next/navigation";
@@ -33,5 +33,5 @@ export default async function Page({ params }: PageProps) {
       />
       <EditProductForm game={game}/>
     </div>
-	)
+	);
 }

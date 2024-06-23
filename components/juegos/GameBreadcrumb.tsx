@@ -37,5 +37,5 @@ export default function GameBreadcrumb({ name, category }: { name: string, categ
 				</BreadcrumbItem>
 			</BreadcrumbList>
 		</Breadcrumb>
-	)
+	);
 }

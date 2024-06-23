@@ -69,5 +69,5 @@ export default function CartItem({ game, quantity }: { game: Game, quantity: num
         <p className="text-sm text-gray-500">{formatPrice(game.price)}</p>
       </div>
     </DropdownMenuItem>
-  )
+  );
 }

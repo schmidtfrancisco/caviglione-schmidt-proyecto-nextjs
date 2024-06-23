@@ -1,7 +1,7 @@
-import { sql, QueryResultRow } from "@vercel/postgres";
-import { unstable_noStore as noStore } from "next/cache";
-import { Category, Game } from "@/lib/definitions/products-definitions";
 import { mapToGameArray } from "@/lib/data/products-data";
+import { Category, Game } from "@/lib/definitions/products-definitions";
+import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -16,8 +16,8 @@ export async function fetchGamesByCategory(category: Category) {
     const games: Game[] = mapToGameArray(data.rows);
     return games;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games");
   }
 }
 
@@ -33,8 +33,8 @@ export async function fetchGamesByCategoryWithLimit(category: Category, limit: n
     const games: Game[] = mapToGameArray(data.rows);
     return games;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games");
   }
 }
 
@@ -46,7 +46,6 @@ export async function fetchFilteredGamesByCategorySorted(
   min: number,
   max: number
 ) { 
-
   const minInCents = min * 100;
   const maxInCents = max * 100;
   if (sort == "none") {
@@ -81,13 +80,11 @@ export async function fetchFilteredGamesByCategory(
       LIMIT ${ITEMS_PER_PAGE}
       OFFSET ${offset};
     `;
-
     const games: Game[] = mapToGameArray(data.rows);
-
     return games;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games");
   }
 }
 
@@ -111,13 +108,11 @@ export async function fetchFilteredGamesNameAscByCategory(
       LIMIT ${ITEMS_PER_PAGE}
       OFFSET ${offset};
     `;
-
     const games: Game[] = mapToGameArray(data.rows);
-
     return games;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games");
   }
 }
 
@@ -141,13 +136,11 @@ export async function fetchFilteredGamesNameDescByCategory(
       LIMIT ${ITEMS_PER_PAGE}
       OFFSET ${offset};
     `;
-
     const games: Game[] = mapToGameArray(data.rows);
-
     return games;
   } catch (error) { 
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games");
   }
 }
 
@@ -171,13 +164,11 @@ export async function fetchFilteredGamesPriceAscByCategory(
       LIMIT ${ITEMS_PER_PAGE}
       OFFSET ${offset};
     `;
-
     const games: Game[] = mapToGameArray(data.rows);
-
     return games;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games");
   }
 }
 
@@ -201,13 +192,11 @@ export async function fetchFilteredGamesPriceDescByCategory(
       LIMIT ${ITEMS_PER_PAGE}
       OFFSET ${offset};
     `;
-
     const games: Game[] = mapToGameArray(data.rows);
-
     return games;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games");
   }
 }
 
@@ -223,8 +212,8 @@ export async function fetchGamesByCategoryCount(category: Category, query: strin
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games count');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games count");
   }
 }
 
@@ -243,8 +232,8 @@ export async function fetchGamesByCategoryCountPrice(category: Category, query: 
     const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch games count');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch games count");
   }
 }
 
@@ -259,7 +248,7 @@ export async function fetchCategoryGamesMaxPrice(category: Category, query: stri
     `;
     return data.rows[0].max / 100 ;
   } catch (error) {
-    console.error('Database error:', error);
-    throw new Error('Failed to fetch max price');
+    console.error("Database error:", error);
+    throw new Error("Failed to fetch max price");
   }
 }

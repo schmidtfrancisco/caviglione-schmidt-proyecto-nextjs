@@ -104,6 +104,6 @@ export default async function OrderDetails({ id }: { id: number }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 

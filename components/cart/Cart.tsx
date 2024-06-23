@@ -92,5 +92,5 @@ export default function Cart() {
         )}
       </DropdownMenuContent>
     </DropdownMenu >
-  )
+  );
 }

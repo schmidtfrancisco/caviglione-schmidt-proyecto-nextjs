@@ -42,39 +42,39 @@ const subLinks = [
 ]
 
 export default function NavLinks({ isForSidebar = false }: { isForSidebar?: boolean }) {
-  const pathname = usePathname()
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const pathname = usePathname();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   if (!isForSidebar) {
     return (
       <>
-        <CommonLinks pathname={pathname} />
+        <CommonLinks pathname={pathname}/>
         <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
           <DropdownMenuTrigger asChild>
             <button
               className="text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:bg-gray-700 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
-              <TagIcon strokeWidth={1.5} className="h-6 w-6" />
+              <TagIcon strokeWidth={1.5} className="h-6 w-6"/>
               Categorías
-              <ChevronDownIcon className={cn(dropdownOpen ? "rotate-180" : "", "h-4 w-4 transition-all")} />
+              <ChevronDownIcon className={cn(dropdownOpen ? "rotate-180" : "", "h-4 w-4 transition-all")}/>
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-50">
-            <CommonSubLinks pathname={pathname} />
+            <CommonSubLinks pathname={pathname}/>
           </DropdownMenuContent>
         </DropdownMenu>
       </>
-    )
+    );
   } else {
     return (
       <>
-        <SheetLinks pathname={pathname} />
+        <SheetLinks pathname={pathname}/>
         <div className="flex gap-2 items-center px-2">
-          <TagIcon strokeWidth={1.5} className="h-6 w-6" />
+          <TagIcon strokeWidth={1.5} className="h-6 w-6"/>
           <p className="text-sm font-bold m-2">Categorías</p>
         </div>
-        <SheetSubLinks pathname={pathname} />
+        <SheetSubLinks pathname={pathname}/>
       </>
-    )
+    );
   }
 }
 
@@ -99,7 +99,7 @@ export function SheetLinks({ pathname }: { pathname: string }) {
         );
       })}
     </>
-  )
+  );
 }
 
 export function CommonLinks({ pathname }: { pathname: string }) {
@@ -116,13 +116,13 @@ export function CommonLinks({ pathname }: { pathname: string }) {
                 'bg-gray-700 text-sky-400 hover:text-gray-300': pathname === link.href,
               }
             )}>
-            <LinkIcon strokeWidth={1.5} className="h-6 w-6" />
+            <LinkIcon strokeWidth={1.5} className="h-6 w-6"/>
             <p className="md:block">{link.name}</p>
           </Link>
         );
       })}
     </>
-  )
+  );
 }
 
 export function SheetSubLinks({ pathname }: { pathname: string }) {
@@ -140,14 +140,14 @@ export function SheetSubLinks({ pathname }: { pathname: string }) {
                     'bg-gray-700 text-sky-400 hover:text-gray-300': pathname === link.href,
                   }
                 )}>
-              <LinkIcon strokeWidth={1.5} className="h-6 w-6" />
+              <LinkIcon strokeWidth={1.5} className="h-6 w-6"/>
               <p className="md:block">{link.name}</p>
             </Link>
           </SheetClose>
         );
       })}
     </>
-  )
+  );
 }
 
 export function CommonSubLinks({ pathname }: { pathname: string }) {
@@ -165,12 +165,12 @@ export function CommonSubLinks({ pathname }: { pathname: string }) {
                     'bg-gray-700 text-sky-400 hover:text-gray-300': pathname === link.href,
                   }
                 )}>
-              <LinkIcon strokeWidth={1.5} className="h-6 w-6" />
+              <LinkIcon strokeWidth={1.5} className="h-6 w-6"/>
               <p className="px-4 md:block">{link.name}</p>
             </Link>
           </DropdownMenuItem>
         );
       })}
     </>
-  )
+  );
 }

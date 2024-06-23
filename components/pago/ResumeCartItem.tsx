@@ -10,7 +10,6 @@ import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { MinusIcon, PlusIcon } from "lucide-react";
 
 export default function ResumeCartItem({ game, quantity }: { game: Game, quantity: number }) {
-
   const { cart, dispatch, isCartConfirmed } = useCart();
   const handleRemoveFromCart = (id: string) => {
     dispatch({ type: "REMOVE_FROM_CART", id })
@@ -37,32 +36,32 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
             <div className="flex items-center gap-1">
               {!isCartConfirmed ? (
                 <>
-                <Button
-                onClick={() => handleUpdateQuantity(game.id, quantity - 1)}
-                variant="ghost"
-                size="icon"
-                className="p-0 m-0"
-                disabled={quantity === 1}
-              >
-                <MinusIcon className="h-4 w-4" />
-              </Button>
-              <span className="text-sm text-center">{quantity} un.</span>
-              <Button
-                onClick={() => handleUpdateQuantity(game.id, quantity + 1)}
-                variant="ghost"
-                size="icon"
-              >
-                <PlusIcon className="h-4 w-4" />
-              </Button>
-              <Button
-                onClick={() => handleRemoveFromCart(game.id)}
-                variant="ghost"
-                size="sm"
-              >
-                <TrashIcon className="h-4 w-4 mr-1" />
-                Eliminar
-              </Button>
-              </>
+									<Button
+										onClick={() => handleUpdateQuantity(game.id, quantity - 1)}
+										variant="ghost"
+										size="icon"
+										className="p-0 m-0"
+										disabled={quantity === 1}
+									>
+										<MinusIcon className="h-4 w-4"/>
+									</Button>
+									<span className="text-sm text-center">{quantity} un.</span>
+									<Button
+										onClick={() => handleUpdateQuantity(game.id, quantity + 1)}
+										variant="ghost"
+										size="icon"
+									>
+										<PlusIcon className="h-4 w-4"/>
+									</Button>
+									<Button
+										onClick={() => handleRemoveFromCart(game.id)}
+										variant="ghost"
+										size="sm"
+									>
+										<TrashIcon className="h-4 w-4 mr-1"/>
+										Eliminar
+									</Button>
+								</>
               ) : (
                 <p className="text-sm pl-3 pt-1">Cantidad: {quantity}</p>
               )}
@@ -73,9 +72,7 @@ export default function ResumeCartItem({ game, quantity }: { game: Game, quantit
           <p className="font-medium text-right">{formatPrice(game.price)}</p>
         </div>
       </div>
-      <Separator className="my-2" />
+      <Separator className="my-2"/>
     </>
-  )
-
+  );
 }
-
