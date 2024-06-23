@@ -6,7 +6,6 @@ import AddToCartButton from "@/components/cart/AddToCartButton";
 import GameCldImage from "@/components/juegos/GameCldImage";
 
 export default function GameCard({ game }: { game: Game }) {
-
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-gray-100">
       <div className="flex items-center gap-2">

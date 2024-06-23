@@ -1,15 +1,14 @@
-'use client';
+"use client";
 
-import { formatPrice } from "@/lib/utils";
-import { Game } from "@/lib/definitions/products-definitions";
-import { useCart } from "@/lib/hooks/useCart";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import { Button } from "@/components/ui/button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline"
+import { Game } from "@/lib/definitions/products-definitions";
+import { useCart } from "@/lib/hooks/useCart";
+import { formatPrice } from "@/lib/utils";
+import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 export default function CartItem({ game, quantity }: { game: Game, quantity: number }) {
-
   const { cart, dispatch, isCartConfirmed } = useCart();
 
   const handleRemoveFromCart = (id: string) => {
@@ -64,15 +63,11 @@ export default function CartItem({ game, quantity }: { game: Game, quantity: num
               ) : (
                 <p className="text-xs pl-3">Cant.: {quantity}</p>
               )}
-
             </div>
           </div>
         </div>
-
         <p className="text-sm text-gray-500">{formatPrice(game.price)}</p>
-
       </div>
     </DropdownMenuItem>
-
   )
 }

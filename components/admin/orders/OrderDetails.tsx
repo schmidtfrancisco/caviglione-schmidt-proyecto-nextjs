@@ -1,19 +1,16 @@
-
-import { formatPrice } from "@/lib/utils";
-import { fetchOrderById, fetchOrderItems } from "@/lib/data/orders-data";
-import Status from "@/components/admin/pedidos/status";
-import OrderItem from "@/components/admin/pedidos/OrderItem";
+import OrderItem from "@/components/admin/orders/OrderItem";
+import Status from "@/components/admin/orders/Status";
 import { Separator } from "@/components/ui/separator";
+import { fetchOrderById, fetchOrderItems } from "@/lib/data/orders-data";
+import { formatPrice } from "@/lib/utils";
+import { CalendarDaysIcon, EnvelopeIcon, ListBulletIcon, TruckIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { Joystick } from "lucide-react";
-import { ListBulletIcon, UserCircleIcon, EnvelopeIcon, CalendarDaysIcon, TruckIcon } from "@heroicons/react/24/outline";
 
 export default async function OrderDetails({ id }: { id: number }) {
   const order = await fetchOrderById(id);
   const orderItems = await fetchOrderItems(id);
-
-  const ENVIO = 1000;
-  const total = order.total + (ENVIO * 100);
-
+  const envio = 1000;
+  const total = order.total + (envio * 100);
   return (
     <div className="grid gap-6 md:px-8">
       <div className="flex items-center justify-between">
@@ -23,27 +20,26 @@ export default async function OrderDetails({ id }: { id: number }) {
             <div className="md:text-lg font-medium">{order.client}</div>
           </div>
           <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-            <CalendarDaysIcon className="w-4 h-4" />
+            <CalendarDaysIcon className="w-4 h-4"/>
             Realizado el {order.date.toLocaleDateString('es-AR')}
           </div>
         </div>
-        <Status status={order.status} />
+        <Status status={order.status}/>
       </div>
       <div className="grid gap-4">
         <div className="grid gap-3">
           <div className="flex items-center gap-1 font-medium">
-            <Joystick className="w-4 h-4" />
+            <Joystick className="w-4 h-4"/>
             Juegos
           </div>
           {orderItems?.map((item) => (
-            <OrderItem key={item.game_id} gameId={item.game_id} quantity={item.quantity}
-            />
+            <OrderItem key={item.game_id} gameId={item.game_id} quantity={item.quantity}/>
           ))}
         </div>
-        <Separator />
+        <Separator/>
         <div className="grid gap-3">
           <div className="flex items-center gap-1 font-medium">
-            <ListBulletIcon className="w-4 h-4" />
+            <ListBulletIcon className="w-4 h-4"/>
             Resumen del pedido
           </div>
           <div className="grid gap-2 md:px-4">
@@ -53,9 +49,9 @@ export default async function OrderDetails({ id }: { id: number }) {
             </div>
             <div className="flex items-center justify-between text-sm">
               <div className="text-gray-500 dark:text-gray-400">Envío</div>
-              <div>{formatPrice(ENVIO * 100)}</div>
+              <div>{formatPrice(envio * 100)}</div>
             </div>
-            <Separator />
+            <Separator/>
             <div className="flex items-center justify-between font-medium text-sm md:text-base">
               <div>Total</div>
               <div>{formatPrice(total)}</div>
@@ -66,16 +62,15 @@ export default async function OrderDetails({ id }: { id: number }) {
             </div>
           </div>
         </div>
-
         <div className="grid gap-3">
           <div className="flex items-center gap-1 font-medium">
-            <UserCircleIcon className="w-4 h-4" />
+            <UserCircleIcon className="w-4 h-4"/>
             Información del cliente
           </div>
           <div className="grid gap-2">
             <div className="flex items-center justify-between text-xs md:text-sm">
               <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                <EnvelopeIcon className="w-4 h-4" />
+                <EnvelopeIcon className="w-4 h-4"/>
                 Email
               </div>
               <div>
@@ -84,10 +79,10 @@ export default async function OrderDetails({ id }: { id: number }) {
                 </p>
               </div>
             </div>
-            <Separator />
+            <Separator/>
             <div className="flex flex-col gap-2 md:flex-row md:items-center">
               <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                <TruckIcon className="w-4 h-4" />
+                <TruckIcon className="w-4 h-4"/>
                 Dirección de envio
               </div>
               <div className="flex flex-col ml-auto mr-6">

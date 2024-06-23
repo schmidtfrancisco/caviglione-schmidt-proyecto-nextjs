@@ -38,11 +38,11 @@ export function CarouselItemSkeleton() {
 export function GameListSkeleton() {
   return (
     <>
-      <GameItemSkeleton />
-      <GameItemSkeleton />
-      <GameItemSkeleton />
-      <GameItemSkeleton />
-      <GameItemSkeleton />
+      <GameItemSkeleton/>
+      <GameItemSkeleton/>
+      <GameItemSkeleton/>
+      <GameItemSkeleton/>
+      <GameItemSkeleton/>
     </>
   );
 }
@@ -66,7 +66,6 @@ export function GameItemSkeleton() {
 }
 
 export function GamePageSkeleton() {
-
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-16 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -85,13 +84,10 @@ export function GamePageSkeleton() {
               <Skeleton className="w-full h-6 bg-gray-200 rounded-lg"></Skeleton>
               <Skeleton className="w-full h-6 bg-gray-200 rounded-lg"></Skeleton>
             </div>
-
             <div className="mt-6 flex items-center">
-
             </div>
           </section>
         </div>
-
         <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
           <div className="aspect-square rounded-lg">
             <Skeleton className="w-full h-auto [aspect-ratio:1/1] bg-gray-200 rounded-lg"></Skeleton>

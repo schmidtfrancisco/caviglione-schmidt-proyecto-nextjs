@@ -1,13 +1,12 @@
-import { Suspense } from "react";
 import { outfit } from "@/components/fonts";
-import { cn } from "@/lib/utils";
-import { fetchGamesCount } from "@/lib/data/products-data";
+import GameCldImage from "@/components/juegos/GameCldImage";
 import GamesList from "@/components/juegos/GamesList";
-import Search from "@/components/pagination-search/Search";
 import PagePagination from "@/components/pagination-search/PagePagination";
+import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
-import Image from "next/image";
-
+import { fetchGamesCount } from "@/lib/data/products-data";
+import { cn } from "@/lib/utils";
+import { Suspense } from "react";
 
 export default async function Page(
   { searchParams }: {
@@ -20,7 +19,6 @@ export default async function Page(
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.pag) || 1;
   const maxPage = await fetchGamesCount(query);
-
   return (
     <div className="p-1 md:p-6">
       <section className="flex flex-col md:flex-row justify-center">
@@ -29,8 +27,8 @@ export default async function Page(
             "md:text-7xl font-bold text-center md:text-left text-gray-700 flex items-center justify-center")}
           >
             Juegos
-            <Image
-              src="/juegos.png"
+            <GameCldImage
+              src="GameStore/juegos"
               alt="Juegos"
               width={100}
               height={100}
@@ -44,7 +42,7 @@ export default async function Page(
             inputClassName="bg-gray-100" 
             className="flex ml-auto min-w-[300px]"
             />
-          <Suspense fallback={<GameListSkeleton />}>
+          <Suspense fallback={<GameListSkeleton/>}>
             <GamesList query={query} currentPage={currentPage} />
           </Suspense>
         </div>

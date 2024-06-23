@@ -1,4 +1,3 @@
-
 import { Category, Game } from "@/lib/definitions/products-definitions";
 import { fetchFilteredGames, fetchFilteredGamesByCategory } from "@/lib/data/products-data";
 import GameCard from "@/components/juegos/GameCard";
@@ -12,7 +11,6 @@ export default async function GamesList(
   } else {
     games = await fetchFilteredGames(query, currentPage);
   }
-
   return (
     <>
       {games.map((game) => (

@@ -1,9 +1,9 @@
-import { fetchOrdersCount, fetchOrdersCountByState } from "@/lib/data/orders-data"
-import Header from "@/components/admin/Header"
-import PagePagination from "@/components/pagination-search/PagePagination"
-import OrdersTable from "@/components/admin/pedidos/OrdersTable"
+import Header from "@/components/admin/Header";
+import OrdersTable from "@/components/admin/orders/OrdersTable";
+import PagePagination from "@/components/pagination-search/PagePagination";
+import { fetchOrdersCount, fetchOrdersCountByState } from "@/lib/data/orders-data";
 
-export default async function Component({searchParams} : {
+export default async function Page({ searchParams } : {
 	searchParams: {
 		pag?: string
 		query?: string
@@ -16,8 +16,7 @@ export default async function Component({searchParams} : {
 	let maxPage;
 	if (state === '') {
 		maxPage = await fetchOrdersCount(query);
-	}	
-	else {
+	}	else {
 		maxPage = await fetchOrdersCountByState(query, state);
 	}
 	

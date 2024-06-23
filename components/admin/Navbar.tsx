@@ -1,8 +1,7 @@
-
-import { signOut } from '@/auth';
-import NavLinks from "@/components/admin/NavLinks"
-import { Package2Icon } from "lucide-react";
+import { signOut } from "@/auth";
+import NavLinks from "@/components/admin/NavLinks";
 import { PowerIcon } from "@heroicons/react/24/outline";
+import { Package2Icon } from "lucide-react";
 
 export default function Navbar() {
 	return (

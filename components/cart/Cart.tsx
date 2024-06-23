@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { cn, formatPrice } from "@/lib/utils";
-import { useCart } from "@/lib/hooks/useCart";
-import CartItem from "@/components/cart/CartItem"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/outline"
+import CartItem from "@/components/cart/CartItem";
 import GameCldImage from "@/components/juegos/GameCldImage";
+import { Badge } from "@/components/ui/badge";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useCart } from "@/lib/hooks/useCart";
+import { cn, formatPrice } from "@/lib/utils";
+import { ShoppingCartIcon, TrashIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Cart() {
   const [isClient, setIsClient] = useState(false)
@@ -39,7 +39,6 @@ export default function Cart() {
           <span className="sr-only">Cart</span>
         </Button>
       </DropdownMenuTrigger>
-
       <DropdownMenuContent align="end" className="w-80">
         <DropdownMenuLabel className="flex items-center justify-between">
           Tu carrito ({cartCount})
@@ -51,7 +50,7 @@ export default function Cart() {
             <TrashIcon className="h-4 w-4" />
           </Button>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator/>
         {(cartCount === 0) ? (
           <div className="flex flex-col items-center justify-between w-full gap-2">
             <GameCldImage
@@ -75,15 +74,14 @@ export default function Cart() {
                 <CartItem key={item.game.id} game={item.game} quantity={item.quantity} />
               ))}
             </ScrollArea>
-
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator/>
             <DropdownMenuItem>
               <div className="flex items-center justify-between w-full">
                 <p className="font-medium">Total</p>
                 <p className="font-medium">{formatPrice(cartTotal)}</p>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator/>
             <DropdownMenuItem asChild>
               <Link href="/pago"
                 className={cn(buttonVariants({ size: "sm", variant: "default" }), "cursor-pointer w-full")}>
@@ -93,7 +91,6 @@ export default function Cart() {
           </>
         )}
       </DropdownMenuContent>
-
     </DropdownMenu >
   )
 }

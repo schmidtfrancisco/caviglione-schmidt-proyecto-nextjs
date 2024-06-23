@@ -1,35 +1,32 @@
-'use client';
+"use client";
 
-import { useFormState } from 'react-dom';
-import Link from 'next/link';
-import { Category, Game } from '@/lib/definitions/products-definitions';
 import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
 import GameCldImage from "@/components/juegos/GameCldImage";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import Breadcrumbs from "@/components/admin/pedidos/breadcrumbs";
-import { updateProduct } from '@/lib/actions';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Button } from '@/components/ui/button';
-import {
-  CheckIcon,
-  CurrencyDollarIcon,
-  ArrowRightCircleIcon, CreditCardIcon, XMarkIcon
-} from '@heroicons/react/24/outline';
-import { formatPrice } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useState } from 'react';
+import { Textarea } from "@/components/ui/textarea";
+import { updateProduct } from "@/lib/actions";
+import { Category, Game } from "@/lib/definitions/products-definitions";
+import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
+import { useState } from "react";
+import { useFormState } from "react-dom";
 
-export default function EditGameForm({ game }: { game: Game }) {
+export default function EditProductForm({ game }: { game: Game }) {
 	const initialState = { message: "", errors: {} };
   const updateGameWithId = updateProduct.bind(null, game.id);
   const [state, dispatch] = useFormState(updateGameWithId, initialState);
-	
+	const [urlStates, setUrlStates] = useState<string[]>([]);
+	const addNewUrl = (newUrl: string) => {
+    setUrlStates(prevStates => [...prevStates, newUrl]);
+  };
   return (
-    <form action={dispatch}>
-      <div className="bg-white">
+		<form action={dispatch}>
+			<div className="bg-white">
 				<div className="mx-auto max-w-2xl px-4 py-10 sm:px-6  lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
 					<div className="lg:col-span-2">
 						<div className="mt-10">
@@ -68,48 +65,62 @@ export default function EditGameForm({ game }: { game: Game }) {
 									</div>
 								</div>
 								<div className="ml-4 border-l text-muted-foreground border-gray-300 pl-4">
-									<RadioGroup defaultValue={game.category} className="grid-flow-col" id="category" name="category">
+									<RadioGroup
+										id="category"
+										name="category"
+										defaultValue={game.category}
+										className="grid-flow-col"
+									>
 										<div className="flex items-center space-x-2">
-											<RadioGroupItem value={Category.JUEGOS_DE_MESA} id="opt1" />
-											<GameCategoryBadge category={Category.JUEGOS_DE_MESA} className="text-white px-2 py-1 rounded-full text-xs"/>
+											<RadioGroupItem value={Category.JUEGOS_DE_MESA} id="opt1"/>
+											<GameCategoryBadge
+												category={Category.JUEGOS_DE_MESA}
+												className="text-white px-2 py-1 rounded-full text-xs"
+											/>
 										</div>
 										<div className="flex items-center space-x-2">
-											<RadioGroupItem value={Category.VIDEOJUEGOS} id="opt2" />
-											<GameCategoryBadge category={Category.VIDEOJUEGOS} className="text-white px-2 py-1 rounded-full text-xs"/>
+											<RadioGroupItem value={Category.VIDEOJUEGOS} id="opt2"/>
+											<GameCategoryBadge
+												category={Category.VIDEOJUEGOS}
+												className="text-white px-2 py-1 rounded-full text-xs"
+											/>
 										</div>
 										<div className="flex items-center space-x-2">
 											<RadioGroupItem value={Category.JUGUETES} id="opt3" />
-											<GameCategoryBadge category={Category.JUGUETES} className="text-white px-2 py-1 rounded-full text-xs"/>
+											<GameCategoryBadge
+												category={Category.JUGUETES}
+												className="text-white px-2 py-1 rounded-full text-xs"
+											/>
 										</div>
 									</RadioGroup>
 								</div>
 							</div>
 							<div className="mt-4 space-y-6">
-								<Textarea className="resize-none" id="description" name='description'
-								defaultValue={game.description} placeholder="Ingrese la descripción del producto"/>
+								<Textarea
+									id="description"
+									name="description"
+									defaultValue={game.description}
+									placeholder="Ingrese la descripción del producto"
+									className="resize-none"
+								/>
 							</div>
 							<div className="mt-4 space-y-6">
 								{game.images_url.map((imgUrl, index) => (
-                  <div key={index} className="flex items-center space-x-2">
+									<div key={index} className="flex items-center space-x-2">
 										<Checkbox
 											id={`delete-${index}`}
 											name="images"
 											value={imgUrl}
 											defaultChecked
 										/>
-											<label
-												htmlFor={`delete-${index}`}
-												className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-											>
-												Imagen {index + 1} / {game.images_url.length}
-											</label>
+										<label
+											htmlFor={`delete-${index}`}
+											className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+										>
+											¿Mantener imagen {index + 1} / {game.images_url.length}?
+										</label>
 									</div>
-                ))}
-							</div>
-							<div className="mt-6 flex items-center">
-							<Button className="w-full" type="submit">
-					Confirmar
-				</Button>
+								))}
 							</div>
 						</section>
 					</div>
@@ -131,15 +142,33 @@ export default function EditGameForm({ game }: { game: Game }) {
 									<ChevronRightIcon className="h-6 w-6" />
 								</CarouselNext>
 							</Carousel>
-							
-							<Button className="mt-5">
-								Añadir nuevas imágenes
-							</Button>
 						</div>
+						<CldUploadWidget
+							uploadPreset='GameStore'
+							signatureEndpoint='/api/sign-cloudinary-params'
+							onSuccess={(results) => { 
+								const info = (results.info) as CloudinaryUploadWidgetInfo
+								addNewUrl(info.public_id)
+							}}
+						>
+							{({ open }) => {
+								return (
+									<>
+										<Button type="button" onClick={() => open()}>
+											Añadir imágenes
+										</Button>
+									</>
+								);
+							}}
+						</CldUploadWidget>
 					</div>
 				</div>
-				
+				<div className="mt-6 flex items-center">
+					<Button className="w-full" type="submit" name='added' value={urlStates}>
+						Confirmar
+					</Button>
+				</div>
 			</div>
-    </form>
+		</form>
   );
 }

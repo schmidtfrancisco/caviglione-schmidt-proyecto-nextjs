@@ -1,13 +1,12 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-import { CartItem, Category } from "@/lib/definitions/products-definitions";
 import { OrderItem } from "@/lib/definitions/orders-definitions";
+import { CartItem, Category } from "@/lib/definitions/products-definitions";
+import { type ClassValue, clsx } from "clsx";
 import { Items } from "mercadopago/dist/clients/commonTypes";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-
 
 export function formatPrice(price: number) {
   return (price / 100).toLocaleString("es-AR", {
@@ -22,49 +21,32 @@ export function getCategoryLink(category: Category) {
 
 export function linkToCategory(link: string) {
   switch (link) {
-    case 'juegos-de-mesa':
+    case "juegos-de-mesa":
       return Category.JUEGOS_DE_MESA;
-    case 'videojuegos':
+    case "videojuegos":
       return Category.VIDEOJUEGOS;
-    case 'juguetes':
+    case "juguetes":
       return Category.JUGUETES;
     default: return null
   }
 }
 
-
 export const generatePagination = (currentPage: number, totalPages: number) => {
-  // If the total number of pages is 7 or less,
-  // display all pages without any ellipsis.
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
-
-  // If the current page is among the first 3 pages,
-  // show the first 3, an ellipsis, and the last 2 pages.
   if (currentPage <= 2) {
     return [1, 2, 3, '...', totalPages - 1, totalPages];
   }
-
-  // If the current page is among the first 3 pages,
-  // show the first 3, an ellipsis, and the last 2 pages.
   if (currentPage <= 3) {
     return [1, 2, 3, 4, '...', totalPages - 1, totalPages];
   }
-
-  // If the current page is among the last 3 pages,
-  // show the first 2, an ellipsis, and the last 3 pages.
   if (currentPage >= totalPages - 1) {
     return [1, 2, '...', totalPages - 2, totalPages - 1, totalPages];
   }
-
   if (currentPage >= totalPages - 2) {
     return [1, 2, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
   }
-
-  // If the current page is somewhere in the middle,
-  // show the first page, an ellipsis, the current page and its neighbors,
-  // another ellipsis, and the last page.
   return [
     1,
     '...',

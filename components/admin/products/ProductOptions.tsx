@@ -1,7 +1,5 @@
-'use client';	
+"use client";	
 
-import Link from "next/link"
-import { deleteProduct } from '@/lib/actions';
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -12,13 +10,15 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { PlusIcon, PencilIcon, ExclamationCircleIcon, TrashIcon } from '@heroicons/react/24/outline'
+} from "@/components/ui/alert-dialog";
+import { deleteProduct } from "@/lib/actions";
+import { ExclamationCircleIcon, PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export function EditProduct({ id }: { id: string }) {
 	return (
 		<Link
-			href={'/admin/products/' + id + '/edit'}
+			href={"/admin/products/" + id + "/edit"}
 			className="rounded-md border p-2 hover:bg-gray-100 flex items-center w-full"
 		>
 			<PencilIcon className="w-5 md:mr-2" />
@@ -31,14 +31,12 @@ export function DeleteProduct({ id }: { id: string }) {
 	const deleteProductWithId = () => {
 		deleteProduct(id);
 	};
-
 	return (
-		<AlertDialog >
+		<AlertDialog>
 			<AlertDialogTrigger className='rounded-md border p-2 hover:bg-gray-100 flex items-center w-full'>
-				<TrashIcon className="w-5 md:mr-2" />
+				<TrashIcon className="w-5 md:mr-2"/>
 				<span className="hidden md:block ml-1 text-sm">Eliminar</span>
 			</AlertDialogTrigger>
-
 			<AlertDialogContent>
 				<AlertDialogHeader>
 					<AlertDialogTitle className='flex items-center'>
@@ -66,7 +64,7 @@ export function DeleteProduct({ id }: { id: string }) {
 export function CreateProduct() {
   return (
     <Link href="/admin/products/create" className="flex items-center justify-center w-full">
-			<PlusIcon className="w-5 md:mr-2" />
+			<PlusIcon className="w-5 md:mr-2"/>
 			<span className="hidden md:block ml-1 text-sm">Crear</span>
 		</Link>
   )
