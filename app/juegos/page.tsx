@@ -1,13 +1,13 @@
 import { outfit } from "@/components/fonts";
+import FiltersSection from "@/components/juegos/FiltersSection";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import GamesList from "@/components/juegos/GamesList";
 import PagePagination from "@/components/pagination-search/PagePagination";
 import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
-import { fetchGamesCount, fetchGamesMaxPrice } from "@/lib/data/products-data";
+import { fetchGamesCountPrice, fetchGamesMaxPrice } from "@/lib/data/products-data";
 import { cn } from "@/lib/utils";
 import { Suspense } from "react";
-import FiltersSection from "@/components/juegos/FiltersSection";
 export default async function Page(
   { searchParams }: {
     searchParams: {
@@ -24,7 +24,7 @@ export default async function Page(
   const sort = searchParams?.sort || 'none';
   const min = Number(searchParams?.min) || 0;
   const max = Number(searchParams?.max) || 50000;
-  const maxPage = await fetchGamesCount(query, min, max);
+  const maxPage = await fetchGamesCountPrice(query, min, max);
   const maxPrice = await fetchGamesMaxPrice(query);
   return (
     <div className="p-1 md:p-6">

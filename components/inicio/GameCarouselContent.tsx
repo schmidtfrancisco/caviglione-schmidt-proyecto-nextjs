@@ -1,6 +1,6 @@
 import GameCarouselItem from "@/components/inicio/GameCarouselItem";
 import { CarouselContent } from "@/components/ui/carousel";
-import { fetchGamesByCategoryWithLimit } from "@/lib/data/products-data";
+import { fetchGamesByCategoryWithLimit } from "@/lib/data/products-category-data";
 import { Category, Game } from "@/lib/definitions/products-definitions";
 
 export default async function GameCarouselContent(

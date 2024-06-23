@@ -241,7 +241,23 @@ export async function fetchFilteredGamesPriceDesc(
   }
 }
 
-export async function fetchGamesCount(query: string, min: number, max: number) {
+export async function fetchGamesCount(query: string) {
+  noStore();
+  try {
+    const data = await sql` 
+      SELECT COUNT(*)
+      FROM gamestore.games
+      WHERE name ILIKE ${`%${query}%`};
+    `;
+    const totalPages = Math.ceil(Number(data.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch games count');
+  }
+}
+
+export async function fetchGamesCountPrice(query: string, min: number, max: number) {
   noStore();
   try {
     const data = await sql` 
