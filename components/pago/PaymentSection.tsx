@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { useContext, useEffect } from "react";
-import { formatPrice } from "@/lib/utils";
-import { useCart } from "@/lib/hooks/useCart";
 import { PaymentContext } from "@/components/pago/PaymentContext";
 import PaymentDataForm from "@/components/pago/PaymentDataForm";
 import WallletBrick from "@/components/pago/WalletBrick";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { useCart } from "@/lib/hooks/useCart";
+import { formatPrice } from "@/lib/utils";
 import { DicesIcon } from "lucide-react";
+import { useContext, useEffect } from "react";
 
 export default function PaymentSection() {
   const { cartTotal, cartCount, isCartConfirmed, setIsCartConfirmed } = useCart();

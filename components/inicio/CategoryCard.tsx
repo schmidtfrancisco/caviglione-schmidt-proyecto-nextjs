@@ -1,7 +1,7 @@
-import Link from "next/link";
+import GameCldImage from "@/components/juegos/GameCldImage";
 import { Category } from "@/lib/definitions/products-definitions";
 import { getCategoryLink } from "@/lib/utils";
-import GameCldImage from "@/components/juegos/GameCldImage";
+import Link from "next/link";
 
 export default function CategoryCard({ category, description, src }: { category: Category, description: string, src: string }) {
   return (
@@ -21,6 +21,5 @@ export default function CategoryCard({ category, description, src }: { category:
         <p className="text-sm text-gray-500 dark:text-gray-400">{description}</p>
       </div>
     </div>
-
   )
 }

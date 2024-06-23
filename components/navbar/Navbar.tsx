@@ -1,12 +1,11 @@
-
-import Link from "next/link"
-import NavLinks from "@/components/navbar/Nav-links"
-import Cart from "@/components/cart/Cart"
-import LoginOptions from "@/components/login/LoginOptions"
-import SheetLoginOptions from "@/components/login/SheetLoginOptions"
-import { SheetTrigger, SheetContent, Sheet} from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Bars3BottomLeftIcon, FlagIcon } from "@heroicons/react/24/outline"
+import Cart from "@/components/cart/Cart";
+import LoginOptions from "@/components/login/LoginOptions";
+import SheetLoginOptions from "@/components/login/SheetLoginOptions";
+import NavLinks from "@/components/navbar/Nav-links";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Bars3BottomLeftIcon, FlagIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -33,20 +32,17 @@ export default function Navbar() {
           </div>
         </SheetContent>
       </Sheet>
-
       <Link className="mr-6 hidden lg:flex items-center gap-2" href="/">
         <FlagIcon className="h-6 w-6" />
         <span className="text-lg font-semibold">Game Store</span>
       </Link>
-
       <nav className="flex flex-row gap-4 items-center">
         <div className="hidden lg:flex lg:flex-row items-center gap-4 ml-auto justify-self-end">
-          <NavLinks />
+          <NavLinks/>
         </div>
-
         <div className="ml-auto flex items-center gap-4">
           <Cart />
-          <LoginOptions />
+          <LoginOptions/>
         </div>
       </nav>
     </header>

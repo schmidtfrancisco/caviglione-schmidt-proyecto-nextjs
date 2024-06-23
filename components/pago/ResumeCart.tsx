@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import Link from "next/link";
-import { cn, formatPrice } from "@/lib/utils";
-import { useCart } from "@/lib/hooks/useCart";
+import GameCldImage from "@/components/juegos/GameCldImage";
 import ResumeCartItem from "@/components/pago/ResumeCartItem";
-import { Separator } from "@/components/ui/separator";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import GameCldImage from "@/components/juegos/GameCldImage";
+import { Separator } from "@/components/ui/separator";
+import { useCart } from "@/lib/hooks/useCart";
+import { cn, formatPrice } from "@/lib/utils";
+import Link from "next/link";
 
 
 export default function ResumeCart() {

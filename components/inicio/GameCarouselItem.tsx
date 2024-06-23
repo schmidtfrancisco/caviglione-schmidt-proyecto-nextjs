@@ -1,16 +1,15 @@
-'use client';
+"use client";
 
-import Link from "next/link"
-import { formatPrice, getCategoryLink } from "@/lib/utils";
-import { Game } from '@/lib/definitions/products-definitions';
-import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
 import AddToCartButton from "@/components/cart/AddToCartButton";
+import GameCategoryBadge from "@/components/inicio/GameCategoryBadge";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import { Card, CardContent } from "@/components/ui/card";
 import { CarouselItem } from "@/components/ui/carousel";
+import { Game } from '@/lib/definitions/products-definitions';
+import { formatPrice, getCategoryLink } from "@/lib/utils";
+import Link from "next/link";
 
 export default function GameCarouselItem({ game }: { game: Game }) {
-
   return (
     <CarouselItem className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
       <Card>

@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { authenticate } from '@/lib/actions';
-import { Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { authenticate } from "@/lib/actions";
 import {
-  AtSymbolIcon,
-  KeyIcon,
+	AtSymbolIcon,
 	ExclamationCircleIcon,
-} from '@heroicons/react/24/outline';
+	KeyIcon,
+} from "@heroicons/react/24/outline";
+import { useFormState, useFormStatus } from "react-dom";
 
 export default function LoginForm() {
 	const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -52,7 +52,7 @@ export default function LoginForm() {
 							<KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
 						</div>
           </div>
-          <LoginButton />
+          <LoginButton/>
 					<div
 						className="flex h-8 items-end space-x-1"
 						aria-live="polite"

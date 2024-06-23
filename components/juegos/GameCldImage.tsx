@@ -1,5 +1,6 @@
-"use client"
-import { CldImage } from "next-cloudinary"
+"use client";
+
+import { CldImage } from "next-cloudinary";
 
 export default function GameCldImage(
 	{width = 600, height = 600, src, alt = "", style, className}: 

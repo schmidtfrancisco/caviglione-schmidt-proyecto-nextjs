@@ -1,6 +1,6 @@
-import { Category, Game } from "@/lib/definitions/products-definitions";
-import { fetchFilteredGames, fetchFilteredGamesByCategory } from "@/lib/data/products-data";
 import GameCard from "@/components/juegos/GameCard";
+import { fetchFilteredGames, fetchFilteredGamesByCategory } from "@/lib/data/products-data";
+import { Category, Game } from "@/lib/definitions/products-definitions";
 
 export default async function GamesList(
   { query, currentPage, category }: { query: string, currentPage: number, category?: Category },

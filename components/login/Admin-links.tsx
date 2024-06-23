@@ -1,15 +1,14 @@
-'use client'
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { SheetClose } from "@/components/ui/sheet"
-import { ArrowRightEndOnRectangleIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/outline"
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { SheetClose } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { ArrowRightEndOnRectangleIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function SheetLogInLink() {
   const pathname = usePathname()
-
   return (
     <SheetClose asChild>
       <Link href="/login" className={cn(
@@ -27,7 +26,6 @@ export function SheetLogInLink() {
 
 export function SheetDashboardLink() {
   const pathname = usePathname()
-
   return (
     <SheetClose asChild>
       <Link href="/admin" className={cn(
@@ -45,7 +43,6 @@ export function SheetDashboardLink() {
 
 export function DropdownLogInLink() {
   const pathname = usePathname()
-
   return (
     <DropdownMenuItem asChild>
       <Link
@@ -66,7 +63,6 @@ export function DropdownLogInLink() {
 
 export function DropdownDashboardLink() {
   const pathname = usePathname()
-
   return (
     <DropdownMenuItem asChild>
       <Link
@@ -83,4 +79,3 @@ export function DropdownDashboardLink() {
     </DropdownMenuItem>
   )
 }
-
