@@ -1,5 +1,5 @@
 import GameCard from "@/components/juegos/GameCard";
-import { fetchFilteredGames, fetchFilteredGamesByCategory } from "@/lib/data/products-data";
+import { fetchFilteredGamesByCategory, fetchFilteredGamesSort } from "@/lib/data/products-data";
 import { Category, Game } from "@/lib/definitions/products-definitions";
 
 export default async function GamesList(
@@ -9,7 +9,7 @@ export default async function GamesList(
   if (category) {
     games = await fetchFilteredGamesByCategory(category, query, currentPage);
   } else {
-    games = await fetchFilteredGames(query, sort, currentPage);
+    games = await fetchFilteredGamesSort(query, sort, currentPage);
   }
   return (
     <>

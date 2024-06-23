@@ -129,7 +129,7 @@ export async function fetchGames() {
 
 const ITEMS_PER_PAGE = 10;
 
-export async function fetchFilteredGames(
+export async function fetchFilteredGamesSort(
   query: string,
   sort: string,
   currentPage: number
@@ -147,11 +147,11 @@ export async function fetchFilteredGames(
     case 'price_desc':
       return fetchFilteredGamesDesc(query, "price", currentPage);
     default:
-      return fetchFilteredGamesNone(query, currentPage);
+      return fetchFilteredGames(query, currentPage);
   }
 } 
 
-export async function fetchFilteredGamesNone(
+export async function fetchFilteredGames(
   query: string,
   currentPage: number
 ) {
