@@ -118,7 +118,7 @@ const PaymentFormSchema = z.object({
 });
 
 const client = new MercadoPagoConfig({
-	accessToken: "TEST-8968989067718937-060722-adfaca3b8c9a39eda01ba86f17a1c264-686744806"
+	accessToken: process.env.MP_ACCESS_TOKEN!!
 });
 
 export async function generatePreference(
@@ -126,7 +126,7 @@ export async function generatePreference(
   mpItems: any
 ): Promise<PreferenceResponse> {
   const validatedData = PaymentFormSchema.safeParse(Object.fromEntries(formData.entries()));
-  console.log(mpItems);
+  
   if (!validatedData.success) {
     return {
       formState: {
@@ -148,9 +148,9 @@ export async function generatePreference(
         },
       },
       back_urls: {
-        success: "https://caviglione-schmidt-proyecto-nextjs.vercel.app//pago/finalizado",
-        failure: "https://www.your-site.com/failure",
-        pending: "https://www.your-site.com/pending"
+        success: "https://caviglione-schmidt-proyecto-nextjs.vercel.app/pago/finalizado",
+        failure: "https://caviglione-schmidt-proyecto-nextjs.vercel.app/pago",
+        pending: "https://caviglione-schmidt-proyecto-nextjs.vercel.app/pago"
       },
       auto_return: "approved",
       shipments: {
@@ -160,6 +160,11 @@ export async function generatePreference(
     };
     const preference = new Preference(client);
     const result = await preference.create({ body });
+
+    console.log(result);
+
+    console.log(result.id);
+
     return {
       preferenceId: result.id
     };

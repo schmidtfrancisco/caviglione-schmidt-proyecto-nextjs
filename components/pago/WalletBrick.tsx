@@ -9,11 +9,11 @@ import { useContext, useEffect } from "react";
 export default function WalletBrick() {
   const { preferenceId } = useContext(PaymentContext);
 
-  useEffect(() => {
-    initMercadoPago("TEST-833b8760-ddbf-4ff0-8e5d-2b272d62ffa9", {
-      locale: "es-AR",
-    });
-  }, []);
+  
+  initMercadoPago("APP_USR-eb8b3053-4194-4ef1-bda1-903b677b786e", {
+    locale: "es-AR",
+  });
+  
 
   const renderCheckoutButton = (preferenceId: string) => {
     if (preferenceId === "") return null;
@@ -28,7 +28,7 @@ export default function WalletBrick() {
 
   const initialization = {
     preferenceId: preferenceId,
-    redirectMode: "modal" as "modal" | "blank" | "self",
+    redirectMode: "self" as "modal" | "blank" | "self",
   }
 
   const customization: IWalletBrickCustomization = {

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function GameCard({ game }: { game: Game }) {
   return (
-    <div className="bg-white rounded-lg shadow-lg border-2 border-gray-100">
+    <div className="bg-white rounded-lg shadow-lg border-2 border-gray-100 h-fit">
       <div className="flex items-center gap-2">
         <Link href={`${getCategoryLink(game.category)}/${game.id}`}>
           <GameCldImage

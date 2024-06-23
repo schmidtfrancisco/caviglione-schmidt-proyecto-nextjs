@@ -7,11 +7,11 @@ import Search from "@/components/pagination-search/Search";
 import { GameListSkeleton } from "@/components/skeletons";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { fetchCategoryGamesMaxPrice, fetchGamesByCategoryCountPrice } from "@/lib/data/products-category-data";
 import { Category } from "@/lib/definitions/products-definitions";
 import { cn, linkToCategory } from "@/lib/utils";
 import { FunnelIcon } from "@heroicons/react/24/outline";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
@@ -26,6 +26,10 @@ interface PageProps {
     min?: string;
     max?: string;
   }
+}
+
+export const metadata: Metadata = {
+  title: 'Juegos',
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
@@ -58,7 +62,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         />
       </div>
       <section className="flex flex-col md:flex-row w-full">
-        <div className="w-full md:w-1/2 lg:w-1/4 md:grow-0 p-4">
+        <div className="w-full md:w-1/2 xl:w-1/3 md:grow-0 p-4">
           <div className="flex md:flex-col items-center mb-2 gap-2">
             <Search
               placeholder={`Buscar ${category.toLowerCase()} ...`}
@@ -85,7 +89,7 @@ export default async function Page({ params, searchParams }: PageProps) {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-2 md:gap-4 md:p-6 lg:w-3/5">
+        <div className="grid grid-cols-1 gap-2 md:gap-4 md:p-6 xl:w-3/5">
           <Suspense fallback={<GameListSkeleton />}>
             <GamesList query={query} currentPage={currentPage} category={category} sort={sort} min={min} max={max} />
           </Suspense>

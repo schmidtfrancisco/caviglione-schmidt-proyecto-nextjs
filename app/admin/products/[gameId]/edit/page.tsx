@@ -2,12 +2,17 @@ import Breadcrumbs from "@/components/admin/orders/Breadcrumbs";
 import EditProductForm from '@/components/admin/products/EditProductForm';
 import { fetchGameById } from "@/lib/data/products-data";
 import { Game } from "@/lib/definitions/products-definitions";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface PageProps {
   params: {
     gameId: string
   }
+}
+
+export const metadata: Metadata = {
+  title: 'Editar producto',
 }
 
 export default async function Page({ params }: PageProps) {

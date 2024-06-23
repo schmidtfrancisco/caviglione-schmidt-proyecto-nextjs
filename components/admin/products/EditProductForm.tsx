@@ -18,13 +18,13 @@ import { useFormState } from "react-dom";
 
 export default function EditProductForm({ game }: { game: Game }) {
 	const initialState = { message: "", errors: {} };
-  const updateGameWithId = updateProduct.bind(null, game.id);
-  const [state, dispatch] = useFormState(updateGameWithId, initialState);
+	const updateGameWithId = updateProduct.bind(null, game.id);
+	const [state, dispatch] = useFormState(updateGameWithId, initialState);
 	const [urlStates, setUrlStates] = useState<string[]>([]);
 	const addNewUrl = (newUrl: string) => {
-    setUrlStates(prevStates => [...prevStates, newUrl]);
-  };
-  return (
+		setUrlStates(prevStates => [...prevStates, newUrl]);
+	};
+	return (
 		<form action={dispatch}>
 			<div className="bg-white">
 				<div className="mx-auto max-w-2xl px-4 py-10 sm:px-6  lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
@@ -48,12 +48,12 @@ export default function EditProductForm({ game }: { game: Game }) {
 											name="price"
 											step="0.01"
 											type="number"
-											defaultValue={game.price/100}
+											defaultValue={game.price / 100}
 											placeholder='Precio'
 											min="0"
 											aria-describedby="amount-error"
 										/>
-										<CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
+										<CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
 									</div>
 									<div id="amount-error" aria-live="polite" aria-atomic="true">
 										{state.errors?.price &&
@@ -72,14 +72,14 @@ export default function EditProductForm({ game }: { game: Game }) {
 										className="grid-flow-col flex flex-col md:flex-row"
 									>
 										<div className="flex items-center space-x-2">
-											<RadioGroupItem value={Category.JUEGOS_DE_MESA} id="opt1"/>
+											<RadioGroupItem value={Category.JUEGOS_DE_MESA} id="opt1" />
 											<GameCategoryBadge
 												category={Category.JUEGOS_DE_MESA}
 												className="text-white px-2 py-1 rounded-full text-xs"
 											/>
 										</div>
 										<div className="flex items-center space-x-2">
-											<RadioGroupItem value={Category.VIDEOJUEGOS} id="opt2"/>
+											<RadioGroupItem value={Category.VIDEOJUEGOS} id="opt2" />
 											<GameCategoryBadge
 												category={Category.VIDEOJUEGOS}
 												className="text-white px-2 py-1 rounded-full text-xs"
@@ -146,18 +146,16 @@ export default function EditProductForm({ game }: { game: Game }) {
 						<CldUploadWidget
 							uploadPreset='GameStore'
 							signatureEndpoint='/api/sign-cloudinary-params'
-							onSuccess={(results) => { 
+							onSuccess={(results) => {
 								const info = (results.info) as CloudinaryUploadWidgetInfo
 								addNewUrl(info.public_id)
 							}}
 						>
 							{({ open }) => {
 								return (
-									<>
-										<Button type="button" onClick={() => open()}>
-											Añadir imágenes
-										</Button>
-									</>
+									<Button type="button" onClick={() => open()}>
+										Añadir imágenes
+									</Button>
 								);
 							}}
 						</CldUploadWidget>
@@ -170,5 +168,5 @@ export default function EditProductForm({ game }: { game: Game }) {
 				</div>
 			</div>
 		</form>
-  );
+	);
 }

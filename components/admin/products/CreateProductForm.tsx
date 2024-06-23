@@ -19,11 +19,11 @@ export default function CreateProductForm() {
 	const [state, dispatch] = useFormState(createProduct, initialState);
 	const [urlStates, setUrlStates] = useState<string[]>([]);
 	const addNewUrl = (newUrl: string) => {
-    setUrlStates(prevStates => [...prevStates, newUrl]);
-  };
+		setUrlStates(prevStates => [...prevStates, newUrl]);
+	};
 	return (
 		<form action={dispatch}>
-      <Card className="w-full max-w-2xl">
+			<Card className="w-full max-w-2xl">
 				<CardHeader>
 					<CardTitle>Añadir producto</CardTitle>
 					<CardDescription>Completa el formulario para añadir un nuevo producto.</CardDescription>
@@ -43,21 +43,21 @@ export default function CreateProductForm() {
 							<Label htmlFor="category">Categoría</Label>
 							<RadioGroup defaultValue={Category.JUEGOS_DE_MESA} name="category" id="category">
 								<div className="flex items-center space-x-2">
-									<RadioGroupItem value={Category.JUEGOS_DE_MESA} id="opt1"/>
+									<RadioGroupItem value={Category.JUEGOS_DE_MESA} id="opt1" />
 									<GameCategoryBadge
 										category={Category.JUEGOS_DE_MESA}
 										className="text-white px-2 py-1 rounded-full text-xs"
 									/>
 								</div>
 								<div className="flex items-center space-x-2">
-									<RadioGroupItem value={Category.VIDEOJUEGOS} id="opt2"/>
+									<RadioGroupItem value={Category.VIDEOJUEGOS} id="opt2" />
 									<GameCategoryBadge
 										category={Category.VIDEOJUEGOS}
 										className="text-white px-2 py-1 rounded-full text-xs"
 									/>
 								</div>
 								<div className="flex items-center space-x-2">
-									<RadioGroupItem value={Category.JUGUETES} id="opt3"/>
+									<RadioGroupItem value={Category.JUGUETES} id="opt3" />
 									<GameCategoryBadge
 										category={Category.JUGUETES}
 										className="text-white px-2 py-1 rounded-full text-xs"
@@ -73,11 +73,12 @@ export default function CreateProductForm() {
 										id="price"
 										name="price"
 										type="number"
-										placeholder="Ingrese el valor del productor"
+										step="0.01"
+										placeholder="Ingrese el precio del producto"
 										aria-describedby="amount-error"
 										className="peer block py-2 pl-10"
 									/>
-									<CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
+									<CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
 								</div>
 							</div>
 							<div id="amount-error" aria-live="polite" aria-atomic="true">
@@ -101,22 +102,20 @@ export default function CreateProductForm() {
 						</div>
 						<div className="flex flex-col">
 							<div className="grid gap-2">
-								<Label>Product Images</Label>
+								<Label>Imágenes del producto</Label>
 								<CldUploadWidget
 									uploadPreset='GameStore'
 									signatureEndpoint='/api/sign-cloudinary-params'
-									onSuccess={(results) => { 
+									onSuccess={(results) => {
 										const info = (results.info) as CloudinaryUploadWidgetInfo
 										addNewUrl(info.public_id)
 									}}
 								>
 									{({ open }) => {
 										return (
-											<>
-												<Button type="button" onClick={() => open()}>
-													Seleccionar archivos
-												</Button>
-											</>
+											<Button type="button" onClick={() => open()}>
+												Seleccionar archivos
+											</Button>
 										);
 									}}
 								</CldUploadWidget>
@@ -134,7 +133,7 @@ export default function CreateProductForm() {
 				</CardContent>
 				<CardFooter>
 					<Button type="submit" className="ml-auto" name='images' value={urlStates}>
-						Create Product
+						Crear Producto
 					</Button>
 				</CardFooter>
 			</Card>

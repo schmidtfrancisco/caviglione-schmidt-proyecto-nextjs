@@ -7,6 +7,7 @@ import { fetchGameById } from "@/lib/data/products-data";
 import { Game } from "@/lib/definitions/products-definitions";
 import { formatPrice } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -15,11 +16,16 @@ interface PageProps {
   }
 }
 
+export const metadata: Metadata = {
+  title: 'Juego',
+}
+
 export default async function Page({ params }: PageProps) {
   const game: Game | null = await fetchGameById(params.gameId);
   if (!game) {
     notFound();
   }
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">

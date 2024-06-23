@@ -1,4 +1,9 @@
 import Navbar from "@/components/admin/Navbar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Administrar',
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

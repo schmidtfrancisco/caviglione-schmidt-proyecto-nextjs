@@ -11,6 +11,11 @@ import { cn } from "@/lib/utils";
 import { FunnelIcon } from "@heroicons/react/24/outline";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Juegos',
+}
 export default async function Page(
   { searchParams }: {
     searchParams: {
