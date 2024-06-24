@@ -1,10 +1,13 @@
+import { outfit } from "@/components/fonts";
 import CategoryCard from "@/components/inicio/CategoryCard";
 import CategoryGamesSection from "@/components/inicio/CategoryGamesSection";
 import GameCldImage from "@/components/juegos/GameCldImage";
 import { buttonVariants } from "@/components/ui/button";
 import { Category } from "@/lib/definitions/products-definitions";
+import { cn } from "@/lib/utils";
 import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+
 
 export default async function Home() {
   return (
@@ -12,7 +15,7 @@ export default async function Home() {
       <section className="w-full">
         <div className="container grid items-center justify-center px-4 md:px-6 md:grid-cols-2 lg:gap-2">
           <div className="flex flex-col items-center text-center gap-4 p-4 md:pl-6 md:items-start md:text-start">
-            <h1 className="text-4xl font-bold tracking-tighter mt-4 md:text-5xl md:mb-14 lg:text-7xl ">
+            <h1 className={cn(outfit.className, "text-4xl font-bold tracking-tighter mt-4 md:text-5xl md:mb-14 lg:text-8xl ")}>
               Game<span className="text-sky-800 dark:text-gray-50">Store</span>
             </h1>
             <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">

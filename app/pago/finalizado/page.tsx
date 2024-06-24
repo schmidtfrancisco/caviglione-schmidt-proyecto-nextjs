@@ -7,6 +7,7 @@ import { formatPrice, mapToOrderItems } from "@/lib/utils";
 import { MercadoPagoConfig, Payment } from "mercadopago";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface SearchParams {
   collection_id: string;
@@ -28,11 +29,11 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
   const existPayment = await existsOrderWithPaymentId(paymentId);
   if (existPayment) {
     return (
-      <h1> EXISTEEE</h1>
+      notFound()
     )
   }
   const client = new MercadoPagoConfig({
-		accessToken: process.env.MP_ACCESS_TOKEN!!
+		accessToken: "TEST-5677161765353145-062318-d63b57c6c3d084bc65187f2c172d72b0-686744806"
 	});
   try {
     const payment = await new Payment(client).get({ id: paymentId });
@@ -100,7 +101,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
     )
   } catch (error) {
     return (
-      <h1> ERROR</h1>
+      notFound()
     )
   }
 }

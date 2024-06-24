@@ -1,10 +1,3 @@
-// El nombre del esquema es gamestore
-
-/*SELECT *
-FROM pg_catalog.pg_tables
-WHERE schemaname != 'pg_catalog' AND 
-    schemaname != 'information_schema';*/
-
 const { db } = require('@vercel/postgres');
 const { games, users } = require('../lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
@@ -25,7 +18,7 @@ async function seedGames(client) {
             price INT NOT NULL
         );`;
 
-    console.log('Table created: games');
+    console.log("Table created: games");
 
     const insertedGames = await Promise.all(
       games.map(
@@ -37,12 +30,12 @@ async function seedGames(client) {
       ),
     );
 
-    console.log('Games inserted:', insertedGames.length);
+    console.log("Games inserted:", insertedGames.length);
 
     return { createTable, games: insertedGames };
 
   } catch (error) {
-    console.error('Error seeding games', error);
+    console.error("Error seeding games", error);
     throw error;
   }
 }
@@ -79,55 +72,13 @@ async function seedUsers(client) {
       users: insertedUsers,
     };
   } catch (error) {
-    console.error('Error seeding users:', error);
+    console.error("Error seeding users:", error);
     throw error;
   }
 }
 
-
-async function seedOrders(client) {
-  await client.sql`CREATE TYPE order_status AS ENUM ('Aprobado', 'Cancelado', 'Enviado', 'Entregado');`;
-
-  try {
-    const createTable = await client.sql`
-      CREATE TABLE IF NOT EXISTS gamestore.orders (
-        id SERIAL PRIMARY KEY,
-        payment_id VARCHAR(255) UNIQUE NOT NULL,
-        client VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        address VARCHAR(255) NOT NULL,
-        addressNumber INT NOT NULL,
-        zip VARCHAR(255) NOT NULL,
-        total INT NOT NULL,
-        status order_status NOT NULL,
-        date DATE DEFAULT CURRENT_DATE
-      );
-    `;
-
-    console.log('Table created: orders');
-
-  } catch (error) {
-    console.error('Error seeding orders:', error);
-    throw error;
-  }
-}
-
-async function seedGamesOrders(client) {
-  try {
-    const createTable = await client.sql`
-      CREATE TABLE IF NOT EXISTS gamestore.games_orders (
-        game_id UUID REFERENCES gamestore.games(id),
-        order_id INT REFERENCES gamestore.orders(id),
-        quantity INT NOT NULL,
-        PRIMARY KEY (game_id, order_id)
-      );
-    `;
-
-    console.log('Table created: games_orders');
-  } catch (error) {
-    console.error('Error seeding games_orders:', error);
-    throw error;
-  }
+function toJSON(array) {
+  return JSON.stringify(array);
 }
 
 async function main() {
@@ -135,15 +86,14 @@ async function main() {
 
   await seedGames(client)
   await seedUsers(client);
-  await seedOrders(client);
-  await seedGamesOrders(client);
+  
 
   await client.end()
 }
 
 main().catch((err) => {
   console.error(
-    'An error occurred while attempting to seed the database:',
+    "An error occurred while attempting to seed the database:",
     err,
   );
 });

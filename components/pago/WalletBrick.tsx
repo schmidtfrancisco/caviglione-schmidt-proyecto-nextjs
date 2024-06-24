@@ -4,13 +4,13 @@ import { PaymentContext } from "@/components/pago/PaymentContext";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import Wallet from "@mercadopago/sdk-react/bricks/wallet";
 import { IWalletBrickCustomization } from "@mercadopago/sdk-react/bricks/wallet/types";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 export default function WalletBrick() {
   const { preferenceId } = useContext(PaymentContext);
 
   
-  initMercadoPago("APP_USR-eb8b3053-4194-4ef1-bda1-903b677b786e", {
+  initMercadoPago("TEST-9191c3fa-8ee2-435a-8fc5-69e7bb424d11", {
     locale: "es-AR",
   });
   

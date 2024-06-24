@@ -65,7 +65,7 @@ export default async function OrdersTable(
 							<TableHead className="hidden md:table-cell">Fecha</TableHead>
 							<TableHead className="hidden md:table-cell">Cliente</TableHead>
 							<TableHead className="text-center">Estado</TableHead>
-							<TableHead className="text-right">Total</TableHead>
+							<TableHead className="text-right">Subtotal</TableHead>
 							<TableHead className="text-right">Acciones</TableHead>
 						</TableRow>
 					</TableHeader>
