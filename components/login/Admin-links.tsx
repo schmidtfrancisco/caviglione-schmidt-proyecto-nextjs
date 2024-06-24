@@ -29,7 +29,7 @@ export function SheetDashboardLink() {
   return (
     <SheetClose asChild>
       <Link href="/admin" className={cn(
-        "text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
+        "text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
         {
           'bg-gray-700 text-blue-400': pathname === "/admin",
         }
@@ -68,7 +68,7 @@ export function DropdownDashboardLink() {
       <Link
         href="/admin"
         className={cn(
-          "text-sm cursor-pointer flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
+          "text-sm cursor-pointer flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
           {
             'bg-gray-700 text-blue-400': pathname === "/admin",
           }
