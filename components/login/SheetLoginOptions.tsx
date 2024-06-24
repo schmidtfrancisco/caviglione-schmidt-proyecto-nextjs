@@ -11,7 +11,7 @@ export default async function SheetLoginOptions() {
     )
   } else {
     return (
-      <>
+      <div className="flex flex-col gap-2">
         <SheetDashboardLink/>
         <SheetClose asChild>
           <form
@@ -20,13 +20,13 @@ export default async function SheetLoginOptions() {
               await signOut({redirectTo: "/login"});
             }}
           >
-            <button className="text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            <button className="text-sm flex align-middle items-center gap-2 w-full rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
               <ArrowRightStartOnRectangleIcon className="h-6 w-6" />
               Cerrar sesión
             </button>
           </form>
         </SheetClose>
-      </>
+      </div>
     );
   }
 }

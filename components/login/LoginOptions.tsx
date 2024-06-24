@@ -23,10 +23,10 @@ export default async function LoginOptions() {
           <DropdownMenuLabel>Opciones de administrador</DropdownMenuLabel>
           <DropdownMenuSeparator/>
           {session ? (
-            <div className="flex flex-col gap-2">
+            <>
               <DropdownDashboardLink/>
               <LogOutButton/>
-            </div>
+            </>
           ) : (
             <DropdownLogInLink/>
           )
