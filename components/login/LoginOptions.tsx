@@ -23,10 +23,10 @@ export default async function LoginOptions() {
           <DropdownMenuLabel>Opciones de administrador</DropdownMenuLabel>
           <DropdownMenuSeparator/>
           {session ? (
-            <>
+            <div className="flex flex-col gap-2">
               <DropdownDashboardLink/>
               <LogOutButton/>
-            </>
+            </div>
           ) : (
             <DropdownLogInLink/>
           )
@@ -46,7 +46,7 @@ export function LogOutButton() {
           await signOut({ redirectTo: "/login" });
         }}
       >
-        <button className="text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+        <button className="w-full text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           <ArrowRightStartOnRectangleIcon className="h-5 w-5" />
           Cerrar sesión
         </button>

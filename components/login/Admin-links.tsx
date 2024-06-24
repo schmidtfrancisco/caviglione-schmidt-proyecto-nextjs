@@ -12,7 +12,7 @@ export function SheetLogInLink() {
   return (
     <SheetClose asChild>
       <Link href="/login" className={cn(
-        "text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
+        "text-sm flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
         {
           'bg-gray-700 text-blue-400': pathname === "/login",
         }
@@ -48,7 +48,7 @@ export function DropdownLogInLink() {
       <Link
         href="/login"
         className={cn(
-          "text-sm cursor-pointer flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
+          "text-sm cursor-pointer flex align-middle items-center gap-2 rounded-lg p-2 hover:text-gray-300 hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
           {
             'bg-gray-700 text-blue-400': pathname === "/login",
           }
