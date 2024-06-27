@@ -117,14 +117,15 @@ const PaymentFormSchema = z.object({
   zip: z.string(),
 });
 
-const client = new MercadoPagoConfig({
-	accessToken: "TEST-5677161765353145-062318-d63b57c6c3d084bc65187f2c172d72b0-686744806",
-});
+
 
 export async function generatePreference(
   formData: FormData,
   mpItems: any
 ): Promise<PreferenceResponse> {
+  const client = new MercadoPagoConfig({
+    accessToken: "TEST-5677161765353145-062318-d63b57c6c3d084bc65187f2c172d72b0-686744806",
+  });
   const validatedData = PaymentFormSchema.safeParse(Object.fromEntries(formData.entries()));
   
   if (!validatedData.success) {
@@ -223,17 +224,22 @@ export async function updateOrder(id: number, prevState: State, formData: FormDa
     };
   }
   const { total, status } = validatedFields.data;
-  const totalInCents = total * 100;
+  const totalInCents = Math.trunc(total * 100);
   try {
     await sql`
 			UPDATE gamestore.orders
 			SET total = ${totalInCents}, status = ${status}
 			WHERE id = ${id}
 		`;
+    console.log('inserted');
   } catch (error) {
+    console.log(error);
     return { message: "Database Error: Failed to Update Order." };
+    
   }
+  console.log('updated');
   revalidatePath("/admin");
+  console.log('updated2');
   redirect("/admin");
 }
 
@@ -285,7 +291,7 @@ export async function updateProduct(id: string, prevState: ProductState, formDat
 		finalImagesArray = imagesUrl.concat(extraImagesAsEntryValues)
 	}
   const { name, description, category, price } = validatedFields.data;
-  const totalInCents = price * 100;
+  const totalInCents = Math.trunc(price * 100);
   try {
     await sql`
 			UPDATE gamestore.games
@@ -321,7 +327,7 @@ export async function createProduct(prevState: ProductState, formData: FormData)
 	const imagesToStringArray = images.split(',')
 	const imagesToEntryValues: FormDataEntryValue[] =
 		imagesToStringArray.map(value => value.replace(/^"|"$/g, ''))
-  const totalInCents = price * 100;
+  const totalInCents = Math.trunc(price * 100);
   try {
     await sql`
 				INSERT INTO gamestore.games

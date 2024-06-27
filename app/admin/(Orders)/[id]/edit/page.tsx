@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 					},
           {
             label: "Editar pedido",
-            href: `/admin/pedidos/${id}/edit`,
+            href: `/admin/${id}/edit`,
             active: true,
           },
         ]}
